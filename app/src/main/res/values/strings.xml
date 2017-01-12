@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Ahitat</string>
+    <string name="title_activity_main_app">MainAppActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="weblink"><a href="http://rmbgysz.ro/ahitat1">Olvasd \n2017-ben is \naz Áhítatot!</a></string>
+    <string name="ige">„De az ő ígérete szerint új eget és új földet várunk, amelyben igazság lakik.”(2Pt 3:13)</string>
+    <string name="description">Áhítat-applikáció</string>
+
+    <string name="menuleiras">A Romániai Magyar Baptista Szövetség áhítata</string>
+    <string name="maiahitat">Mai áhítat</string>
+    <string name="datumszerint">Dátum szerint</string>
+    <string name="kereses">Keresés</string>
+    <string name="kedvencek">Kedvencek</string>
+    <string name="megosztas">Megosztás</string>
+    <string name="logoleiras">Áhítat logó</string>
+
+</resources>
