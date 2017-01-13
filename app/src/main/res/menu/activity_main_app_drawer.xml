@@ -22,11 +22,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_favourite"
-                android:title="Kedvencek" />
+                android:title="@string/kedvencek" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_my_share"
-                android:title="Megosztás" />
+                android:title="@string/megosztas" />
         </menu>
     </item>
 
