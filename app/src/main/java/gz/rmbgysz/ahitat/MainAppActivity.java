@@ -1,8 +1,10 @@
 package gz.rmbgysz.ahitat;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +32,15 @@ public class MainAppActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_app);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setTextViews(getActualDateString(), "Ez lesz a cím", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+                "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
+                "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \n" +
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+                "officia deserunt mollit anim id est laborum.");
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +59,23 @@ public class MainAppActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private String getActualDateString(){
+        DateFormat dateFormat = new SimpleDateFormat("MM_dd");
+        Date currentDate = new Date();
+        return dateFormat.format(currentDate);
+    }
+
+    private void setTextViews(String actualDateString, String headingString, String contentString) {
+        TextView actualDate = (TextView)findViewById(R.id.actual_date);
+        actualDate.setText(actualDateString);
+
+        TextView heading = (TextView)findViewById(R.id.heading);
+        heading.setText(headingString);
+
+        TextView content = (TextView)findViewById(R.id.content);
+        content.setText(contentString);
     }
 
     @Override
