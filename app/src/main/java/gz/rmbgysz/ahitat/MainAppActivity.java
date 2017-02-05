@@ -19,11 +19,15 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //TODO: majd kitenni vhova
+    private static final String[] monthsString = {"Január", "Február", "Március", "Április", "Május", "Júinus", "Július", "Augusztus", "Szeptember", "Október", "November", "December"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class MainAppActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Ide jön majd a helyi menü", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -61,12 +65,18 @@ public class MainAppActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    //TODO: vahova kitenni ?
     private String getActualDateString(){
-        DateFormat dateFormat = new SimpleDateFormat("MM_dd");
+
         Date currentDate = new Date();
-        return dateFormat.format(currentDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        return monthsString[calendar.get(calendar.MONTH)] + " " +
+                String.valueOf(calendar.get(calendar.DAY_OF_MONTH)) + ".";
+
     }
 
+    //TODO: vahova kitenni ?
     private void setTextViews(String actualDateString, String headingString, String contentString) {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText(actualDateString);
