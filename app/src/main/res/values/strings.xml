@@ -10,6 +10,7 @@
     <string name="ige">„De az ő ígérete szerint új eget és új földet várunk, amelyben igazság lakik.”(2Pt 3:13)</string>
     <string name="description">Áhítat-applikáció</string>
 
+    <string name="application_title">Áhitat</string>
     <string name="menuleiras">A Romániai Magyar Baptista Szövetség áhítata</string>
     <string name="maiahitat">Mai áhítat</string>
     <string name="datumszerint">Dátum szerint</string>
@@ -17,5 +18,11 @@
     <string name="kedvencek">Kedvencek</string>
     <string name="megosztas">Megosztás</string>
     <string name="logoleiras">Áhítat logó</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="article_fragment">Hello blank fragment</string>
+    <string name="title_activity_headline">HeadlineActivity</string>
+    <string name="actual_date">TextView</string>
+    <string name="heading">TextView</string>
 
 </resources>
