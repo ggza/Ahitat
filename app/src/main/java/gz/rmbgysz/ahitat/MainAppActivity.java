@@ -1,6 +1,7 @@
 package gz.rmbgysz.ahitat;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -25,6 +29,11 @@ import java.util.Date;
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView myDrawerList;
+    private String[] mMenuTitles;
+    private DrawerLayout mDrawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +61,17 @@ public class MainAppActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     //TODO: vahova kitenni ?
     private String getActualDateString(){
@@ -103,6 +114,7 @@ public class MainAppActivity extends AppCompatActivity
         return true;
     }
 
+/*  FIXME: menu kikapcsolas
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -117,22 +129,46 @@ public class MainAppActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+*/
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    //@SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_actual_lecture) {
 
-        } else if (id == R.id.nav_slideshow) {
+            Snackbar.make(findViewById(R.id.content_main_app), "Mai áhitat", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+
+        } else if (id == R.id.nav_search_by_date) {
+
+            Snackbar.make(findViewById(R.id.content_main_app), "Keresés dátum szerint", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+
+        } else if (id == R.id.nav_search) {
+
+            Snackbar.make(findViewById(R.id.content_main_app), "Keresés", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+
+        } else if (id == R.id.nav_favorites) {
+
+            Intent intent = new Intent(this, FavoritesActivity.class);
+            startActivity(intent);
+
+            //Snackbar.make(findViewById(R.id.content_main_app), "Kedvencek", Snackbar.LENGTH_LONG)
+            //        .setAction("clicked", null)
+            //        .show();
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
 
         }
 
