@@ -26,9 +26,6 @@ import java.util.Date;
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //TODO: majd kitenni vhova
-    private static final String[] monthsString = {"Január", "Február", "Március", "Április", "Május", "Júinus", "Július", "Augusztus", "Szeptember", "Október", "November", "December"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +68,8 @@ public class MainAppActivity extends AppCompatActivity
         Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
-        return monthsString[calendar.get(calendar.MONTH)] + " " +
+
+        return getResources().getStringArray(R.array.hungarian_month_names)[calendar.get(calendar.MONTH)] + " " +
                 String.valueOf(calendar.get(calendar.DAY_OF_MONTH)) + ".";
 
     }
