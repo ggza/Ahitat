@@ -19,6 +19,20 @@
     <string name="megosztas">Megosztás</string>
     <string name="logoleiras">Áhítat logó</string>
 
+    <string-array name="hungarian_month_names">
+        <item>Január</item>
+        <item>Február</item>
+        <item>Március</item>
+        <item>Május</item>
+        <item>Június</item>
+        <item>Július</item>
+        <item>Augusztus</item>
+        <item>Szeptember</item>
+        <item>Október</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="article_fragment">Hello blank fragment</string>
     <string name="title_activity_headline">HeadlineActivity</string>
