@@ -1,11 +1,12 @@
 package gz.rmbgysz.ahitat;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,25 +16,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView myDrawerList;
-    private String[] mMenuTitles;
     private DrawerLayout mDrawerLayout;
+    private DateManager dateManager = new DateManager(this);
 
+    private static String demoContent = " Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+            "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
+            "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \n" +
+            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+            "officia deserunt mollit anim id est laborum.";
+
+    private static String demoTitle = "Ez lesz a cím";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +45,15 @@ public class MainAppActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setTextViews(getActualDateString(), "Ez lesz a cím", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
-                "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
-                "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \n" +
-                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
-                "officia deserunt mollit anim id est laborum.");
+        initFloatingActionButtonMenu();
 
+        setTextViews(dateManager.getFormattedDate());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //FIXME: folyt kov: https://blog.stylingandroid.com/floating-action-button-part-3/
+        //https://blenderviking.github.io/2016/11/26/Android-How-to-build-an-Android-Floating-Action-Button/
+
+        /* ez a regi megoldas egyelore nem kell
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_menu);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +61,7 @@ public class MainAppActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -73,28 +75,16 @@ public class MainAppActivity extends AppCompatActivity
     }
 
 
-    //TODO: vahova kitenni ?
-    private String getActualDateString(){
-
-        Date currentDate = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
-
-        return getResources().getStringArray(R.array.hungarian_month_names)[calendar.get(calendar.MONTH)] + " " +
-                String.valueOf(calendar.get(calendar.DAY_OF_MONTH)) + ".";
-
-    }
-
-    //TODO: vahova kitenni ?
-    private void setTextViews(String actualDateString, String headingString, String contentString) {
+    //TODO: vhova kitenni ?
+    private void setTextViews(String actualDateString) {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText(actualDateString);
 
         TextView heading = (TextView)findViewById(R.id.heading);
-        heading.setText(headingString);
+        heading.setText(demoTitle);
 
         TextView content = (TextView)findViewById(R.id.content);
-        content.setText(contentString);
+        content.setText(actualDateString + demoContent);
     }
 
     @Override
@@ -131,7 +121,7 @@ public class MainAppActivity extends AppCompatActivity
     }
 */
 
-    //@SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -160,20 +150,59 @@ public class MainAppActivity extends AppCompatActivity
             Intent intent = new Intent(this, FavoritesActivity.class);
             startActivity(intent);
 
-            //Snackbar.make(findViewById(R.id.content_main_app), "Kedvencek", Snackbar.LENGTH_LONG)
-            //        .setAction("clicked", null)
-            //        .show();
-
         } else if (id == R.id.nav_share) {
 
             Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void initFloatingActionButtonMenu() {
+        final FloatingActionsMenu floatingActionsMenu = (FloatingActionsMenu) findViewById(R.id.fab_menu);
+        final FloatingActionButton goBack = (FloatingActionButton) findViewById(R.id.action_go_back);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dateManager.stepToPreviousDay();
+                setTextViews(dateManager.getFormattedDate());
+                floatingActionsMenu.collapse();
+            }
+        });
+        final FloatingActionButton goForward = (FloatingActionButton) findViewById(R.id.action_go_forward);
+        goForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dateManager.stepToNextDay();
+                setTextViews(dateManager.getFormattedDate());
+                floatingActionsMenu.collapse();
+            }
+        });
+
+        final View floatingMenuBackground = findViewById(R.id.floating_menu_background);
+        floatingMenuBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                floatingActionsMenu.collapse();
+            }
+        });
+
+        floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
+            @Override
+            public void onMenuExpanded() {
+                floatingMenuBackground.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+                floatingMenuBackground.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
 }
