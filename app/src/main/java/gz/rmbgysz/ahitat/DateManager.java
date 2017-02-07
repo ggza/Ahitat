@@ -9,7 +9,11 @@ import android.content.Context;
 import java.util.Calendar;
 import java.util.Date;
 
-//TODO: kell egy min, maxDate, ezzel vedekezunk majd
+/*TODO:
+-kell egy min, maxDate, ezzel vedekezunk majd
+-localtime-ot is figyelembe kell majd venni
+*/
+
 public class DateManager {
 
     private Date mDate;
