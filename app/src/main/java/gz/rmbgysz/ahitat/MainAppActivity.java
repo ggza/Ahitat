@@ -1,12 +1,21 @@
 package gz.rmbgysz.ahitat;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +26,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.DatePicker;
 
-import java.util.Calendar;
-import java.util.Date;
+/*
+DatePicker
+https://android--examples.blogspot.hu/2015/05/how-to-use-datepickerdialog-in-android.html
+https://www.codota.com/android/methods/android.widget.DatePicker/setMaxDate
+https://inducesmile.com/android/android-timepicker-and-datepicker-examples/
+http://stackoverflow.com/questions/27225815/android-how-to-show-datepicker-in-fragment
+*/
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private FragmentManager fragmentManager = getFragmentManager();
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
@@ -135,9 +151,13 @@ public class MainAppActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_search_by_date) {
 
-            Snackbar.make(findViewById(R.id.content_main_app), "Keresés dátum szerint", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
+            //Snackbar.make(findViewById(R.id.content_main_app), "Keresés dátum szerint", Snackbar.LENGTH_LONG)
+            //        .setAction("clicked", null)
+            //        .show();
+            DatePickerFragment mDatePicker = new DatePickerFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            //mDatePicker.show(fragmentTransaction, "Select date");
+
 
         } else if (id == R.id.nav_search) {
 
@@ -204,5 +224,18 @@ public class MainAppActivity extends AppCompatActivity
         });
     }
 
-
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            //displayCurrentTime.setText("Selected date: " + String.valueOf(year) + " - " + String.valueOf(month) + " - " + String.valueOf(day));
+        }
+    }
 }
