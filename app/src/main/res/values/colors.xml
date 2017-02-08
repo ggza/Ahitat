@@ -3,7 +3,13 @@
     <color name="colorPrimary">#1B5E20</color>
     <color name="colorPrimaryDark">#1B5E20</color>
     <color name="colorAccent">#EF6C00</color>
+    <color name="half_colorAccent">#d6e9bd65</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+
+    <!--floating button actions-->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="half_black">#808080</color>
 </resources>

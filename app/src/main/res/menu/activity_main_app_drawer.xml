@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_actual_lecture"
             android:icon="@drawable/ic_actual_lecture"
             android:title="@string/maiahitat" />
-
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_search_by_date"
             android:icon="@drawable/ic_search_by_date"
             android:title="@string/datumszerint" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_search"
             android:icon="@drawable/ic_search"
             android:title="@string/kereses" />
     </group>
 
-    <item android:title="@string/almenu">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_favourite"
-                android:title="@string/kedvencek" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_my_share"
-                android:title="@string/megosztas" />
-        </menu>
-    </item>
-
+    <group android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_favourite"
+            android:title="@string/kedvencek" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_my_share"
+            android:title="@string/megosztas" />
+    </group
 </menu>
