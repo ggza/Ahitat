@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ahitat</string>
+    <string name="app_name">Áhitat</string>
     <string name="title_activity_main_app">MainAppActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -21,11 +21,16 @@
     <string name="logoleiras">Áhítat logó</string>
     <string name="previous">Előző</string>
     <string name="next">Következő</string>
+    <string name="cancel">Mégse</string>
+    <string name="ok">Beállít</string>
+    <string name="date_set_error">Hiba történt a dátum beállításnál!!!</string>
+    <string name="date_init_error">Hiba történt a dátum inicializálásánál!!!</string>
 
     <string-array name="hungarian_month_names">
         <item>Január</item>
         <item>Február</item>
         <item>Március</item>
+        <item>Április</item>
         <item>Május</item>
         <item>Június</item>
         <item>Július</item>
