@@ -15,6 +15,8 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.ShareCompat;
+import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -170,9 +172,41 @@ public class MainAppActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-            Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
+            //TODO: ezt nem tudtam emulatoron tesztelni
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+            sendIntent.setType("text/html");
+            startActivity(sendIntent);
+            startActivity(Intent.createChooser(sendIntent, "Áhitat megosztása"));
+
+
+            /*
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/html");
+
+
+            String shareString = Html.fromHtml("<p>Store Name:</p>") .toString();
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
+
+            if (sharingIntent.resolveActivity(getPackageManager()) != null)
+                startActivity(Intent.createChooser(sharingIntent, "Áhitat megosztása"));
+            else {
+                Toast.makeText(this, "No app found on your phone which can perform this action", Toast.LENGTH_SHORT).show();
+            }
+            */
+
+            /*
+            ShareCompat.IntentBuilder.from(this)
+                    .setText("blabla")
+                    .setType("string/html")
+                    .setChooserTitle("Kiválasztott áhitat megosztása")
+                    .startChooser();
+            */
+            /*Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
+            */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
