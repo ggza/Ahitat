@@ -17,7 +17,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/ahitat_logo"
+        app:srcCompat="@drawable/ahitat_logo_sz"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:contentDescription="@string/logoleiras" />
 
