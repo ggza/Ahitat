@@ -19,6 +19,7 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_main_app"
         app:menu="@menu/activity_main_app_drawer"
+        app:itemTextAppearance="@style/NavDrawerTextStyle"
         android:layout_width="wrap_content" />
 
 </android.support.v4.widget.DrawerLayout>
