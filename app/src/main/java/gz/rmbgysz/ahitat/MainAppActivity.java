@@ -2,18 +2,15 @@ package gz.rmbgysz.ahitat;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.icu.util.Calendar;
-import android.icu.util.TimeZone;
 import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
@@ -32,17 +29,8 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-/*
-DatePicker
-https://android--examples.blogspot.hu/2015/05/how-to-use-datepickerdialog-in-android.html
-https://www.codota.com/android/methods/android.widget.DatePicker/setMaxDate
-https://inducesmile.com/android/android-timepicker-and-datepicker-examples/
-http://stackoverflow.com/questions/27225815/android-how-to-show-datepicker-in-fragment
-*/
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
@@ -125,7 +113,6 @@ public class MainAppActivity extends AppCompatActivity
         return true;
     }
 
-/*  FIXME: menu kikapcsolas
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -134,13 +121,16 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.add_to_favorites) {
+            Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva " + dateManager.getDateString(), Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-*/
 
 
     @Override
@@ -156,14 +146,23 @@ public class MainAppActivity extends AppCompatActivity
         } else if (id == R.id.nav_search_by_date) {
 
             DialogFragment newFragment = new DatePickerFragment();
+            Bundle bundle = null;
+            try {
+                bundle = getBundleForDatePicker();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            newFragment.setArguments(bundle);
             newFragment.show(getSupportFragmentManager(), "datePicker");
 
+        /*FIXME: a keressel egyelore nem foglalkozunk
         } else if (id == R.id.nav_search) {
 
             Snackbar.make(findViewById(R.id.content_main_app), "Keresés", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
-
+        */
         } else if (id == R.id.nav_favorites) {
 
             Intent intent = new Intent(this, FavoritesActivity.class);
@@ -179,6 +178,17 @@ public class MainAppActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @NonNull
+    private Bundle getBundleForDatePicker() throws ParseException {
+        Bundle bundle = new Bundle();
+        bundle.putInt("year",dateManager.getYear());
+        bundle.putInt("month",dateManager.getMonth());
+        bundle.putInt("day",dateManager.getDay());
+        bundle.putLong("minDate", dateManager.getMinDate());
+        bundle.putLong("maxDate", dateManager.getMaxDate());
+        return bundle;
     }
 
     private void initFloatingActionButtonMenu() {
@@ -229,9 +239,10 @@ public class MainAppActivity extends AppCompatActivity
             dateManager.setDate(year, month +1 , dayOfMonth);
             setTextViews(dateManager.getFormattedDate());
         } catch (ParseException e) {
-            Toast.makeText(view.getContext(), "Hiba történt a dátum beállítása közben!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
         }
     }
+
 
     public static class DatePickerFragment extends DialogFragment {
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -246,24 +257,18 @@ public class MainAppActivity extends AppCompatActivity
             config.setLocale(locale);
             getResources().getConfiguration().updateFrom(config);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            final Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Europe/Budapest"));
-
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
+            int year = getArguments().getInt("year");
+            int month = getArguments().getInt("month");
+            int day = getArguments().getInt("day");
+            long minDate = getArguments().getLong("minDate");
+            long maxDate = getArguments().getLong("maxDate");
             DatePickerDialog dpd = new DatePickerDialog(getActivity(),
                     (DatePickerDialog.OnDateSetListener)
                             getActivity(), year, month, day);
 
-
-            try {
-                dpd.getDatePicker().setMinDate(sdf.parse("2017-01-01").getTime());
-                dpd.getDatePicker().setMaxDate(sdf.parse("2017-12-31").getTime());
-            } catch (ParseException e) {
-                Toast.makeText(getContext(), "Hiba történt a dátum inicializálás közben!!!", Toast.LENGTH_SHORT).show();
-            }
+            dpd.getDatePicker().setMinDate(minDate);
+            dpd.getDatePicker().setMaxDate(maxDate);
+            //TODO: meg kell oldani hogy resbol jojjon
             dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégse", dpd);
             dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Beállít", dpd);
 
