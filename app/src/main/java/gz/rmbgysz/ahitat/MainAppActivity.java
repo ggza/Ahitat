@@ -2,20 +2,21 @@ package gz.rmbgysz.ahitat;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.icu.util.Calendar;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.ShareCompat;
+import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,19 +28,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
-/*
-DatePicker
-https://android--examples.blogspot.hu/2015/05/how-to-use-datepickerdialog-in-android.html
-https://www.codota.com/android/methods/android.widget.DatePicker/setMaxDate
-https://inducesmile.com/android/android-timepicker-and-datepicker-examples/
-http://stackoverflow.com/questions/27225815/android-how-to-show-datepicker-in-fragment
-*/
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainAppActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
 
-    private FragmentManager fragmentManager = getFragmentManager();
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
@@ -56,6 +53,7 @@ public class MainAppActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_main_app);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -64,9 +62,6 @@ public class MainAppActivity extends AppCompatActivity
         initFloatingActionButtonMenu();
 
         setTextViews(dateManager.getFormattedDate());
-
-        //FIXME: folyt kov: https://blog.stylingandroid.com/floating-action-button-part-3/
-        //https://blenderviking.github.io/2016/11/26/Android-How-to-build-an-Android-Floating-Action-Button/
 
         /* ez a regi megoldas egyelore nem kell
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_menu);
@@ -83,7 +78,7 @@ public class MainAppActivity extends AppCompatActivity
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -120,7 +115,6 @@ public class MainAppActivity extends AppCompatActivity
         return true;
     }
 
-/*  FIXME: menu kikapcsolas
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -129,13 +123,16 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.add_to_favorites) {
+            Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva " + dateManager.getDateString(), Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-*/
 
 
     @Override
@@ -144,27 +141,30 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_actual_lecture) {
+            dateManager.setDate(new Date());
+            setTextViews(dateManager.getFormattedDate());
 
-            Snackbar.make(findViewById(R.id.content_main_app), "Mai áhitat", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
 
         } else if (id == R.id.nav_search_by_date) {
 
-            //Snackbar.make(findViewById(R.id.content_main_app), "Keresés dátum szerint", Snackbar.LENGTH_LONG)
-            //        .setAction("clicked", null)
-            //        .show();
-            DatePickerFragment mDatePicker = new DatePickerFragment();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            //mDatePicker.show(fragmentTransaction, "Select date");
+            DialogFragment newFragment = new DatePickerFragment();
+            Bundle bundle = null;
+            try {
+                bundle = getBundleForDatePicker();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
+            newFragment.setArguments(bundle);
+            newFragment.show(getSupportFragmentManager(), "datePicker");
 
+        /*FIXME: a keressel egyelore nem foglalkozunk
         } else if (id == R.id.nav_search) {
 
             Snackbar.make(findViewById(R.id.content_main_app), "Keresés", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
-
+        */
         } else if (id == R.id.nav_favorites) {
 
             Intent intent = new Intent(this, FavoritesActivity.class);
@@ -172,14 +172,56 @@ public class MainAppActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-            Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
+            //TODO: ezt nem tudtam emulatoron tesztelni
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+            sendIntent.setType("text/html");
+            startActivity(Intent.createChooser(sendIntent, "Áhitat megosztása"));
+
+
+            /*
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/html");
+
+
+            String shareString = Html.fromHtml("<p>Store Name:</p>") .toString();
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
+
+            if (sharingIntent.resolveActivity(getPackageManager()) != null)
+                startActivity(Intent.createChooser(sharingIntent, "Áhitat megosztása"));
+            else {
+                Toast.makeText(this, "No app found on your phone which can perform this action", Toast.LENGTH_SHORT).show();
+            }
+            */
+
+            /*
+            ShareCompat.IntentBuilder.from(this)
+                    .setText("blabla")
+                    .setType("string/html")
+                    .setChooserTitle("Kiválasztott áhitat megosztása")
+                    .startChooser();
+            */
+            /*Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
+            */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @NonNull
+    private Bundle getBundleForDatePicker() throws ParseException {
+        Bundle bundle = new Bundle();
+        bundle.putInt("year",dateManager.getYear());
+        bundle.putInt("month",dateManager.getMonth());
+        bundle.putInt("day",dateManager.getDay());
+        bundle.putLong("minDate", dateManager.getMinDate());
+        bundle.putLong("maxDate", dateManager.getMaxDate());
+        return bundle;
     }
 
     private void initFloatingActionButtonMenu() {
@@ -224,18 +266,47 @@ public class MainAppActivity extends AppCompatActivity
         });
     }
 
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        try {
+            dateManager.setDate(year, month +1 , dayOfMonth);
+            setTextViews(dateManager.getFormattedDate());
+        } catch (ParseException e) {
+            Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public static class DatePickerFragment extends DialogFragment {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
+
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            //displayCurrentTime.setText("Selected date: " + String.valueOf(year) + " - " + String.valueOf(month) + " - " + String.valueOf(day));
+            //lokalizacio
+            Locale locale = new Locale("HU");
+            locale.setDefault(locale);
+
+            Configuration config = new Configuration();
+            config.setLocale(locale);
+            getResources().getConfiguration().updateFrom(config);
+
+            int year = getArguments().getInt("year");
+            int month = getArguments().getInt("month");
+            int day = getArguments().getInt("day");
+            long minDate = getArguments().getLong("minDate");
+            long maxDate = getArguments().getLong("maxDate");
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+                    (DatePickerDialog.OnDateSetListener)
+                            getActivity(), year, month, day);
+
+            dpd.getDatePicker().setMinDate(minDate);
+            dpd.getDatePicker().setMaxDate(maxDate);
+            //TODO: meg kell oldani hogy resbol jojjon
+            dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégse", dpd);
+            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Beállít", dpd);
+
+            return dpd;
+
         }
     }
 }
