@@ -49,11 +49,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColorLink="@android:color/black"
-            android:drawableBottom="@drawable/ujjam"
+            android:drawableBottom="@drawable/ic_ujjam"
             android:background="@android:color/transparent"
             android:textColor="@android:color/black"
             android:onClick="startMainApp"
-            android:layout_marginTop="150dp" />
+            android:layout_marginTop="120dp" />
     </LinearLayout>
 
     <ImageView
