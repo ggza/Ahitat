@@ -19,8 +19,8 @@
     <string name="kedvencek">Kedvencek</string>
     <string name="megosztas">Megosztás</string>
     <string name="logoleiras">Áhítat logó</string>
-    <string name="previous">Előző</string>
-    <string name="next">Következő</string>
+    <string name="previous">Előző nap</string>
+    <string name="next">Következő nap</string>
 
     <string-array name="hungarian_month_names">
         <item>Január</item>
