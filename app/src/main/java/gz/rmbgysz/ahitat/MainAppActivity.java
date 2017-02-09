@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.icu.util.Calendar;
+import android.icu.util.TimeZone;
 import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
@@ -27,6 +29,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.DatePicker;
+import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /*
 DatePicker
@@ -37,9 +45,8 @@ http://stackoverflow.com/questions/27225815/android-how-to-show-datepicker-in-fr
 */
 
 public class MainAppActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
 
-    private FragmentManager fragmentManager = getFragmentManager();
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
@@ -56,6 +63,7 @@ public class MainAppActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_main_app);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -64,9 +72,6 @@ public class MainAppActivity extends AppCompatActivity
         initFloatingActionButtonMenu();
 
         setTextViews(dateManager.getFormattedDate());
-
-        //FIXME: folyt kov: https://blog.stylingandroid.com/floating-action-button-part-3/
-        //https://blenderviking.github.io/2016/11/26/Android-How-to-build-an-Android-Floating-Action-Button/
 
         /* ez a regi megoldas egyelore nem kell
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_menu);
@@ -83,7 +88,7 @@ public class MainAppActivity extends AppCompatActivity
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -144,20 +149,14 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_actual_lecture) {
+            dateManager.setDate(new Date());
+            setTextViews(dateManager.getFormattedDate());
 
-            Snackbar.make(findViewById(R.id.content_main_app), "Mai áhitat", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
 
         } else if (id == R.id.nav_search_by_date) {
 
-            //Snackbar.make(findViewById(R.id.content_main_app), "Keresés dátum szerint", Snackbar.LENGTH_LONG)
-            //        .setAction("clicked", null)
-            //        .show();
-            DatePickerFragment mDatePicker = new DatePickerFragment();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            //mDatePicker.show(fragmentTransaction, "Select date");
-
+            DialogFragment newFragment = new DatePickerFragment();
+            newFragment.show(getSupportFragmentManager(), "datePicker");
 
         } else if (id == R.id.nav_search) {
 
@@ -224,18 +223,52 @@ public class MainAppActivity extends AppCompatActivity
         });
     }
 
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        try {
+            dateManager.setDate(year, month +1 , dayOfMonth);
+            setTextViews(dateManager.getFormattedDate());
+        } catch (ParseException e) {
+            Toast.makeText(view.getContext(), "Hiba történt a dátum beállítása közben!!!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
+
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
+            //lokalizacio
+            Locale locale = new Locale("HU");
+            locale.setDefault(locale);
+
+            Configuration config = new Configuration();
+            config.setLocale(locale);
+            getResources().getConfiguration().updateFrom(config);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            final Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Europe/Budapest"));
+
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            //displayCurrentTime.setText("Selected date: " + String.valueOf(year) + " - " + String.valueOf(month) + " - " + String.valueOf(day));
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+                    (DatePickerDialog.OnDateSetListener)
+                            getActivity(), year, month, day);
+
+
+            try {
+                dpd.getDatePicker().setMinDate(sdf.parse("2017-01-01").getTime());
+                dpd.getDatePicker().setMaxDate(sdf.parse("2017-12-31").getTime());
+            } catch (ParseException e) {
+                Toast.makeText(getContext(), "Hiba történt a dátum inicializálás közben!!!", Toast.LENGTH_SHORT).show();
+            }
+            dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégse", dpd);
+            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Beállít", dpd);
+
+            return dpd;
+
         }
     }
 }
