@@ -37,6 +37,7 @@ import java.util.Locale;
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
 
+    private DatabaseHelper mydb ;
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
@@ -61,6 +62,16 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
+        mydb = new DatabaseHelper(this);
+        //mydb.createTables();
+
+        mydb.deleteDevotionals();
+
+        for (int i=0 ; i < 29 ; i++) {
+
+
+        }
+
         setTextViews(dateManager.getFormattedDate());
 
         /* ez a regi megoldas egyelore nem kell
@@ -83,6 +94,8 @@ public class MainAppActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mydb.close();
     }
 
 
