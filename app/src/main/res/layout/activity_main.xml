@@ -9,18 +9,6 @@
     android:scaleType="fitXY"
     android:background="@drawable/hatter" >
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cropToPadding="false"
-        android:adjustViewBounds="false"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:contentDescription="@string/description"
-        android:scaleType="fitXY" />
-
     <TextView
         android:id="@+id/ige"
         android:text="@string/ige"
@@ -37,32 +25,46 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif" />
 
-    <TextView
-        android:id="@+id/focim"
-        android:text="@string/focim"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
-        android:textSize="40sp"
-        android:lineSpacingExtra="2sp"
+    <LinearLayout
+        android:onClick="startMainApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:layout_centerInParent="false"
-        android:layout_marginTop="79dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="startMainApp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColorLink="@android:color/black"
+            android:drawableBottom="@drawable/ic_ujjam"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:onClick="startMainApp"
+            android:layout_marginTop="120dp" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_ahitat_logo"
-        android:layout_marginTop="23dp"
         android:id="@+id/imageView2"
         android:contentDescription="@string/description"
         android:onClick="startMainApp"
-        android:layout_below="@+id/focim"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cropToPadding="false"
+        android:adjustViewBounds="false"
+        android:id="@+id/imageView"
+        android:contentDescription="@string/description"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
