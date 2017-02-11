@@ -13,6 +13,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,26 +29,32 @@ import java.util.HashMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static String DB_NAME = "devotional2017.db";
-    public static final String DEVOTIONALS_TABLE_NAME = "devotionals";
-    public static final String DEVOTIONALS_COLUMN_ID = "id";
-    public static final String DEVOTIONALS_COLUMN_DATE = "dev_date";
-    public static final String DEVOTIONALS_COLUMN_HEADER = "header";
-    public static final String DEVOTIONALS_COLUMN_BODY = "body";
-    public static final String DEVOTIONALS_COLUMN_AUTHOR = "author";
+    private static String DB_NAME = "devotional2017.sqlite";
+    public static final String AHITATOK_TABLE_NAME = "ahitatok";
+    public static final String AHITATOK_COLUMN_ID = "id";
+    public static final String AHITATOK_COLUMN_DATE = "datum";
 
-    public static final String FAVORITES_TABLE_NAME = "favorites";
-    public static final String FAVORITES_COLUMN_ID = "id";
-    public static final String FAVORITES_COLUMN_DATE = "favorite_date";
+    public static final String AHITATOK_COLUMN_DE_CIM = "de_cim";
+    public static final String AHITATOK_COLUMN_DE_IGE = "de_ige";
+    public static final String AHITATOK_COLUMN_DE_SZOVEG = "de_szoveg";
+    public static final String AHITATOK_COLUMN_DE_SZERZO = "de_szerzo";
+    public static final String AHITATOK_COLUMN_DU_CIM = "du_cim";
+    public static final String AHITATOK_COLUMN_DU_IGE = "du_ige";
+    public static final String AHITATOK_COLUMN_DU_SZOVEG = "du_szoveg";
+    public static final String AHITATOK_COLUMN_DU_SZERZO = "du_szerzo";
+    public static final String AHITATOK_COLUMN_BIBLIAORA = "bibliaora";
+    public static final String AHITATOK_COLUMN_IMAORA = "imaora";
 
+
+    public static final String KEDVENCEK_TABLE_NAME = "kedvencek";
+    public static final String KEDVENCEK_COLUMN_ID = "id";
+    public static final String KEDVENCEK_COLUMN_DATE = "datum";
+
+    private static final String TAG = "DatabaseHelper";
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/gz.rmbgysz.ahitat/databases/";
-
-
-
+    private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
-
     private final Context myContext;
 
     private HashMap hp;
@@ -55,6 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.myContext = context;
+        DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
     }
 
     @Override
@@ -63,7 +71,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if(newVersion>oldVersion)
+            try {
+                copyDataBase();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     /**
@@ -74,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         boolean dbExist = checkDataBase();
 
         if(dbExist){
-            //do nothing - database already exist
+            Log.d(TAG, "database exist");
         }else{
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
@@ -117,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void copyDataBase() throws IOException{
 
         //Open your local db as the input stream
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
+        InputStream myInput = this.myContext.getAssets().open(DB_NAME);
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
@@ -175,24 +188,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
-    public ArrayList<String> getAllDevotionals() {
-        ArrayList<String> array_list = new ArrayList<String>();
+    public HashMap<String, Ahitat> getAllDevotionals() {
+        HashMap<String, Ahitat> hash_map = new HashMap<String, Ahitat>();
 
-        //hp = new HashMap();
+
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from devotionals", null );
+        Cursor res =  db.rawQuery( "select * from ahitatok", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(DEVOTIONALS_COLUMN_DATE)));
+            hash_map.put(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+                        new Ahitat(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_IGE)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZOVEG)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZERZO)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_IGE)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZOVEG)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZERZO)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_BIBLIAORA)),
+                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_IMAORA))));
+
+
             res.moveToNext();
         }
-        return array_list;
+        return hash_map;
     }
+
 
     public boolean deleteDevotionals() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from devotionals");
+        db.execSQL("delete from " + AHITATOK_TABLE_NAME+ " ");
         return true;
     }
 
@@ -201,11 +229,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from favorites", null );
+        Log.d(TAG,"before select");
+        Cursor res =  db.rawQuery( "select * from " + KEDVENCEK_TABLE_NAME +" ", null );
+        Log.d(TAG,"after select");
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(FAVORITES_COLUMN_DATE)));
+            array_list.add(res.getString(res.getColumnIndex(KEDVENCEK_COLUMN_DATE)));
             res.moveToNext();
         }
         return array_list;
@@ -214,22 +244,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertFavorite (String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("favorite_date", date);
-        db.insert("favorites", null, contentValues);
+        contentValues.put(KEDVENCEK_COLUMN_DATE, date);
+        db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
         return true;
     }
 
     public Integer deleteFavorite(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("favorites",
-                "id = ? ",
+        return db.delete(KEDVENCEK_TABLE_NAME,
+                KEDVENCEK_COLUMN_ID + " = ? ",
                 new String[] { Integer.toString(id) });
     }
 
     public Integer deleteFavorite(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("favorites",
-                "favorite_date= ? ",
+        return db.delete(KEDVENCEK_TABLE_NAME,
+                KEDVENCEK_COLUMN_DATE + "= ? ",
                 new String[] { date });
     }
 

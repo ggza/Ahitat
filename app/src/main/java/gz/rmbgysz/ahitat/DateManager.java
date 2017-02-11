@@ -61,9 +61,12 @@ public class DateManager {
     }
 
     public String getDateString() {
+
+        String formattedMonth = String.format("%02d",calendar.get(Calendar.MONTH) +1);
+        String formattedDay = String.format("%02d",calendar.get(Calendar.DAY_OF_MONTH));
+
         return String.valueOf(calendar.get(Calendar.YEAR)) + "-" +
-                String.valueOf(calendar.get(Calendar.MONTH)) + "-" +
-                String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+                formattedMonth + "-" + formattedDay;
     }
 
 

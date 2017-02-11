@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
@@ -30,14 +31,19 @@ import android.widget.TextView;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
 
     private DatabaseHelper mydb ;
+    private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
@@ -63,16 +69,24 @@ public class MainAppActivity extends AppCompatActivity
         initFloatingActionButtonMenu();
 
         mydb = new DatabaseHelper(this);
-        //mydb.createTables();
 
-        mydb.deleteDevotionals();
+        try {
+            mydb.createDataBase();
 
-        for (int i=0 ; i < 29 ; i++) {
-
-
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
         }
 
-        setTextViews(dateManager.getFormattedDate());
+        texts_map= mydb.getAllDevotionals();
+
+        /*
+        Snackbar.make(findViewById(R.id.content_main_app), String.valueOf(texts_map.size()) , Snackbar.LENGTH_LONG)
+                .setAction("clicked", null)
+                .show();
+        */
+
+        getItemFomMap(texts_map);
+        //setTextViews(dateManager.getFormattedDate());
 
         /* ez a regi megoldas egyelore nem kell
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_menu);
@@ -98,8 +112,23 @@ public class MainAppActivity extends AppCompatActivity
         mydb.close();
     }
 
+    private void getItemFomMap(HashMap texts_map) {
+        if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
+            fillTextViewsWithEmptyText();
+            Snackbar.make(findViewById(R.id.content_main_app), "Nem található áhitat a kiválasztott napra (" +
+                    dateManager.getDateString() + ")", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+        }
+        else {
+            Ahitat item = (Ahitat) texts_map.get(dateManager.getDateString());
+            setTextViews(dateManager.getFormattedDate(), item);
+        }
+    }
+
 
     //TODO: vhova kitenni ?
+    //FIXME: deprecated ?
     private void setTextViews(String actualDateString) {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText(actualDateString);
@@ -110,6 +139,29 @@ public class MainAppActivity extends AppCompatActivity
         TextView content = (TextView)findViewById(R.id.content);
         content.setText(actualDateString + demoContent);
     }
+
+    private void setTextViews(String actualDateString, Ahitat item) {
+        TextView actualDate = (TextView)findViewById(R.id.actual_date);
+        actualDate.setText(actualDateString);
+
+        TextView heading = (TextView)findViewById(R.id.heading);
+        heading.setText(item.getDe_cim());
+
+        TextView content = (TextView)findViewById(R.id.content);
+        content.setText(item.getDe_szoveg());
+    }
+
+    private void fillTextViewsWithEmptyText() {
+        TextView actualDate = (TextView)findViewById(R.id.actual_date);
+        actualDate.setText("");
+
+        TextView heading = (TextView)findViewById(R.id.heading);
+        heading.setText("");
+
+        TextView content = (TextView)findViewById(R.id.content);
+        content.setText("");
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -155,7 +207,8 @@ public class MainAppActivity extends AppCompatActivity
 
         if (id == R.id.nav_actual_lecture) {
             dateManager.setDate(new Date());
-            setTextViews(dateManager.getFormattedDate());
+            getItemFomMap(texts_map);
+            //setTextViews(dateManager.getFormattedDate());
 
 
         } else if (id == R.id.nav_search_by_date) {
@@ -244,7 +297,8 @@ public class MainAppActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 dateManager.stepToPreviousDay();
-                setTextViews(dateManager.getFormattedDate());
+                getItemFomMap(texts_map);
+                //setTextViews(dateManager.getFormattedDate());
                 floatingActionsMenu.collapse();
             }
         });
@@ -253,7 +307,8 @@ public class MainAppActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 dateManager.stepToNextDay();
-                setTextViews(dateManager.getFormattedDate());
+                getItemFomMap(texts_map);
+                //setTextViews(dateManager.getFormattedDate());
                 floatingActionsMenu.collapse();
             }
         });
@@ -283,7 +338,8 @@ public class MainAppActivity extends AppCompatActivity
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         try {
             dateManager.setDate(year, month +1 , dayOfMonth);
-            setTextViews(dateManager.getFormattedDate());
+            getItemFomMap(texts_map);
+            //setTextViews(dateManager.getFormattedDate());
         } catch (ParseException e) {
             Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
         }
