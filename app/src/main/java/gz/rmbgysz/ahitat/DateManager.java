@@ -6,67 +6,95 @@ package gz.rmbgysz.ahitat;
 
 import android.content.Context;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /*TODO:
 -kell egy min, maxDate, ezzel vedekezunk majd
--localtime-ot is figyelembe kell majd venni
 */
 
 public class DateManager {
 
-    private Date mDate;
+    private String timezoneString = "Europe/Budapest";
+    private String minDateString = "2017-01-01";
+    private String maxDateString = "2017-12-31";
     private Context context;
-    private Calendar calendar = Calendar.getInstance();
+    private Calendar calendar;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public DateManager(Context context) {
-        mDate = new Date();
         this.context = context;
+        calendar = Calendar.getInstance(TimeZone.getTimeZone(timezoneString));
+
+    }
+
+
+    public long getMinDate() throws ParseException {
+        return simpleDateFormat.parse(minDateString).getTime();
+    }
+
+    public long getMaxDate() throws ParseException {
+        return simpleDateFormat.parse(maxDateString).getTime();
     }
 
     public DateManager(Context context, Date date) {
-        mDate = date;
+        calendar.setTime(date);
         this.context = context;
     }
 
     public void setDate(Date date) {
-        mDate = date;
+        calendar.setTime(date);
     }
+
+    public void setDate(int year, int month, int day) throws ParseException {
+        String dateString = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day);
+        Date date = simpleDateFormat.parse(dateString);
+        calendar.setTime(date);
+    }
+
 
     public Date getDate() {
-        return mDate;
+        return calendar.getTime();
     }
 
+    public String getDateString() {
+
+        String formattedMonth = String.format("%02d",calendar.get(Calendar.MONTH) +1);
+        String formattedDay = String.format("%02d",calendar.get(Calendar.DAY_OF_MONTH));
+
+        return String.valueOf(calendar.get(Calendar.YEAR)) + "-" +
+                formattedMonth + "-" + formattedDay;
+    }
+
+
     public void stepToNextDay() {
-        calendar.setTime(mDate);
         calendar.add(Calendar.DAY_OF_YEAR,1);
-        mDate = calendar.getTime();
     }
 
     public void stepToPreviousDay() {
-        calendar.setTime(mDate);
         calendar.add(Calendar.DAY_OF_YEAR,-1);
-        mDate = calendar.getTime();
     }
 
     public String getFormattedDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(mDate);
-
         return context.getResources().getStringArray(R.array.hungarian_month_names)
                 [calendar.get(calendar.MONTH)] + " " +
                 String.valueOf(calendar.get(calendar.DAY_OF_MONTH)) + ".";
+    }
 
+    public int getYear() {
+        return calendar.get(Calendar.YEAR);
     }
 
     public int getMonth() {
-        calendar.setTime(mDate);
-        return calendar.MONTH;
+        return calendar.get(Calendar.MONTH);
     }
 
     public int getDay() {
-        calendar.setTime(mDate);
-        return calendar.DAY_OF_MONTH;
+
+        return calendar.get(Calendar.DAY_OF_MONTH);
     }
+
 }
