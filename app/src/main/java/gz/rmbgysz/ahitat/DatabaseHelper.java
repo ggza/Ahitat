@@ -191,7 +191,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public HashMap<String, Ahitat> getAllDevotionals() {
         HashMap<String, Ahitat> hash_map = new HashMap<String, Ahitat>();
 
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from ahitatok", null );
         res.moveToFirst();
@@ -227,11 +226,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<String> getAllFavorites() {
         ArrayList<String> array_list = new ArrayList<String>();
 
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Log.d(TAG,"before select");
         Cursor res =  db.rawQuery( "select * from " + KEDVENCEK_TABLE_NAME +" ", null );
-        Log.d(TAG,"after select");
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -246,6 +242,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEDVENCEK_COLUMN_DATE, date);
         db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
+        db.close();
         return true;
     }
 

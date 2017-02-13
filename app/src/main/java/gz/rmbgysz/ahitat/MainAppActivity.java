@@ -33,10 +33,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 public class MainAppActivity extends AppCompatActivity
@@ -69,13 +67,8 @@ public class MainAppActivity extends AppCompatActivity
 
         texts_map= mydb.getAllDevotionals();
 
-        /*
-        Snackbar.make(findViewById(R.id.content_main_app), String.valueOf(texts_map.size()) , Snackbar.LENGTH_LONG)
-                .setAction("clicked", null)
-                .show();
-        */
-
         getItemFomMap(texts_map);
+
         //setTextViews(dateManager.getFormattedDate());
 
         /* ez a regi megoldas egyelore nem kell
@@ -105,10 +98,8 @@ public class MainAppActivity extends AppCompatActivity
     private void getItemFomMap(HashMap texts_map) {
         if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
             fillTextViewsWithEmptyText();
-            Snackbar.make(findViewById(R.id.content_main_app), "Nem található áhítat a kiválasztott napra (" +
-                    dateManager.getDateString() + ")", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
+            Toast.makeText(this, "Nem található áhítat a kiválasztott napra (" +
+                    dateManager.getDateString() + ")", Toast.LENGTH_SHORT).show();
         }
         else {
             Ahitat item = (Ahitat) texts_map.get(dateManager.getDateString());
@@ -203,10 +194,10 @@ public class MainAppActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.add_to_favorites) {
-            Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva " + dateManager.getDateString(), Snackbar.LENGTH_LONG)
+            Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(), Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
-
+            boolean ret = mydb.insertFavorite(dateManager.getDateString());
             return true;
         }
 
