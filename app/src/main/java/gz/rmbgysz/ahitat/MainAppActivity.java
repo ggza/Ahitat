@@ -105,7 +105,7 @@ public class MainAppActivity extends AppCompatActivity
     private void getItemFomMap(HashMap texts_map) {
         if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
             fillTextViewsWithEmptyText();
-            Snackbar.make(findViewById(R.id.content_main_app), "Nem található áhitat a kiválasztott napra (" +
+            Snackbar.make(findViewById(R.id.content_main_app), "Nem található áhítat a kiválasztott napra (" +
                     dateManager.getDateString() + ")", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
