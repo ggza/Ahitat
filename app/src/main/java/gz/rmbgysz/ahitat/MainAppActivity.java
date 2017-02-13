@@ -47,16 +47,6 @@ public class MainAppActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
-    private static String demoContent = " Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
-            "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
-            "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \n" +
-            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
-            "officia deserunt mollit anim id est laborum.";
-
-    private static String demoTitle = "Ez lesz a cím";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,44 +112,55 @@ public class MainAppActivity extends AppCompatActivity
         }
         else {
             Ahitat item = (Ahitat) texts_map.get(dateManager.getDateString());
-            setTextViews(dateManager.getFormattedDate(), item);
+            setTextViews(dateManager.getFormattedDateWithDayName(), item);
         }
-    }
-
-
-    //TODO: vhova kitenni ?
-    //FIXME: deprecated ?
-    private void setTextViews(String actualDateString) {
-        TextView actualDate = (TextView)findViewById(R.id.actual_date);
-        actualDate.setText(actualDateString);
-
-        TextView heading = (TextView)findViewById(R.id.heading);
-        heading.setText(demoTitle);
-
-        TextView content = (TextView)findViewById(R.id.content);
-        content.setText(actualDateString + demoContent);
     }
 
     private void setTextViews(String actualDateString, Ahitat item) {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText(actualDateString);
 
-        TextView heading = (TextView)findViewById(R.id.heading);
-        heading.setText(item.getDe_cim());
+        TextView deCim = (TextView)findViewById(R.id.de_cim);
+        deCim.setText(item.getDe_cim());
 
-        TextView content = (TextView)findViewById(R.id.content);
-        content.setText(item.getDe_szoveg());
+        TextView deIge = (TextView)findViewById(R.id.de_ige);
+        deIge.setText(item.getDe_ige());
+
+        TextView deSzoveg = (TextView)findViewById(R.id.de_szoveg);
+        deSzoveg.setText(item.getDe_szoveg());
+
+        TextView duCim = (TextView)findViewById(R.id.du_cim);
+        duCim.setText(item.getDu_cim());
+
+        TextView duIge = (TextView)findViewById(R.id.du_ige);
+        duIge.setText(item.getDu_ige());
+
+        TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
+        duSzoveg.setText(item.getDu_szoveg());
+
     }
 
     private void fillTextViewsWithEmptyText() {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText("");
 
-        TextView heading = (TextView)findViewById(R.id.heading);
-        heading.setText("");
+        TextView deCim = (TextView)findViewById(R.id.de_cim);
+        deCim.setText("");
 
-        TextView content = (TextView)findViewById(R.id.content);
-        content.setText("");
+        TextView deIge = (TextView)findViewById(R.id.de_ige);
+        deIge.setText("");
+
+        TextView deSzoveg = (TextView)findViewById(R.id.de_szoveg);
+        deSzoveg.setText("");
+
+        TextView duCim = (TextView)findViewById(R.id.du_cim);
+        duCim.setText("");
+
+        TextView duIge = (TextView)findViewById(R.id.du_ige);
+        duIge.setText("");
+
+        TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
+        duSzoveg.setText("");
     }
 
 
@@ -208,8 +209,6 @@ public class MainAppActivity extends AppCompatActivity
         if (id == R.id.nav_actual_lecture) {
             dateManager.setDate(new Date());
             getItemFomMap(texts_map);
-            //setTextViews(dateManager.getFormattedDate());
-
 
         } else if (id == R.id.nav_search_by_date) {
 
@@ -308,7 +307,6 @@ public class MainAppActivity extends AppCompatActivity
             public void onClick(View view) {
                 dateManager.stepToNextDay();
                 getItemFomMap(texts_map);
-                //setTextViews(dateManager.getFormattedDate());
                 floatingActionsMenu.collapse();
             }
         });
@@ -339,7 +337,6 @@ public class MainAppActivity extends AppCompatActivity
         try {
             dateManager.setDate(year, month +1 , dayOfMonth);
             getItemFomMap(texts_map);
-            //setTextViews(dateManager.getFormattedDate());
         } catch (ParseException e) {
             Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
         }

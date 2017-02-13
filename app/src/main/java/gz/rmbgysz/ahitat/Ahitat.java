@@ -18,6 +18,11 @@ public class Ahitat {
     String bibliaora;
     String imaora;
 
+    private String changeLineBreak(String in) {
+      String out = in.replaceAll("<br>","\n");
+      return out;
+    };
+
     public Ahitat(int id,
                   String datum,
                   String de_cim,
@@ -61,7 +66,7 @@ public class Ahitat {
     }
 
     public String getDe_cim() {
-        return de_cim;
+        return changeLineBreak(de_cim);
     }
 
     public void setDe_cim(String de_cim) {
@@ -69,7 +74,7 @@ public class Ahitat {
     }
 
     public String getDe_ige() {
-        return de_ige;
+        return changeLineBreak(de_ige);
     }
 
     public void setDe_ige(String de_ige) {
@@ -77,7 +82,7 @@ public class Ahitat {
     }
 
     public String getDe_szoveg() {
-        return de_szoveg;
+        return changeLineBreak(de_szoveg);
     }
 
     public void setDe_szoveg(String de_szoveg) {
@@ -85,7 +90,7 @@ public class Ahitat {
     }
 
     public String getDe_szerzo() {
-        return de_szerzo;
+        return changeLineBreak(de_szerzo);
     }
 
     public void setDe_szerzo(String de_szerzo) {
@@ -93,7 +98,7 @@ public class Ahitat {
     }
 
     public String getDu_cim() {
-        return du_cim;
+        return changeLineBreak(du_cim);
     }
 
     public void setDu_cim(String du_cim) {
@@ -101,7 +106,7 @@ public class Ahitat {
     }
 
     public String getDu_ige() {
-        return du_ige;
+        return changeLineBreak(du_ige);
     }
 
     public void setDu_ige(String du_ige) {
@@ -109,7 +114,7 @@ public class Ahitat {
     }
 
     public String getDu_szoveg() {
-        return du_szoveg;
+        return changeLineBreak(du_szoveg);
     }
 
     public void setDu_szoveg(String du_szoveg) {
@@ -117,7 +122,7 @@ public class Ahitat {
     }
 
     public String getDu_szerzo() {
-        return du_szerzo;
+        return changeLineBreak(du_szerzo);
     }
 
     public void setDu_szerzo(String du_szerzo) {
@@ -125,7 +130,7 @@ public class Ahitat {
     }
 
     public String getBibliaora() {
-        return bibliaora;
+        return changeLineBreak(bibliaora);
     }
 
     public void setBibliaora(String bibliaora) {
@@ -133,7 +138,7 @@ public class Ahitat {
     }
 
     public String getImaora() {
-        return imaora;
+        return changeLineBreak(imaora);
     }
 
     public void setImaora(String imaora) {

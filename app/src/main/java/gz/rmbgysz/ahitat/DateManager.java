@@ -31,7 +31,6 @@ public class DateManager {
 
     }
 
-
     public long getMinDate() throws ParseException {
         return simpleDateFormat.parse(minDateString).getTime();
     }
@@ -54,7 +53,6 @@ public class DateManager {
         Date date = simpleDateFormat.parse(dateString);
         calendar.setTime(date);
     }
-
 
     public Date getDate() {
         return calendar.getTime();
@@ -79,9 +77,16 @@ public class DateManager {
     }
 
     public String getFormattedDate() {
-        return context.getResources().getStringArray(R.array.hungarian_month_names)
+        return context.getResources()
+                .getStringArray(R.array.hungarian_month_names)
                 [calendar.get(calendar.MONTH)] + " " +
                 String.valueOf(calendar.get(calendar.DAY_OF_MONTH)) + ".";
+    }
+
+    public String getFormattedDateWithDayName() {
+        return getFormattedDate() + " " + context.getResources()
+                .getStringArray(R.array.hungarian_day_names)
+                [calendar.get(calendar.DAY_OF_WEEK) - 1];
     }
 
     public int getYear() {
