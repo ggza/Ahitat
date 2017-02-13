@@ -9,6 +9,7 @@ https://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-appl
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -237,13 +238,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public boolean insertFavorite (String date) {
+
+    public boolean insertFavoriteIfNotExist (String datum) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(KEDVENCEK_COLUMN_DATE, date);
-        db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
+
+        long count = DatabaseUtils.queryNumEntries(db, KEDVENCEK_TABLE_NAME,
+                KEDVENCEK_COLUMN_DATE+"=? ", new String[] {datum});
+
+        if (count == 0) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(KEDVENCEK_COLUMN_DATE, datum);
+            db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
+        }
         db.close();
-        return true;
+
+        return (count == 0);
     }
 
     public Integer deleteFavorite(Integer id) {

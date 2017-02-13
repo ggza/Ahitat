@@ -92,7 +92,7 @@ public class MainAppActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mydb.close();
+        mydb.closeDB();
     }
 
     private void getItemFomMap(HashMap texts_map) {
@@ -193,11 +193,13 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.add_to_favorites) {
-            Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(), Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
-            boolean ret = mydb.insertFavorite(dateManager.getDateString());
+            boolean ret = mydb.insertFavoriteIfNotExist(dateManager.getDateString());
+            if (ret) {
+                if (id == R.id.add_to_favorites) {
+                    Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(), Snackbar.LENGTH_LONG)
+                            .setAction("clicked", null)
+                            .show();
+            }
             return true;
         }
 
