@@ -138,6 +138,12 @@ public class MainAppActivity extends AppCompatActivity
         TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
         duSzoveg.setText(item.getDu_szoveg());
 
+        TextView delelott = (TextView)findViewById(R.id.delelott);
+        delelott.setVisibility(View.VISIBLE);
+
+        TextView delutan = (TextView)findViewById(R.id.delutan);
+        delutan.setVisibility(View.VISIBLE);
+
     }
 
     private void fillTextViewsWithEmptyText() {
@@ -161,6 +167,13 @@ public class MainAppActivity extends AppCompatActivity
 
         TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
         duSzoveg.setText("");
+
+        TextView delelott = (TextView)findViewById(R.id.delelott);
+        delelott.setVisibility(View.INVISIBLE);
+
+        TextView delutan = (TextView)findViewById(R.id.delutan);
+        delutan.setVisibility(View.INVISIBLE);
+
     }
 
 
