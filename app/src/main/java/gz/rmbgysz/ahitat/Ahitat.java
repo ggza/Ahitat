@@ -19,7 +19,7 @@ public class Ahitat {
     String imaora;
 
     private String changeLineBreak(String in) {
-      String out = in.replaceAll("<br>","\n");
+      String out = in.replaceAll("<br>","\n\n");
       return out;
     };
 
