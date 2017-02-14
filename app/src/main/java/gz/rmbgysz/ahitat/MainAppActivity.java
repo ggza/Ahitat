@@ -135,6 +135,12 @@ public class MainAppActivity extends AppCompatActivity
         TextView duSzerzo = (TextView)findViewById(R.id.du_szerzo);
         duSzerzo.setText(item.getDu_szerzo());
 
+        TextView bibliaora = (TextView)findViewById(R.id.bibliaora);
+        bibliaora.setText(item.getBibliaora());
+
+        TextView imaora = (TextView)findViewById(R.id.imaora);
+        imaora.setText(item.getImaora());
+
         TextView delelott = (TextView)findViewById(R.id.delelott);
         delelott.setVisibility(View.VISIBLE);
 
@@ -156,6 +162,9 @@ public class MainAppActivity extends AppCompatActivity
         TextView deSzoveg = (TextView)findViewById(R.id.de_szoveg);
         deSzoveg.setText("");
 
+        TextView deSzerzo = (TextView)findViewById(R.id.de_szerzo);
+        deSzerzo.setText("");
+
         TextView duCim = (TextView)findViewById(R.id.du_cim);
         duCim.setText("");
 
@@ -164,6 +173,15 @@ public class MainAppActivity extends AppCompatActivity
 
         TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
         duSzoveg.setText("");
+
+        TextView duSzerzo = (TextView)findViewById(R.id.du_szerzo);
+        duSzerzo.setText("");
+
+        TextView bibliaora = (TextView)findViewById(R.id.bibliaora);
+        bibliaora.setText("");
+
+        TextView imaora = (TextView)findViewById(R.id.imaora);
+        imaora.setText("");
 
         TextView delelott = (TextView)findViewById(R.id.delelott);
         delelott.setVisibility(View.INVISIBLE);
@@ -381,7 +399,7 @@ public class MainAppActivity extends AppCompatActivity
             dpd.getDatePicker().setMaxDate(maxDate);
             //TODO: meg kell oldani hogy resbol jojjon
             dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégse", dpd);
-            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Beállít", dpd);
+            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Választ", dpd);
 
             return dpd;
 

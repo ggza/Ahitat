@@ -115,6 +115,8 @@
     <string name="du_ige">TextView</string>
     <string name="du_szoveg">TextView</string>
     <string name="du_szerzo">TextView</string>
+    <string name="bibliaora">TextView</string>
+    <string name="imaora">TextView</string>
 
     <string-array name="hungarian_month_names">
         <item>Január</item>

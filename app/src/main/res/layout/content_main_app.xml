@@ -97,11 +97,37 @@
             android:id="@+id/de_szerzo" />
 
         <TextView
+            android:text="@string/bibliaora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:lineSpacingMultiplier="1.1"
+            android:ems="14"
+            android:id="@+id/bibliaora" />
+
+        <TextView
+            android:text="@string/imaora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:lineSpacingMultiplier="1.1"
+            android:ems="14"
+            android:id="@+id/imaora" />
+
+        <TextView
             android:text="@string/delutan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="15dp"
             android:textColor="#000000"
             android:textSize="16sp"
             android:id="@+id/delutan"
