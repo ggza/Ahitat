@@ -120,6 +120,9 @@ public class MainAppActivity extends AppCompatActivity
         TextView deSzoveg = (TextView)findViewById(R.id.de_szoveg);
         deSzoveg.setText(item.getDe_szoveg());
 
+        TextView deSzerzo = (TextView)findViewById(R.id.de_szerzo);
+        deSzerzo.setText(item.getDe_szerzo());
+
         TextView duCim = (TextView)findViewById(R.id.du_cim);
         duCim.setText(item.getDu_cim());
 
@@ -128,6 +131,9 @@ public class MainAppActivity extends AppCompatActivity
 
         TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
         duSzoveg.setText(item.getDu_szoveg());
+
+        TextView duSzerzo = (TextView)findViewById(R.id.du_szerzo);
+        duSzerzo.setText(item.getDu_szerzo());
 
         TextView delelott = (TextView)findViewById(R.id.delelott);
         delelott.setVisibility(View.VISIBLE);

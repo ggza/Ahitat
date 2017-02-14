@@ -43,7 +43,6 @@
             android:layout_marginTop="15dp"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:letterSpacing="0.2"
             android:id="@+id/delelott"
             android:textAlignment="center"
             android:background="@color/half_colorAccent"
@@ -84,6 +83,20 @@
             android:id="@+id/de_szoveg" />
 
         <TextView
+            android:text="@string/de_szerzo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            android:gravity="end"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:lineSpacingMultiplier="1.1"
+            android:ems="14"
+            android:id="@+id/de_szerzo" />
+
+        <TextView
             android:text="@string/delutan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +104,6 @@
             android:layout_marginTop="45dp"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:letterSpacing="0.2"
             android:id="@+id/delutan"
             android:textAlignment="center"
             android:background="@color/half_colorAccent"
@@ -130,6 +142,21 @@
             android:lineSpacingMultiplier="1.1"
             android:ems="14"
             android:id="@+id/du_szoveg" />
+
+        <TextView
+            android:text="@string/du_szerzo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/content_main_app_vertical_margin"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            android:gravity="end"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:lineSpacingMultiplier="1.1"
+            android:ems="14"
+            android:id="@+id/du_szerzo" />
 
     </LinearLayout>
 

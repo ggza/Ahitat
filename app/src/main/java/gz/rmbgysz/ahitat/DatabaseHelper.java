@@ -34,7 +34,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String AHITATOK_TABLE_NAME = "ahitatok";
     public static final String AHITATOK_COLUMN_ID = "id";
     public static final String AHITATOK_COLUMN_DATE = "datum";
-
     public static final String AHITATOK_COLUMN_DE_CIM = "de_cim";
     public static final String AHITATOK_COLUMN_DE_IGE = "de_ige";
     public static final String AHITATOK_COLUMN_DE_SZOVEG = "de_szoveg";
