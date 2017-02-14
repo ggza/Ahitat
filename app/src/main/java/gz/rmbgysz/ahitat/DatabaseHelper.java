@@ -5,7 +5,6 @@ http://stackoverflow.com/questions/513084/ship-an-application-with-a-database
 https://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
 * */
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -44,7 +43,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String AHITATOK_COLUMN_DU_SZERZO = "du_szerzo";
     public static final String AHITATOK_COLUMN_BIBLIAORA = "bibliaora";
     public static final String AHITATOK_COLUMN_IMAORA = "imaora";
-
 
     public static final String KEDVENCEK_TABLE_NAME = "kedvencek";
     public static final String KEDVENCEK_COLUMN_ID = "id";
