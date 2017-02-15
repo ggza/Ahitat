@@ -178,10 +178,10 @@ public class MainAppActivity extends AppCompatActivity
         duSzerzo.setText("");
 
         TextView bibliaora = (TextView)findViewById(R.id.bibliaora);
-        bibliaora.setVisibility(View.INVISIBLE);
+        bibliaora.setVisibility(View.GONE);
 
         TextView imaora = (TextView)findViewById(R.id.imaora);
-        imaora.setVisibility(View.INVISIBLE);
+        imaora.setVisibility(View.GONE);
 
         TextView delelott = (TextView)findViewById(R.id.delelott);
         delelott.setVisibility(View.INVISIBLE);
