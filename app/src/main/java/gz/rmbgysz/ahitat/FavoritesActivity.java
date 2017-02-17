@@ -33,11 +33,22 @@ public class FavoritesActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.favorites_list);
 
         mydb = new DatabaseHelper(this);
+
+        /*
         ArrayList<String> array_list = mydb.getAllFavorites();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, android.R.id.text1, array_list);
+        */
 
+
+        final ArrayList<Kedvenc> array_list = mydb.getAllFavoritesWithTitles();
+
+        KedvencekAdapter adapter = new KedvencekAdapter(this, array_list);
+
+
+        //ArrayAdapter<Kedvenc> adapter = new ArrayAdapter<Kedvenc>(this,
+        //            android.R.layout.simple_list_item_multiple_choice, android.R.id.text1, array_list);
 
 
         // Assign adapter to ListView

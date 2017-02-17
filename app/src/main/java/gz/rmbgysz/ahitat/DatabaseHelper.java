@@ -5,7 +5,6 @@ http://stackoverflow.com/questions/513084/ship-an-application-with-a-database
 https://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
 * */
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -21,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -34,7 +32,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String AHITATOK_TABLE_NAME = "ahitatok";
     public static final String AHITATOK_COLUMN_ID = "id";
     public static final String AHITATOK_COLUMN_DATE = "datum";
-
     public static final String AHITATOK_COLUMN_DE_CIM = "de_cim";
     public static final String AHITATOK_COLUMN_DE_IGE = "de_ige";
     public static final String AHITATOK_COLUMN_DE_SZOVEG = "de_szoveg";
@@ -45,7 +42,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String AHITATOK_COLUMN_DU_SZERZO = "du_szerzo";
     public static final String AHITATOK_COLUMN_BIBLIAORA = "bibliaora";
     public static final String AHITATOK_COLUMN_IMAORA = "imaora";
-
 
     public static final String KEDVENCEK_TABLE_NAME = "kedvencek";
     public static final String KEDVENCEK_COLUMN_ID = "id";
@@ -238,6 +234,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
+    public ArrayList<Kedvenc> getAllFavoritesWithTitles() {
+        ArrayList<Kedvenc> array_list = new ArrayList<>();
+        //
+        SQLiteDatabase db = this.getReadableDatabase();
+        //FIXME: ehelyett kell egy view
+        //Cursor res =  db.rawQuery( "select t.datum, a.de_cim as de_cim, a.du_cim as du_cim from kedvencek t, ahitat a where a.datum=t.datum ", null );
+        //FIXME: most ez hasznalom helyette
+        Cursor res =  db.rawQuery( "select * from " + AHITATOK_TABLE_NAME +" ", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            Kedvenc k = new Kedvenc(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+                    "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
+                    "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
+
+            Log.d(TAG, "kedvenc " + k);
+            array_list.add(k);
+            res.moveToNext();
+        }
+        return array_list;
+    }
 
     public boolean insertFavoriteIfNotExist (String datum) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -250,7 +267,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(KEDVENCEK_COLUMN_DATE, datum);
             db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
         }
-        db.close();
 
         return (count == 0);
     }
