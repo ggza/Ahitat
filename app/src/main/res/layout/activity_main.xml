@@ -18,20 +18,20 @@
         android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/ige"
-        android:text="@string/ige"
+        android:id="@+id/mai_ahitat"
+        android:text="@string/mai_ahitat"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textStyle="normal|italic"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:textAlignment="center"
-        android:textSize="14sp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="170dp"
         android:lineSpacingExtra="2sp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="serif" />
+        android:onClick="startMainApp" />
 
     <LinearLayout
         android:onClick="startMainApp"
@@ -49,7 +49,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/black"
             android:onClick="startMainApp"
-            android:layout_marginTop="280dp" />
+            android:layout_marginTop="350dp" />
     </LinearLayout>
 
     <ImageView

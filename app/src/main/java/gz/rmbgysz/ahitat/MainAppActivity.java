@@ -178,10 +178,10 @@ public class MainAppActivity extends AppCompatActivity
         duSzerzo.setText("");
 
         TextView bibliaora = (TextView)findViewById(R.id.bibliaora);
-        bibliaora.setText("");
+        bibliaora.setVisibility(View.GONE);
 
         TextView imaora = (TextView)findViewById(R.id.imaora);
-        imaora.setText("");
+        imaora.setVisibility(View.GONE);
 
         TextView delelott = (TextView)findViewById(R.id.delelott);
         delelott.setVisibility(View.INVISIBLE);
@@ -190,7 +190,6 @@ public class MainAppActivity extends AppCompatActivity
         delutan.setVisibility(View.INVISIBLE);
 
     }
-
 
     @Override
     public void onBackPressed() {
