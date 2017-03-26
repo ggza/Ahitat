@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
@@ -16,8 +15,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.ShareCompat;
-import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -45,12 +43,17 @@ public class MainAppActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = new DateManager(this);
 
+    private int originalBibHeight;
+    private int originalImaHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_main_app);
+        getInitalHeights();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -95,6 +98,15 @@ public class MainAppActivity extends AppCompatActivity
         mydb.closeDB();
     }
 
+    private void getInitalHeights() {
+        TextView bibliaoraTemp = (TextView)findViewById(R.id.bibliaora);
+        TextView imaoraTemp = (TextView)findViewById(R.id.imaora);
+
+        originalBibHeight = bibliaoraTemp.getLayoutParams().height;
+        originalImaHeight = imaoraTemp.getLayoutParams().height;
+
+    }
+
     private void getItemFomMap(HashMap texts_map) {
         if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
             fillTextViewsWithEmptyText();
@@ -122,6 +134,28 @@ public class MainAppActivity extends AppCompatActivity
 
         TextView deSzerzo = (TextView)findViewById(R.id.de_szerzo);
         deSzerzo.setText(item.getDe_szerzo());
+        TextView bibliaora = (TextView) findViewById(R.id.bibliaora);
+        TextView imaora = (TextView) findViewById(R.id.imaora);
+
+        if (item.getBibliaora().isEmpty() && (bibliaora instanceof TextView) && (imaora instanceof TextView)) {
+                LinearLayout.LayoutParams bibParams = (LinearLayout.LayoutParams) bibliaora.getLayoutParams();
+                bibParams.height = 0;
+                bibParams.setMargins(0,0,0,0);
+                LinearLayout.LayoutParams imParams = (LinearLayout.LayoutParams) imaora.getLayoutParams();
+                imParams.height = 0;
+                imParams.setMargins(0,0,0,0);
+        }
+        else {
+            LinearLayout.LayoutParams bibParams = (LinearLayout.LayoutParams) bibliaora.getLayoutParams();
+            bibParams.height = originalBibHeight;
+            bibParams.setMargins(0,15,0,15);//FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni, megneztem a designerben es ott 15-re van beallita ha ott valtozik itt is hozza kell nyulni
+            LinearLayout.LayoutParams imParams = (LinearLayout.LayoutParams) imaora.getLayoutParams();
+            imParams.height = originalImaHeight;
+            imParams.setMargins(0,15,0,15);
+        }
+
+        bibliaora.setText(item.getBibliaora());
+        imaora.setText(item.getImaora());
 
         TextView duCim = (TextView)findViewById(R.id.du_cim);
         duCim.setText(item.getDu_cim());
@@ -134,12 +168,6 @@ public class MainAppActivity extends AppCompatActivity
 
         TextView duSzerzo = (TextView)findViewById(R.id.du_szerzo);
         duSzerzo.setText(item.getDu_szerzo());
-
-        TextView bibliaora = (TextView)findViewById(R.id.bibliaora);
-        bibliaora.setText(item.getBibliaora());
-
-        TextView imaora = (TextView)findViewById(R.id.imaora);
-        imaora.setText(item.getImaora());
 
         TextView delelott = (TextView)findViewById(R.id.delelott);
         delelott.setVisibility(View.VISIBLE);

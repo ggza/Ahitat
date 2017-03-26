@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         tools:ignore="UselessParent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin" >
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:id="@+id/main_app_linear_layout">
 
         <TextView
             android:text="@string/actual_date"
