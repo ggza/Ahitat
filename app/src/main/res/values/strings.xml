@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Áhitat</string>
+    <string name="app_name">Áhítat</string>
     <string name="title_activity_main_app">MainAppActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -12,7 +12,7 @@
     <string name="mai_ahitat">MAI ÁHÍTAT</string>
     <string name="description">Áhítat-applikáció</string>
 
-    <string name="application_title">Áhitat</string>
+    <string name="application_title">ÁHÍTAT 2017</string>
     <string name="menuleiras">A Romániai Magyar Baptista Szövetség áhítata</string>
     <string name="maiahitat">Mai áhítat</string>
     <string name="datumszerint">Dátum szerint</string>

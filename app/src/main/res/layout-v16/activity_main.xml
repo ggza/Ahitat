@@ -17,22 +17,6 @@
         android:contentDescription="@string/description"
         android:scaleType="fitXY" />
 
-    <TextView
-        android:id="@+id/mai_ahitat"
-        android:text="@string/mai_ahitat"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="170dp"
-        android:lineSpacingExtra="2sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="startMainApp" />
-
     <LinearLayout
         android:onClick="startMainApp"
         android:layout_width="wrap_content"
