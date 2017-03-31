@@ -25,6 +25,7 @@
         android:layout_centerHorizontal="true">
 
         <Button
+            android:text="@string/maiahitat"
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

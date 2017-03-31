@@ -106,18 +106,19 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="delelott">REGGELI SOROZAT</string>
+    <string name="delelott">DÉLELŐTTI SOROZAT</string>
     <string name="de_ige">TextView</string>
     <string name="de_cim">TextView</string>
     <string name="de_szoveg">TextView</string>
     <string name="de_szerzo">TextView</string>
-    <string name="delutan">ESTI SOROZAT</string>
+    <string name="delutan">DÉLUTÁNI SOROZAT</string>
     <string name="du_cim">TextView</string>
     <string name="du_ige">TextView</string>
     <string name="du_szoveg">TextView</string>
     <string name="du_szerzo">TextView</string>
     <string name="bibliaora">TextView</string>
     <string name="imaora">TextView</string>
+    <string name="maiahitat">MAI ÁHÍTAT</string>
 
     <string-array name="hungarian_month_names">
         <item>Január</item>
