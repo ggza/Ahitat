@@ -234,8 +234,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public ArrayList<Kedvenc> getAllFavoritesWithTitles() {
-        ArrayList<Kedvenc> array_list = new ArrayList<>();
+    public ArrayList<Favorite> getAllFavoritesWithTitles() {
+        ArrayList<Favorite> array_list = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -244,7 +244,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            Kedvenc k = new Kedvenc(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+            Favorite k = new Favorite(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
                     "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
                     "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
 

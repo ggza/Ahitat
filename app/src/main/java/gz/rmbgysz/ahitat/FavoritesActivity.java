@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,12 +41,12 @@ public class FavoritesActivity extends AppCompatActivity {
         */
 
 
-        final ArrayList<Kedvenc> array_list = mydb.getAllFavoritesWithTitles();
+        final ArrayList<Favorite> array_list = mydb.getAllFavoritesWithTitles();
 
-        KedvencekAdapter adapter = new KedvencekAdapter(this, array_list);
+        FavoritesAdapter adapter = new FavoritesAdapter(this, array_list);
 
 
-        //ArrayAdapter<Kedvenc> adapter = new ArrayAdapter<Kedvenc>(this,
+        //ArrayAdapter<Favorite> adapter = new ArrayAdapter<Favorite>(this,
         //            android.R.layout.simple_list_item_multiple_choice, android.R.id.text1, array_list);
 
 
