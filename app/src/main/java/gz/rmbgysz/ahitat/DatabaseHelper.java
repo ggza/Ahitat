@@ -236,12 +236,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<Kedvenc> getAllFavoritesWithTitles() {
         ArrayList<Kedvenc> array_list = new ArrayList<>();
-        //
+
         SQLiteDatabase db = this.getReadableDatabase();
-        //FIXME: ehelyett kell egy view
-        //Cursor res =  db.rawQuery( "select t.datum, a.de_cim as de_cim, a.du_cim as du_cim from kedvencek t, ahitat a where a.datum=t.datum ", null );
-        //FIXME: most ez hasznalom helyette
-        Cursor res =  db.rawQuery( "select * from " + AHITATOK_TABLE_NAME +" ", null );
+
+        Cursor res =  db.rawQuery( "select t.datum as datum, a.de_cim as de_cim, " +
+                "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum ", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -249,7 +248,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
                     "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
 
-            Log.d(TAG, "kedvenc " + k);
             array_list.add(k);
             res.moveToNext();
         }
