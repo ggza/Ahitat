@@ -1,5 +1,6 @@
 package gz.rmbgysz.ahitat;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,12 +10,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class FavoritesActivity extends AppCompatActivity {
 
     private ListView listView;
     private DatabaseHelper mydb;
+    private DateManager dateManager = DateManager.getInstance(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,7 @@ public class FavoritesActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         // ListView Item Click Listener
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -64,19 +69,23 @@ public class FavoritesActivity extends AppCompatActivity {
                 int itemPosition = position;
 
                 // ListView Clicked item value
-                String itemValue = (String) listView.getItemAtPosition(position);
+                Favorite item = (Favorite) listView.getItemAtPosition(position);
 
+                try {
+                    dateManager.setDate(item.datum);
+                    finish();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
+                //Toast.makeText(getApplicationContext(),
+                //        "Position :"+itemPosition+"  ListItem : " +item , Toast.LENGTH_LONG)
+                //        .show();
 
             }
 
         });
 
-
-        mydb.closeDB();
     }
 
     @Override
