@@ -148,10 +148,10 @@ public class MainAppActivity extends AppCompatActivity
         else {
             LinearLayout.LayoutParams bibParams = (LinearLayout.LayoutParams) bibliaora.getLayoutParams();
             bibParams.height = originalBibHeight;
-            bibParams.setMargins(0,15,0,15);//FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni, megneztem a designerben es ott 15-re van beallita ha ott valtozik itt is hozza kell nyulni
+            bibParams.setMargins(0,30,0,30);//FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni, megneztem a designerben es ott 15-re van beallita ha ott valtozik itt is hozza kell nyulni
             LinearLayout.LayoutParams imParams = (LinearLayout.LayoutParams) imaora.getLayoutParams();
             imParams.height = originalImaHeight;
-            imParams.setMargins(0,15,0,15);
+            imParams.setMargins(0,30,0,30);
         }
 
         bibliaora.setText(item.getBibliaora());
@@ -212,10 +212,10 @@ public class MainAppActivity extends AppCompatActivity
         imaora.setVisibility(View.GONE);
 
         TextView delelott = (TextView)findViewById(R.id.delelott);
-        delelott.setVisibility(View.INVISIBLE);
+        delelott.setVisibility(View.GONE);
 
         TextView delutan = (TextView)findViewById(R.id.delutan);
-        delutan.setVisibility(View.INVISIBLE);
+        delutan.setVisibility(View.GONE);
 
     }
 
