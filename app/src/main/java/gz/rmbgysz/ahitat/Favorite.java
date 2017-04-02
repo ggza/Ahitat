@@ -4,12 +4,12 @@ package gz.rmbgysz.ahitat;
  * Created by gzoli on 2017.02.14..
  */
 
-public class Kedvenc {
+public class Favorite {
     String datum;
     String de_cim;
     String du_cim;
 
-    public Kedvenc(String datum, String de_cim, String du_cim) {
+    public Favorite(String datum, String de_cim, String du_cim) {
         this.datum = datum;
         this.de_cim = de_cim;
         this.du_cim = du_cim;
@@ -41,7 +41,7 @@ public class Kedvenc {
 
     @Override
     public String toString() {
-        return "Kedvenc{" +
+        return "Favorite{" +
                 "datum='" + datum + '\'' +
                 ", de_cim='" + de_cim + '\'' +
                 ", du_cim='" + du_cim + '\'' +

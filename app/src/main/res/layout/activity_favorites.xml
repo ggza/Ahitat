@@ -21,16 +21,21 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/favorites_app"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UselessLeaf"
-        android:id="@+id/favorites_app">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessLeaf">
 
         <ListView
             android:id="@+id/favorites_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="60dp">
+
         </ListView>
 
     </LinearLayout>

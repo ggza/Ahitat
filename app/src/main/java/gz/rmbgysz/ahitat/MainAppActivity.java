@@ -38,10 +38,11 @@ import java.util.Locale;
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
 
+    public static final int FAVORITES_REQUEST_CODE = 0xe23;
     private DatabaseHelper mydb ;
     private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
-    private DateManager dateManager = new DateManager(this);
+    private DateManager dateManager = DateManager.getInstance(this);
 
     private int originalBibHeight;
     private int originalImaHeight;
@@ -70,7 +71,7 @@ public class MainAppActivity extends AppCompatActivity
 
         texts_map= mydb.getAllDevotionals();
 
-        getItemFomMap(texts_map);
+        getItemFromMap(texts_map);
 
         //setTextViews(dateManager.getFormattedDate());
 
@@ -95,7 +96,10 @@ public class MainAppActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mydb.closeDB();
+    }
+
+    public void refreshActivity() {
+        getItemFromMap(texts_map);
     }
 
     private void getInitalHeights() {
@@ -107,7 +111,7 @@ public class MainAppActivity extends AppCompatActivity
 
     }
 
-    private void getItemFomMap(HashMap texts_map) {
+    private void getItemFromMap(HashMap texts_map) {
         if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
             fillTextViewsWithEmptyText();
             Toast.makeText(this, "Nem található áhítat a kiválasztott napra (" +
@@ -243,6 +247,16 @@ public class MainAppActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onActivityResult( int requestCode, int resultCode, Intent data) {
+     super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == FAVORITES_REQUEST_CODE) {
+            refreshActivity();
+        }
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -271,7 +285,7 @@ public class MainAppActivity extends AppCompatActivity
 
         if (id == R.id.nav_actual_lecture) {
             dateManager.setDate(new Date());
-            getItemFomMap(texts_map);
+            getItemFromMap(texts_map);
 
         } else if (id == R.id.nav_search_by_date) {
 
@@ -294,10 +308,8 @@ public class MainAppActivity extends AppCompatActivity
                     .show();
         */
         } else if (id == R.id.nav_favorites) {
-
             Intent intent = new Intent(this, FavoritesActivity.class);
-            startActivity(intent);
-
+            startActivityForResult(intent, FAVORITES_REQUEST_CODE);
         } else if (id == R.id.nav_share) {
 
             //TODO: ezt nem tudtam emulatoron tesztelni
@@ -359,7 +371,7 @@ public class MainAppActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 dateManager.stepToPreviousDay();
-                getItemFomMap(texts_map);
+                getItemFromMap(texts_map);
                 //setTextViews(dateManager.getFormattedDate());
                 floatingActionsMenu.collapse();
             }
@@ -369,7 +381,7 @@ public class MainAppActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 dateManager.stepToNextDay();
-                getItemFomMap(texts_map);
+                getItemFromMap(texts_map);
                 floatingActionsMenu.collapse();
             }
         });
@@ -399,7 +411,7 @@ public class MainAppActivity extends AppCompatActivity
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         try {
             dateManager.setDate(year, month +1 , dayOfMonth);
-            getItemFomMap(texts_map);
+            getItemFromMap(texts_map);
         } catch (ParseException e) {
             Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
         }

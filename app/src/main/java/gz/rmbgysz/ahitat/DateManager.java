@@ -25,10 +25,17 @@ public class DateManager {
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public DateManager(Context context) {
+    private static DateManager instance = null;
+
+    private DateManager(Context context) {
         this.context = context;
         calendar = Calendar.getInstance(TimeZone.getTimeZone(timezoneString));
+    }
 
+    public static DateManager getInstance(Context context) {
+        if (instance == null)
+            instance = new DateManager(context);
+        return instance;
     }
 
     public long getMinDate() throws ParseException {
@@ -39,14 +46,15 @@ public class DateManager {
         return simpleDateFormat.parse(maxDateString).getTime();
     }
 
-    public DateManager(Context context, Date date) {
-        calendar.setTime(date);
-        this.context = context;
-    }
-
     public void setDate(Date date) {
         calendar.setTime(date);
     }
+
+    public void setDate(String dateString) throws ParseException {
+        Date date = simpleDateFormat.parse(dateString);
+        calendar.setTime(date);
+    }
+
 
     public void setDate(int year, int month, int day) throws ParseException {
         String dateString = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day);

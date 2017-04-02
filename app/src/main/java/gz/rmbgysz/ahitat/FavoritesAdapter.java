@@ -13,13 +13,13 @@ import java.util.ArrayList;
  * Created by gzoli on 2017.02.15..
  */
 
-public class KedvencekAdapter extends BaseAdapter{
+public class FavoritesAdapter extends BaseAdapter{
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Kedvenc> mDataSource;
+    private ArrayList<Favorite> mDataSource;
 
-    public KedvencekAdapter(Context mContext, ArrayList<Kedvenc> mDataSource) {
+    public FavoritesAdapter(Context mContext, ArrayList<Favorite> mDataSource) {
         this.mContext = mContext;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mDataSource = mDataSource;
@@ -48,11 +48,11 @@ public class KedvencekAdapter extends BaseAdapter{
         TextView de_cim = (TextView) rowView.findViewById(R.id.de_cim);
         TextView du_cim = (TextView) rowView.findViewById(R.id.du_cim);
 
-        Kedvenc kedvenc = (Kedvenc) getItem(position);
+        Favorite favorite = (Favorite) getItem(position);
 
-        datum.setText(kedvenc.getDatum());
-        de_cim.setText(kedvenc.getDe_cim());
-        du_cim.setText(kedvenc.getDu_cim());
+        datum.setText(favorite.getDatum());
+        de_cim.setText(favorite.getDe_cim());
+        du_cim.setText(favorite.getDu_cim());
 
         return rowView;
     }
