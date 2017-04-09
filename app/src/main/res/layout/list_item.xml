@@ -14,29 +14,46 @@
         android:layout_weight="1"
         android:layout_height="fill_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/datum"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingBottom="20px"
+                android:paddingLeft="20px"
+                android:paddingTop="5px"
+                android:textStyle="italic" />
+
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/datum"
+            android:id="@+id/de_cim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:textStyle="italic"
-            android:paddingLeft="20px"
-            android:paddingTop="5px"
-            android:paddingBottom="20px"/>
+            android:paddingBottom="5px"
+            android:paddingLeft="20px" />
 
-        <TextView android:id="@+id/de_cim"
+        <TextView
+            android:id="@+id/du_cim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:paddingLeft="20px"
-            android:paddingBottom="5px"/>
+            android:paddingBottom="20px"
+            android:paddingLeft="20px" />
 
-        <TextView android:id="@+id/du_cim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:paddingLeft="20px"
-            android:paddingBottom="20px"/>
     </LinearLayout>
 
 </LinearLayout>
