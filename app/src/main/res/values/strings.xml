@@ -117,7 +117,8 @@
     <string name="du_szerzo">TextView</string>
     <string name="bibliaora">TextView</string>
     <string name="imaora">TextView</string>
-    <string name="maiahitat">MAI ÁHÍTAT</string>
+    <string name="maiahitat">Mai áhítat</string>
+    <string name="maiahitat1">MAI ÁHÍTAT</string>
 
     <string-array name="hungarian_month_names">
         <item>Január</item>
