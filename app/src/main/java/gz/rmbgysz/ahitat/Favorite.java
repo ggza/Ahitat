@@ -8,6 +8,7 @@ public class Favorite {
     String datum;
     String de_cim;
     String du_cim;
+    boolean selected = false;
 
     public Favorite(String datum, String de_cim, String du_cim) {
         this.datum = datum;
@@ -38,6 +39,10 @@ public class Favorite {
     public void setDu_cim(String du_cim) {
         this.du_cim = du_cim;
     }
+
+    public boolean isSelected() {return selected;}
+
+    public void setSelected(boolean selected) {this.selected = selected;}
 
     @Override
     public String toString() {

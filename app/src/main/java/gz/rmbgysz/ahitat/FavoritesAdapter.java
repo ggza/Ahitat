@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,11 +20,13 @@ public class FavoritesAdapter extends BaseAdapter{
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Favorite> mDataSource;
+    private ArrayList<String> mSelectedForDelete;
 
     public FavoritesAdapter(Context mContext, ArrayList<Favorite> mDataSource) {
         this.mContext = mContext;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mDataSource = mDataSource;
+        mSelectedForDelete = new ArrayList<String>();
     }
 
     @Override
@@ -40,15 +44,47 @@ public class FavoritesAdapter extends BaseAdapter{
         return position;
     }
 
+    public int getCountSelectedItemsForDelete() { return mSelectedForDelete.size();}
+
+    public ArrayList<String> getItemsSelectedForDelete() { return  mSelectedForDelete;}
+    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View rowView = mInflater.inflate(R.layout.list_item, parent, false);
+
+        CheckBox selectedForDelete = (CheckBox) rowView.findViewById(R.id.deleteCheckBox);
+
+        final Favorite favorite = (Favorite) getItem(position);
+        selectedForDelete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                CheckBox cb = (CheckBox) v;
+
+                if (cb.isChecked()) {
+                    if (!mSelectedForDelete.contains(favorite.getDatum())) {
+                        mSelectedForDelete.add(favorite.getDatum());
+                        Toast.makeText(mContext,
+                                "Adding item : " + favorite.getDatum(), Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+
+                else {
+                    if (mSelectedForDelete.contains(favorite.getDatum())) {
+                        mSelectedForDelete.remove(favorite.getDatum());
+                        Toast.makeText(mContext,
+                                "Deleting item : " + favorite.getDatum(), Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+            }
+        });
 
         TextView datum = (TextView) rowView.findViewById(R.id.datum);
         TextView de_cim = (TextView) rowView.findViewById(R.id.de_cim);
         TextView du_cim = (TextView) rowView.findViewById(R.id.du_cim);
-
-        Favorite favorite = (Favorite) getItem(position);
 
         datum.setText(favorite.getDatum());
         de_cim.setText(favorite.getDe_cim());
