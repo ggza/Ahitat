@@ -96,7 +96,7 @@ public class FavoritesAdapter extends BaseAdapter{
         return rowView;
     }
 
-    public void deleteItems() {
+    public void deleteItemsAndRefresh() {
 
         for (int j=0; j < mSelectedForDelete.size(); j ++) {
                 mydb.deleteFavorite(mSelectedForDelete.get(j));

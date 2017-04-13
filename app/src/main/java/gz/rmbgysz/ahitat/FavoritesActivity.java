@@ -11,10 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 
 
 public class FavoritesActivity extends AppCompatActivity implements UpdateFavoritesInterface {
@@ -109,7 +107,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     }
 
     public void gotPositiveResult() {
-        adapter.deleteItems();
+        adapter.deleteItemsAndRefresh();
     }
 
     public void gotNegativeResult() {

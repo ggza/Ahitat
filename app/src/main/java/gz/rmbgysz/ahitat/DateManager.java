@@ -12,9 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/*TODO:
--kell egy min, maxDate, ezzel vedekezunk majd
-*/
+
 
 public class DateManager {
 
@@ -23,12 +21,13 @@ public class DateManager {
     private String maxDateString = "2017-12-31";
     private Context context;
     private Calendar calendar;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat simpleDateFormat;
 
     private static DateManager instance = null;
 
     private DateManager(Context context) {
         this.context = context;
+        this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance(TimeZone.getTimeZone(timezoneString));
     }
 
@@ -57,13 +56,9 @@ public class DateManager {
 
 
     public void setDate(int year, int month, int day) throws ParseException {
-        String dateString = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day);
-        Date date = simpleDateFormat.parse(dateString);
-        calendar.setTime(date);
-    }
-
-    public Date getDate() {
-        return calendar.getTime();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
     }
 
     public String getDateString() {

@@ -410,7 +410,7 @@ public class MainAppActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         try {
-            dateManager.setDate(year, month +1 , dayOfMonth);
+            dateManager.setDate(year, month , dayOfMonth);
             getItemFromMap(texts_map);
         } catch (ParseException e) {
             Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
