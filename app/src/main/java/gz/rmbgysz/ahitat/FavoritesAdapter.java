@@ -20,15 +20,17 @@ public class FavoritesAdapter extends BaseAdapter{
     private final UpdateFavoritesInterface listener;
     private Context mContext;
     private LayoutInflater mInflater;
+    private DatabaseHelper mydb;
     private ArrayList<Favorite> mDataSource;
     private final ArrayList<String> mSelectedForDelete;
 
-    public FavoritesAdapter(Context mContext, ArrayList<Favorite> mDataSource) {
+    public FavoritesAdapter(Context mContext) {
         this.mContext = mContext;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mDataSource = mDataSource;
         this.listener = (UpdateFavoritesInterface) mContext;
         mSelectedForDelete = new ArrayList<String>();
+        mydb = new DatabaseHelper(mContext);
+        mDataSource = mydb.getAllFavoritesWithTitles();
     }
 
     @Override
@@ -64,21 +66,22 @@ public class FavoritesAdapter extends BaseAdapter{
                 if (cb.isChecked()) {
                     if (!mSelectedForDelete.contains(favorite.getDatum())) {
                         mSelectedForDelete.add(favorite.getDatum());
-                        //Toast.makeText(mContext,
-                        //        "Adding item : " + favorite.getDatum(), Toast.LENGTH_LONG)
-                        //        .show();
                     }
                 }
 
                 else {
                     if (mSelectedForDelete.contains(favorite.getDatum())) {
                         mSelectedForDelete.remove(favorite.getDatum());
-                        //Toast.makeText(mContext,
-                        //        "Deleting item : " + favorite.getDatum(), Toast.LENGTH_LONG)
-                        //        .show();
                     }
                 }
-                listener.updateMenu(mSelectedForDelete.size());
+
+                try {
+                    listener.updateMenu(mSelectedForDelete.size());
+                }
+                catch (ClassCastException exception) {
+                    exception.printStackTrace();
+                }
+
             }
         });
 
@@ -92,4 +95,17 @@ public class FavoritesAdapter extends BaseAdapter{
 
         return rowView;
     }
+
+    public void deleteItems() {
+
+        for (int j=0; j < mSelectedForDelete.size(); j ++) {
+                mydb.deleteFavorite(mSelectedForDelete.get(j));
+        }
+        mSelectedForDelete.clear();
+        mDataSource = mydb.getAllFavoritesWithTitles();
+        this.notifyDataSetChanged();
+        listener.updateMenu(mSelectedForDelete.size());
+    }
+
 }
+

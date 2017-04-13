@@ -1,5 +1,8 @@
 package gz.rmbgysz.ahitat;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,12 +19,14 @@ import java.util.ArrayList;
 
 public class FavoritesActivity extends AppCompatActivity implements UpdateFavoritesInterface {
 
+    public static final String TITLE = "Törlés megerősítése";
+    public static final String AREYOUSURE = "Biztosan törölni szeretné a kijelölt elemeket?";
+    public static final String YES = "Igen";
+    public static final String CANCEL = "Mégse";
     private int selectedForDeleteCount = 0;
     private Menu optionsMenu = null;
     private ListView listView;
     private FavoritesAdapter adapter;
-    private DatabaseHelper mydb;
-    ArrayList<Favorite> array_list;
     private DateManager dateManager = DateManager.getInstance(this);
 
     @Override
@@ -39,23 +44,18 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
         }
 
         listView = (ListView) findViewById(R.id.favorites_list);
-        mydb = new DatabaseHelper(this);
-        array_list = mydb.getAllFavoritesWithTitles();
-        adapter = new FavoritesAdapter(this, array_list);
+
+        adapter = new FavoritesAdapter(this);
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
 
         // ListView Item Click Listener
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition = position;
 
                 // ListView Clicked item value
                 Favorite item = (Favorite) listView.getItemAtPosition(position);
@@ -92,9 +92,12 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
+        if (item.getItemId() == R.id.delete_from_favorites) {
+            showAlertDialog(FavoritesActivity.this);
+        }
+        else if (item.getItemId() == android.R.id.home)
             finish();
-        //FIXME: setResult when returning: http://stackoverflow.com/questions/20700805/go-back-to-main-activity-on-menu-item-click
+        //setResult when returning: http://stackoverflow.com/questions/20700805/go-back-to-main-activity-on-menu-item-click
         return super.onOptionsItemSelected(item);
     }
 
@@ -105,4 +108,38 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
         }
     }
 
+    public void gotPositiveResult() {
+        adapter.deleteItems();
+    }
+
+    public void gotNegativeResult() {
+    }
+
+    public void showAlertDialog(Context self) {
+        final UpdateFavoritesInterface listener = (UpdateFavoritesInterface)this;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(TITLE);
+        builder.setMessage(AREYOUSURE);
+
+        builder.setPositiveButton(YES, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+                listener.gotPositiveResult();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton(CANCEL, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+                listener.gotNegativeResult();
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
 }

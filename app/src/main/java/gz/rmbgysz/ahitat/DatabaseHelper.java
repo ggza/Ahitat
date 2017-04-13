@@ -240,7 +240,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res =  db.rawQuery( "select t.datum as datum, a.de_cim as de_cim, " +
-                "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum ", null );
+                "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum order by t.datum", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
