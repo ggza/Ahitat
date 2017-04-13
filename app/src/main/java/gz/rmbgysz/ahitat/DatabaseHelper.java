@@ -54,12 +54,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase myDataBase;
     private final Context myContext;
 
-    private HashMap hp;
 
-    public DatabaseHelper(Context context) {
+    //for singleton instance
+
+    private static DatabaseHelper instance = null;
+
+    private DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.myContext = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
+    }
+
+    public static DatabaseHelper getInstance(Context context) {
+        if (instance == null)
+            instance = new DatabaseHelper(context);
+        return instance;
     }
 
     @Override

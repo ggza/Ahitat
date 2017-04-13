@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -60,7 +59,7 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
-        mydb = new DatabaseHelper(this);
+        mydb = DatabaseHelper.getInstance(this);
 
         try {
             mydb.createDataBase();
@@ -284,7 +283,7 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_actual_lecture) {
-            dateManager.setDate(new Date());
+            dateManager.setActualDate();
             getItemFromMap(texts_map);
 
         } else if (id == R.id.nav_search_by_date) {
@@ -372,7 +371,6 @@ public class MainAppActivity extends AppCompatActivity
             public void onClick(View view) {
                 dateManager.stepToPreviousDay();
                 getItemFromMap(texts_map);
-                //setTextViews(dateManager.getFormattedDate());
                 floatingActionsMenu.collapse();
             }
         });

@@ -29,7 +29,7 @@ public class FavoritesAdapter extends BaseAdapter{
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.listener = (UpdateFavoritesInterface) mContext;
         mSelectedForDelete = new ArrayList<String>();
-        mydb = new DatabaseHelper(mContext);
+        mydb = DatabaseHelper.getInstance(mContext);
         mDataSource = mydb.getAllFavoritesWithTitles();
     }
 

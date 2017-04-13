@@ -9,7 +9,6 @@ import android.content.Context;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 
@@ -45,13 +44,12 @@ public class DateManager {
         return simpleDateFormat.parse(maxDateString).getTime();
     }
 
-    public void setDate(Date date) {
-        calendar.setTime(date);
+    public void setActualDate() {
+        calendar = Calendar.getInstance(TimeZone.getTimeZone(timezoneString));
     }
 
     public void setDate(String dateString) throws ParseException {
-        Date date = simpleDateFormat.parse(dateString);
-        calendar.setTime(date);
+        calendar.setTime(simpleDateFormat.parse(dateString));
     }
 
 
@@ -107,7 +105,6 @@ public class DateManager {
     }
 
     public int getDay() {
-
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
