@@ -20,6 +20,10 @@ public class Favorite {
         return datum;
     }
 
+    public String getFormattedDatum() {
+        return datum.replace('-','.') + '.';
+    }
+
     public void setDatum(String datum) {
         this.datum = datum;
     }

@@ -17,15 +17,17 @@ import java.util.ArrayList;
 
 public class FavoritesAdapter extends BaseAdapter{
 
+    private final UpdateFavoritesInterface listener;
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Favorite> mDataSource;
-    private ArrayList<String> mSelectedForDelete;
+    private final ArrayList<String> mSelectedForDelete;
 
     public FavoritesAdapter(Context mContext, ArrayList<Favorite> mDataSource) {
         this.mContext = mContext;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mDataSource = mDataSource;
+        this.listener = (UpdateFavoritesInterface) mContext;
         mSelectedForDelete = new ArrayList<String>();
     }
 
@@ -44,15 +46,12 @@ public class FavoritesAdapter extends BaseAdapter{
         return position;
     }
 
-    public int getCountSelectedItemsForDelete() { return mSelectedForDelete.size();}
-
     public ArrayList<String> getItemsSelectedForDelete() { return  mSelectedForDelete;}
     
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View rowView = mInflater.inflate(R.layout.list_item, parent, false);
-
         CheckBox selectedForDelete = (CheckBox) rowView.findViewById(R.id.deleteCheckBox);
 
         final Favorite favorite = (Favorite) getItem(position);
@@ -65,20 +64,21 @@ public class FavoritesAdapter extends BaseAdapter{
                 if (cb.isChecked()) {
                     if (!mSelectedForDelete.contains(favorite.getDatum())) {
                         mSelectedForDelete.add(favorite.getDatum());
-                        Toast.makeText(mContext,
-                                "Adding item : " + favorite.getDatum(), Toast.LENGTH_LONG)
-                                .show();
+                        //Toast.makeText(mContext,
+                        //        "Adding item : " + favorite.getDatum(), Toast.LENGTH_LONG)
+                        //        .show();
                     }
                 }
 
                 else {
                     if (mSelectedForDelete.contains(favorite.getDatum())) {
                         mSelectedForDelete.remove(favorite.getDatum());
-                        Toast.makeText(mContext,
-                                "Deleting item : " + favorite.getDatum(), Toast.LENGTH_LONG)
-                                .show();
+                        //Toast.makeText(mContext,
+                        //        "Deleting item : " + favorite.getDatum(), Toast.LENGTH_LONG)
+                        //        .show();
                     }
                 }
+                listener.updateMenu(mSelectedForDelete.size());
             }
         });
 
@@ -86,7 +86,7 @@ public class FavoritesAdapter extends BaseAdapter{
         TextView de_cim = (TextView) rowView.findViewById(R.id.de_cim);
         TextView du_cim = (TextView) rowView.findViewById(R.id.du_cim);
 
-        datum.setText(favorite.getDatum());
+        datum.setText(favorite.getFormattedDatum());
         de_cim.setText(favorite.getDe_cim());
         du_cim.setText(favorite.getDu_cim());
 

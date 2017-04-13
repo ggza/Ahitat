@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/add_to_favorites"
+        android:id="@+id/delete_from_favorites"
         android:icon="@drawable/ic_delete_white_24dp"
         app:showAsAction="ifRoom"
         android:title="Törlés">
