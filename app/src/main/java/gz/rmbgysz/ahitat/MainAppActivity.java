@@ -316,7 +316,7 @@ public class MainAppActivity extends AppCompatActivity
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
             sendIntent.setType("text/html");
-            startActivity(Intent.createChooser(sendIntent, "Áhitat megosztása"));
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.ahitat_megosztasa)));
 
 
             /*
@@ -440,9 +440,8 @@ public class MainAppActivity extends AppCompatActivity
 
             dpd.getDatePicker().setMinDate(minDate);
             dpd.getDatePicker().setMaxDate(maxDate);
-            //TODO: meg kell oldani hogy resbol jojjon
-            dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Mégse", dpd);
-            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Választ", dpd);
+            dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), dpd);
+            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.choice), dpd);
 
             return dpd;
 

@@ -23,8 +23,10 @@
     <string name="next">Következő nap</string>
     <string name="cancel">Mégse</string>
     <string name="ok">Beállít</string>
+    <string name="choice">Választ</string>
     <string name="date_set_error">Hiba történt a dátum beállításnál!!!</string>
     <string name="date_init_error">Hiba történt a dátum inicializálásánál!!!</string>
+    <string name="ahitat_megosztasa">Áhitat megosztása</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="article_fragment">Hello blank fragment</string>
