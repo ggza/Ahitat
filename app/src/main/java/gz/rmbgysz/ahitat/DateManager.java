@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 
@@ -51,6 +52,7 @@ public class DateManager {
 
     public void setDate(String dateString) throws ParseException {
         Date date = simpleDateFormat.parse(dateString);
+        //FIXME: a java Date deprecated, majd cserélni kell, de egyelőre így marad
         calendar.setTime(date);
     }
 
