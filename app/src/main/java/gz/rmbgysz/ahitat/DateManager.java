@@ -5,14 +5,12 @@ package gz.rmbgysz.ahitat;
  */
 
 import android.content.Context;
+import android.content.Intent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
-
 
 
 public class DateManager {
@@ -51,9 +49,14 @@ public class DateManager {
     }
 
     public void setDate(String dateString) throws ParseException {
-        Date date = simpleDateFormat.parse(dateString);
-        //FIXME: a java Date deprecated, majd cserélni kell, de egyelőre így marad
-        calendar.setTime(date);
+        String[] result = dateString.split("-");
+        int year = Integer.valueOf(result[0]);
+        int month = Integer.valueOf(result[1]) - 1;
+        int day = Integer.valueOf(result[2]);
+
+        //FIXME: ezt lehetne szebben is majd írok rá egy osztályt
+        if ((year == 2017) && (month >= 0) && (day > 1 ) && (day < 32 ))
+            this.setDate(year, month, day);
     }
 
 
@@ -61,6 +64,9 @@ public class DateManager {
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
+        //setting default
+        calendar.set(Calendar.HOUR,11);
+        calendar.set(Calendar.MINUTE,11);
     }
 
     public String getDateString() {
