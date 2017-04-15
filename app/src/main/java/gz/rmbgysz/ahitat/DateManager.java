@@ -15,6 +15,11 @@ import java.util.TimeZone;
 
 public class DateManager {
 
+    private static int actYear = 2017;
+    private static int minMonth = 0;
+    private static int minDay = 1;
+    private static int maxDay = 31;
+
     private String timezoneString = "Europe/Budapest";
     private String minDateString = "2017-01-01";
     private String maxDateString = "2017-12-31";
@@ -29,6 +34,12 @@ public class DateManager {
         this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance(TimeZone.getTimeZone(timezoneString));
     }
+
+    private boolean isValidDate(int year, int month, int day) {
+        if ((actYear == 2017) && (month >= minMonth) && ( day >= minDay) && (day <= maxDay ))
+            return  true;
+        return false;
+    };
 
     public static DateManager getInstance(Context context) {
         if (instance == null)
@@ -49,13 +60,13 @@ public class DateManager {
     }
 
     public void setDate(String dateString) throws ParseException {
+
         String[] result = dateString.split("-");
         int year = Integer.valueOf(result[0]);
         int month = Integer.valueOf(result[1]) - 1;
         int day = Integer.valueOf(result[2]);
 
-        //FIXME: ezt lehetne szebben is majd írok rá egy osztályt
-        if ((year == 2017) && (month >= 0) && (day > 1 ) && (day < 32 ))
+        if (isValidDate(year, month, day))
             this.setDate(year, month, day);
     }
 
