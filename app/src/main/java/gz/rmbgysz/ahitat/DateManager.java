@@ -1,11 +1,10 @@
 package gz.rmbgysz.ahitat;
 
-/**
- * Created by gzoli on 2017.02.07..
+/*
+  Created by gz on 2017.02.07..
  */
 
 import android.content.Context;
-import android.content.Intent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,31 +18,29 @@ public class DateManager {
     private static int minMonth = 0;
     private static int minDay = 1;
     private static int maxDay = 31;
+    private static int defaultHour = 11;
+    private static int getDefaultMin = 11;
 
     private String timezoneString = "Europe/Budapest";
     private String minDateString = "2017-01-01";
     private String maxDateString = "2017-12-31";
-    private Context context;
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat;
 
     private static DateManager instance = null;
 
-    private DateManager(Context context) {
-        this.context = context;
+    private DateManager() {
         this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance(TimeZone.getTimeZone(timezoneString));
     }
 
     private boolean isValidDate(int year, int month, int day) {
-        if ((actYear == 2017) && (month >= minMonth) && ( day >= minDay) && (day <= maxDay ))
-            return  true;
-        return false;
-    };
+        return (year == actYear) && (month >= minMonth) && (day >= minDay) && (day <= maxDay);
+    }
 
-    public static DateManager getInstance(Context context) {
+    public static DateManager getInstance() {
         if (instance == null)
-            instance = new DateManager(context);
+            instance = new DateManager();
         return instance;
     }
 
@@ -70,14 +67,13 @@ public class DateManager {
             this.setDate(year, month, day);
     }
 
-
     public void setDate(int year, int month, int day) throws ParseException {
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
-        //setting default
-        calendar.set(Calendar.HOUR,11);
-        calendar.set(Calendar.MINUTE,11);
+        //setting default time
+        calendar.set(Calendar.HOUR,defaultHour);
+        calendar.set(Calendar.MINUTE,getDefaultMin);
     }
 
     public String getDateString() {
@@ -89,7 +85,6 @@ public class DateManager {
                 formattedMonth + "-" + formattedDay;
     }
 
-
     public void stepToNextDay() {
         calendar.add(Calendar.DAY_OF_YEAR,1);
     }
@@ -98,14 +93,7 @@ public class DateManager {
         calendar.add(Calendar.DAY_OF_YEAR,-1);
     }
 
-    public String getFormattedDate() {
-        return context.getResources()
-                .getStringArray(R.array.hungarian_month_names)
-                [calendar.get(calendar.MONTH)] + " " +
-                String.valueOf(calendar.get(calendar.DAY_OF_MONTH)) + ".";
-    }
-
-    public String getFormattedDateWithDayName() {
+    public String getFormattedDateWithDayName(Context context) {
         return String.valueOf(calendar.get(calendar.YEAR)) + ". " +
                 context.getResources()
                         .getStringArray(R.array.hungarian_month_names)
@@ -128,5 +116,4 @@ public class DateManager {
     public int getDay() {
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
-
 }

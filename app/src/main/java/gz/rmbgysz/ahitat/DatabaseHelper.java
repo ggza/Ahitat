@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by gzoli on 2017.02.09..
+ * Created by gz on 2017.02.09..
+ * TODO: majd ezt is angolositani kell
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -125,7 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        return checkDB != null ? true : false;
+        return checkDB != null;
     }
 
     /**
@@ -176,34 +177,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
-    // Add your public helper methods to access and get content from the database.
-    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-    // to you to create adapters for your views.
-
-    public void createTables() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(
-                "create table devotionals " +
-                        "(id integer primary key, dev_date string, header text,body text, author text)"
-        );
-
-        db.execSQL(
-                "create table favorites " +
-                        "(id integer primary key, favorite_date string)"
-        );
-    }
-
-    public HashMap<String, Ahitat> getAllDevotionals() {
-        HashMap<String, Ahitat> hash_map = new HashMap<String, Ahitat>();
+    public HashMap<String, DailyDevotion> getAllDevotionals() {
+        HashMap<String, DailyDevotion> hash_map = new HashMap<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from ahitatok", null );
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while(!res.isAfterLast()){
             hash_map.put(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
-                        new Ahitat(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
+                        new DailyDevotion(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
                                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
                                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
                                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_IGE)),
@@ -219,28 +202,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             res.moveToNext();
         }
+        res.close();
         return hash_map;
-    }
-
-
-    public boolean deleteDevotionals() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from " + AHITATOK_TABLE_NAME+ " ");
-        return true;
-    }
-
-    public ArrayList<String> getAllFavorites() {
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from " + KEDVENCEK_TABLE_NAME +" ", null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(KEDVENCEK_COLUMN_DATE)));
-            res.moveToNext();
-        }
-        return array_list;
     }
 
     public ArrayList<Favorite> getAllFavoritesWithTitles() {
@@ -252,7 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum order by t.datum", null );
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while(!res.isAfterLast()){
             Favorite k = new Favorite(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
                     "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
                     "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
@@ -260,6 +223,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             array_list.add(k);
             res.moveToNext();
         }
+        res.close();
         return array_list;
     }
 

@@ -1,59 +1,85 @@
 <resources>
     <string name="app_name">Áhítat</string>
-    <string name="title_activity_main_app">MainAppActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Főmenü kinyitása</string>
+    <string name="navigation_drawer_close">Főmenü bezárása</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="focim">Áhítat</string>
-    <string name="weblink"><a href="http://rmbgysz.ro/ahitat1">Olvasd \n2017-ben is \naz Áhítatot!</a></string>
-    <string name="ige">„De az ő ígérete szerint új eget és új földet várunk, amelyben igazság lakik.”(2Pt 3:13)</string>
-    <string name="mai_ahitat">MAI ÁHÍTAT</string>
     <string name="description">Áhítat-applikáció</string>
 
     <string name="application_title">ÁHÍTAT 2017</string>
-    <string name="menuleiras">A Romániai Magyar Baptista Szövetség áhítata</string>
-    <string name="datumszerint">Dátum szerint</string>
-    <string name="kereses">Keresés</string>
-    <string name="kedvencek">Kedvencek</string>
-    <string name="megosztas">Megosztás</string>
-    <string name="logoleiras">Áhítat logó</string>
+    <string name="menudescription">A Romániai Magyar Baptista Szövetség áhítata</string>
+    <string name="searchbydate">Dátum szerint</string>
+    <string name="search">Keresés</string>
+    <string name="favorites">Kedvencek</string>
+    <string name="share">Megosztás</string>
+    <string name="logodescription">Áhítat logó</string>
     <string name="previous">Előző nap</string>
     <string name="next">Következő nap</string>
     <string name="cancel">Mégse</string>
     <string name="ok">Beállít</string>
     <string name="choice">Választ</string>
-    <string name="date_set_error">Hiba történt a dátum beállításnál!!!</string>
-    <string name="date_init_error">Hiba történt a dátum inicializálásánál!!!</string>
-    <string name="ahitat_megosztasa">Áhitat megosztása</string>
+    <string name="datesettingerror">Hiba történt a dátum beállításnál!!!</string>
+    <string name="dateiniterror">Hiba történt a dátum inicializálásánál!!!</string>
+    <string name="shareactual">Áhitat megosztása</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="article_fragment">Hello blank fragment</string>
-    <string name="title_activity_headline">HeadlineActivity</string>
     <string name="actual_date">TextView</string>
     <string name="heading">TextView</string>
-    <string name="title_activity_favorites">FavoritesActivity</string>
-    <string name="title_activity_settings">Settings</string>
 
-    <!-- Strings related to Settings -->
+    <string name="amheading">DÉLELŐTTI SOROZAT</string>
+    <string name="amverse">de. ige</string>
+    <string name="amtitle">de. cím</string>
+    <string name="amdailydevotion">de. áhitat</string>
+    <string name="amdevotionauthor">de. szerző</string>
+    <string name="pmheading">DÉLUTÁNI SOROZAT</string>
+    <string name="pmtitle">du. cím</string>
+    <string name="pmverse">du. ige</string>
+    <string name="pmdailydevotion">du. szöveg</string>
+    <string name="pmdevotionauthor">du. szerző</string>
+    <string name="biblestudy">bibliaóra</string>
+    <string name="prayer">imaóra</string>
+    <string name="dailydevotion">Mai áhítat</string>
+    <string name="dailydevotiontitle">MAI ÁHÍTAT</string>
 
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
+    <string-array name="hungarian_month_names">
+        <item>Január</item>
+        <item>Február</item>
+        <item>Március</item>
+        <item>Április</item>
+        <item>Május</item>
+        <item>Június</item>
+        <item>Július</item>
+        <item>Augusztus</item>
+        <item>Szeptember</item>
+        <item>Október</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string-array name="hungarian_day_names">
+        <item>Vasárnap</item>
+        <item>Hétfő</item>
+        <item>Kedd</item>
+        <item>Szerda</item>
+        <item>Csütörtök</item>
+        <item>Péntek</item>
+        <item>Szombat</item>
+    </string-array>
+
+    <string name="pref_header_general">Általános</string>
 
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
         based on your message history
     </string>
 
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_title_display_name">Megjelenített név</string>
+    <string name="pref_default_display_name">RMBGYSZ</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string name="pref_title_add_friends_to_messages">Ismerősök hozzáadása</string>
     <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
+        <item>Mindig</item>
+        <item>Ha lehetséges</item>
+        <item>Soha</item>
     </string-array>
     <string-array name="pref_example_list_values">
         <item>1</item>
@@ -61,7 +87,6 @@
         <item>-1</item>
     </string-array>
 
-    <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
     <string name="pref_title_sync_frequency">Sync frequency</string>
@@ -107,44 +132,6 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="delelott">DÉLELŐTTI SOROZAT</string>
-    <string name="de_ige">TextView</string>
-    <string name="de_cim">TextView</string>
-    <string name="de_szoveg">TextView</string>
-    <string name="de_szerzo">TextView</string>
-    <string name="delutan">DÉLUTÁNI SOROZAT</string>
-    <string name="du_cim">TextView</string>
-    <string name="du_ige">TextView</string>
-    <string name="du_szoveg">TextView</string>
-    <string name="du_szerzo">TextView</string>
-    <string name="bibliaora">TextView</string>
-    <string name="imaora">TextView</string>
-    <string name="maiahitat">Mai áhítat</string>
-    <string name="maiahitat1">MAI ÁHÍTAT</string>
-
-    <string-array name="hungarian_month_names">
-        <item>Január</item>
-        <item>Február</item>
-        <item>Március</item>
-        <item>Április</item>
-        <item>Május</item>
-        <item>Június</item>
-        <item>Július</item>
-        <item>Augusztus</item>
-        <item>Szeptember</item>
-        <item>Október</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
-
-    <string-array name="hungarian_day_names">
-        <item>Vasárnap</item>
-        <item>Hétfő</item>
-        <item>Kedd</item>
-        <item>Szerda</item>
-        <item>Csütörtök</item>
-        <item>Péntek</item>
-        <item>Szombat</item>
-    </string-array>
+    <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
 
 </resources>

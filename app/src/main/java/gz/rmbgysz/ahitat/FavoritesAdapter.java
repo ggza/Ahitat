@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class FavoritesAdapter extends BaseAdapter{
         this.mContext = mContext;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.listener = (UpdateFavoritesInterface) mContext;
-        mSelectedForDelete = new ArrayList<String>();
+        mSelectedForDelete = new ArrayList<>();
         mydb = DatabaseHelper.getInstance(mContext);
         mDataSource = mydb.getAllFavoritesWithTitles();
     }
@@ -64,14 +63,14 @@ public class FavoritesAdapter extends BaseAdapter{
                 CheckBox cb = (CheckBox) v;
 
                 if (cb.isChecked()) {
-                    if (!mSelectedForDelete.contains(favorite.getDatum())) {
-                        mSelectedForDelete.add(favorite.getDatum());
+                    if (!mSelectedForDelete.contains(favorite.getDate())) {
+                        mSelectedForDelete.add(favorite.getDate());
                     }
                 }
 
                 else {
-                    if (mSelectedForDelete.contains(favorite.getDatum())) {
-                        mSelectedForDelete.remove(favorite.getDatum());
+                    if (mSelectedForDelete.contains(favorite.getDate())) {
+                        mSelectedForDelete.remove(favorite.getDate());
                     }
                 }
 
@@ -85,13 +84,13 @@ public class FavoritesAdapter extends BaseAdapter{
             }
         });
 
-        TextView datum = (TextView) rowView.findViewById(R.id.datum);
-        TextView de_cim = (TextView) rowView.findViewById(R.id.de_cim);
-        TextView du_cim = (TextView) rowView.findViewById(R.id.du_cim);
+        TextView datum = (TextView) rowView.findViewById(R.id.dailyDevotionDate);
+        TextView de_cim = (TextView) rowView.findViewById(R.id.amTitle);
+        TextView du_cim = (TextView) rowView.findViewById(R.id.pmTitle);
 
         datum.setText(favorite.getFormattedDatum());
-        de_cim.setText(favorite.getDe_cim());
-        du_cim.setText(favorite.getDu_cim());
+        de_cim.setText(favorite.getAmTitle());
+        du_cim.setText(favorite.getPmTitle());
 
         return rowView;
     }

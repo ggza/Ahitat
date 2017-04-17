@@ -25,7 +25,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     private Menu optionsMenu = null;
     private ListView listView;
     private FavoritesAdapter adapter;
-    private DateManager dateManager = DateManager.getInstance(this);
+    private DateManager dateManager = DateManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
                 Favorite item = (Favorite) listView.getItemAtPosition(position);
 
                 try {
-                    dateManager.setDate(item.datum);
+                    dateManager.setDate(item.getDate());
                     finish();
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -114,7 +114,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     }
 
     public void showAlertDialog(Context self) {
-        final UpdateFavoritesInterface listener = (UpdateFavoritesInterface)this;
+        final UpdateFavoritesInterface listener = this;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(TITLE);
@@ -123,7 +123,6 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
         builder.setPositiveButton(YES, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                // Do nothing but close the dialog
                 listener.gotPositiveResult();
                 dialog.dismiss();
             }

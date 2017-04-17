@@ -1,7 +1,7 @@
 package gz.rmbgysz.ahitat;
 
 public interface UpdateFavoritesInterface {
-    public void updateMenu(int count);
-        public void gotPositiveResult();
-    public void gotNegativeResult();
+    void updateMenu(int count);
+    void gotPositiveResult();
+    void gotNegativeResult();
 }

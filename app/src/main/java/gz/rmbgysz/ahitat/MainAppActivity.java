@@ -41,7 +41,7 @@ public class MainAppActivity extends AppCompatActivity
     private DatabaseHelper mydb ;
     private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
-    private DateManager dateManager = DateManager.getInstance(this);
+    private DateManager dateManager = DateManager.getInstance();
 
     private int originalBibHeight;
     private int originalImaHeight;
@@ -102,81 +102,82 @@ public class MainAppActivity extends AppCompatActivity
     }
 
     private void getInitalHeights() {
-        TextView bibliaoraTemp = (TextView)findViewById(R.id.bibliaora);
-        TextView imaoraTemp = (TextView)findViewById(R.id.imaora);
+        TextView bibleLecture = (TextView)findViewById(R.id.bibleLecture);
+        TextView prayerTemp = (TextView)findViewById(R.id.prayer);
 
-        originalBibHeight = bibliaoraTemp.getLayoutParams().height;
-        originalImaHeight = imaoraTemp.getLayoutParams().height;
+        originalBibHeight = bibleLecture.getLayoutParams().height;
+        originalImaHeight = prayerTemp.getLayoutParams().height;
 
     }
 
     private void getItemFromMap(HashMap texts_map) {
         if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
             fillTextViewsWithEmptyText();
-            Toast.makeText(this, "Nem található áhítat a kiválasztott napra (" +
+            Toast.makeText(this, getString(R.string.notfounddailydevotion) + " (" +
                     dateManager.getDateString() + ")", Toast.LENGTH_SHORT).show();
         }
         else {
-            Ahitat item = (Ahitat) texts_map.get(dateManager.getDateString());
-            setTextViews(dateManager.getFormattedDateWithDayName(), item);
+            DailyDevotion item = (DailyDevotion) texts_map.get(dateManager.getDateString());
+            setTextViews(dateManager.getFormattedDateWithDayName(this), item);
         }
     }
 
-    private void setTextViews(String actualDateString, Ahitat item) {
+    private void setTextViews(String actualDateString, DailyDevotion item) {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText(actualDateString);
 
-        TextView deCim = (TextView)findViewById(R.id.de_cim);
-        deCim.setText(item.getDe_cim());
+        TextView amTitle = (TextView)findViewById(R.id.amTitle);
+        amTitle.setText(item.getAmTitle());
 
-        TextView deIge = (TextView)findViewById(R.id.de_ige);
-        deIge.setText(item.getDe_ige());
+        TextView amVerse = (TextView)findViewById(R.id.amVerse);
+        amVerse.setText(item.getAmVerse());
 
-        TextView deSzoveg = (TextView)findViewById(R.id.de_szoveg);
-        deSzoveg.setText(item.getDe_szoveg());
+        TextView amDailyDevotion = (TextView)findViewById(R.id.amDailyDevotion);
+        amDailyDevotion.setText(item.getAmDailyDevotion());
 
-        TextView deSzerzo = (TextView)findViewById(R.id.de_szerzo);
-        deSzerzo.setText(item.getDe_szerzo());
-        TextView bibliaora = (TextView) findViewById(R.id.bibliaora);
-        TextView imaora = (TextView) findViewById(R.id.imaora);
+        TextView amDailyDevotionAuthor = (TextView)findViewById(R.id.amDailyDevotionAuthor);
+        amDailyDevotionAuthor.setText(item.getAmDailyDevotionAuthor());
+        TextView bibleLecture = (TextView) findViewById(R.id.bibleLecture);
+        TextView prayer = (TextView) findViewById(R.id.prayer);
 
-        if (item.getBibliaora().isEmpty() && (bibliaora instanceof TextView) && (imaora instanceof TextView)) {
-                LinearLayout.LayoutParams bibParams = (LinearLayout.LayoutParams) bibliaora.getLayoutParams();
-                bibParams.height = 0;
-                bibParams.setMargins(0,0,0,0);
-                LinearLayout.LayoutParams imParams = (LinearLayout.LayoutParams) imaora.getLayoutParams();
-                imParams.height = 0;
-                imParams.setMargins(0,0,0,0);
+        LinearLayout.LayoutParams bParams = (LinearLayout.LayoutParams) bibleLecture.getLayoutParams();
+        LinearLayout.LayoutParams iParams = (LinearLayout.LayoutParams) prayer.getLayoutParams();
+
+        if (item.getBibleLecture().isEmpty() && (bibleLecture != null) && (prayer != null) && (bParams != null) && (iParams != null)) {
+            bParams.height = 0;
+            bParams.setMargins(0,0,0,0);
+            iParams.height = 0;
+            iParams.setMargins(0,0,0,0);
         }
         else {
-            LinearLayout.LayoutParams bibParams = (LinearLayout.LayoutParams) bibliaora.getLayoutParams();
-            bibParams.height = originalBibHeight;
-            bibParams.setMargins(0,30,0,30);//FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni, megneztem a designerben es ott 15-re van beallita ha ott valtozik itt is hozza kell nyulni
-            LinearLayout.LayoutParams imParams = (LinearLayout.LayoutParams) imaora.getLayoutParams();
-            imParams.height = originalImaHeight;
-            imParams.setMargins(0,30,0,30);
+            bParams.height = originalBibHeight;
+            // FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni,
+            // megneztem a designerben es ott 15-re van beallitva ha ott valtozik itt is hozza kell nyulni
+            bParams.setMargins(0,30,0,30);
+            iParams.height = originalImaHeight;
+            iParams.setMargins(0,30,0,30);
         }
 
-        bibliaora.setText(item.getBibliaora());
-        imaora.setText(item.getImaora());
+        bibleLecture.setText(item.getBibleLecture());
+        prayer.setText(item.getPrayer());
 
-        TextView duCim = (TextView)findViewById(R.id.du_cim);
-        duCim.setText(item.getDu_cim());
+        TextView pmTitle = (TextView)findViewById(R.id.pmTitle);
+        pmTitle.setText(item.getPmTitle());
 
-        TextView duIge = (TextView)findViewById(R.id.du_ige);
-        duIge.setText(item.getDu_ige());
+        TextView pmVerse = (TextView)findViewById(R.id.pmVerse);
+        pmVerse.setText(item.getPmVerse());
 
-        TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
-        duSzoveg.setText(item.getDu_szoveg());
+        TextView pmDailyDevotion = (TextView)findViewById(R.id.pmDailyDevotion);
+        pmDailyDevotion.setText(item.getPmDailyDevotion());
 
-        TextView duSzerzo = (TextView)findViewById(R.id.du_szerzo);
-        duSzerzo.setText(item.getDu_szerzo());
+        TextView pmDailyDevotionAuthor = (TextView)findViewById(R.id.pmDailyDevotionAuthor);
+        pmDailyDevotionAuthor.setText(item.getPmDailyDevotionAuthor());
 
-        TextView delelott = (TextView)findViewById(R.id.delelott);
-        delelott.setVisibility(View.VISIBLE);
+        TextView am = (TextView)findViewById(R.id.delelott);
+        am.setVisibility(View.VISIBLE);
 
-        TextView delutan = (TextView)findViewById(R.id.delutan);
-        delutan.setVisibility(View.VISIBLE);
+        TextView pm = (TextView)findViewById(R.id.delutan);
+        pm.setVisibility(View.VISIBLE);
 
     }
 
@@ -184,41 +185,41 @@ public class MainAppActivity extends AppCompatActivity
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText("");
 
-        TextView deCim = (TextView)findViewById(R.id.de_cim);
-        deCim.setText("");
+        TextView amTitle = (TextView)findViewById(R.id.amTitle);
+        amTitle.setText("");
 
-        TextView deIge = (TextView)findViewById(R.id.de_ige);
-        deIge.setText("");
+        TextView amVerse = (TextView)findViewById(R.id.amVerse);
+        amVerse.setText("");
 
-        TextView deSzoveg = (TextView)findViewById(R.id.de_szoveg);
-        deSzoveg.setText("");
+        TextView amDailyDevotion = (TextView)findViewById(R.id.amDailyDevotion);
+        amDailyDevotion.setText("");
 
-        TextView deSzerzo = (TextView)findViewById(R.id.de_szerzo);
-        deSzerzo.setText("");
+        TextView amDailyDevotionAuthor = (TextView)findViewById(R.id.amDailyDevotionAuthor);
+        amDailyDevotionAuthor.setText("");
 
-        TextView duCim = (TextView)findViewById(R.id.du_cim);
-        duCim.setText("");
+        TextView pmTitle = (TextView)findViewById(R.id.pmTitle);
+        pmTitle.setText("");
 
-        TextView duIge = (TextView)findViewById(R.id.du_ige);
-        duIge.setText("");
+        TextView pmVerse = (TextView)findViewById(R.id.pmVerse);
+        pmVerse.setText("");
 
-        TextView duSzoveg = (TextView)findViewById(R.id.du_szoveg);
-        duSzoveg.setText("");
+        TextView pmDailyDevotion = (TextView)findViewById(R.id.pmDailyDevotion);
+        pmDailyDevotion.setText("");
 
-        TextView duSzerzo = (TextView)findViewById(R.id.du_szerzo);
-        duSzerzo.setText("");
+        TextView pmDailyDevotionAuthor = (TextView)findViewById(R.id.pmDailyDevotionAuthor);
+        pmDailyDevotionAuthor.setText("");
 
-        TextView bibliaora = (TextView)findViewById(R.id.bibliaora);
-        bibliaora.setVisibility(View.GONE);
+        TextView bibleLecture = (TextView)findViewById(R.id.bibleLecture);
+        bibleLecture.setVisibility(View.GONE);
 
-        TextView imaora = (TextView)findViewById(R.id.imaora);
-        imaora.setVisibility(View.GONE);
+        TextView prayer = (TextView)findViewById(R.id.prayer);
+        prayer.setVisibility(View.GONE);
 
-        TextView delelott = (TextView)findViewById(R.id.delelott);
-        delelott.setVisibility(View.GONE);
+        TextView am = (TextView)findViewById(R.id.delelott);
+        am.setVisibility(View.GONE);
 
-        TextView delutan = (TextView)findViewById(R.id.delutan);
-        delutan.setVisibility(View.GONE);
+        TextView pm = (TextView)findViewById(R.id.delutan);
+        pm.setVisibility(View.GONE);
 
     }
 
@@ -266,19 +267,18 @@ public class MainAppActivity extends AppCompatActivity
             boolean ret = mydb.insertFavoriteIfNotExist(dateManager.getDateString());
             if (ret) {
                 if (id == R.id.add_to_favorites) {
-                    Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(), Snackbar.LENGTH_LONG)
+                    Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
                             .setAction("clicked", null)
                             .show();
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -316,7 +316,7 @@ public class MainAppActivity extends AppCompatActivity
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
             sendIntent.setType("text/html");
-            startActivity(Intent.createChooser(sendIntent, getString(R.string.ahitat_megosztasa)));
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.shareactual)));
 
 
             /*
@@ -411,12 +411,13 @@ public class MainAppActivity extends AppCompatActivity
             dateManager.setDate(year, month , dayOfMonth);
             getItemFromMap(texts_map);
         } catch (ParseException e) {
-            Toast.makeText(view.getContext(), R.string.date_set_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), R.string.datesettingerror, Toast.LENGTH_SHORT).show();
         }
     }
 
 
     public static class DatePickerFragment extends DialogFragment {
+        @NonNull
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
 
