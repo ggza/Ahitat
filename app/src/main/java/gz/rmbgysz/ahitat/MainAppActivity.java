@@ -326,6 +326,10 @@ public class MainAppActivity extends AppCompatActivity
             DialogFragment newChoice = new ChoiceDialogFragment();
             newChoice.show(getSupportFragmentManager(), "choseDailyDevotionType");
         }
+        else if (id == R.id.nav_help) {
+            Intent intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

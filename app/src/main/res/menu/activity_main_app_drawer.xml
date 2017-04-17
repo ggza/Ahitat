@@ -31,4 +31,13 @@
             android:icon="@drawable/ic_my_share"
             android:title="@string/share" />
     </group>
+
+    <group android:id="@+id/nav_menu_help"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="@string/title_activity_help" />
+    </group>
+
 </menu>

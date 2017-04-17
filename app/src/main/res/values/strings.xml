@@ -141,5 +141,6 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
+    <string name="title_activity_help">Segítség</string>
 
 </resources>

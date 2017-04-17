@@ -12,8 +12,7 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="MainAppTheme" parent="MainAppTheme.Base">
-    </style>
+    <style name="MainAppTheme" parent="MainAppTheme.Base"></style>
 
     <style name="MainAppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
