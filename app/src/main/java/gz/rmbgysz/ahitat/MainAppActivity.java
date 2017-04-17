@@ -1,7 +1,10 @@
 package gz.rmbgysz.ahitat;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -15,6 +18,10 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,8 +41,10 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 
+import static android.text.Html.FROM_HTML_MODE_COMPACT;
+
 public class MainAppActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener  {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     private DatabaseHelper mydb ;
@@ -143,20 +152,7 @@ public class MainAppActivity extends AppCompatActivity
         LinearLayout.LayoutParams bParams = (LinearLayout.LayoutParams) bibleLecture.getLayoutParams();
         LinearLayout.LayoutParams iParams = (LinearLayout.LayoutParams) prayer.getLayoutParams();
 
-        if (item.getBibleLecture().isEmpty() && (bibleLecture != null) && (prayer != null) && (bParams != null) && (iParams != null)) {
-            bParams.height = 0;
-            bParams.setMargins(0,0,0,0);
-            iParams.height = 0;
-            iParams.setMargins(0,0,0,0);
-        }
-        else {
-            bParams.height = originalBibHeight;
-            // FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni,
-            // megneztem a designerben es ott 15-re van beallitva ha ott valtozik itt is hozza kell nyulni
-            bParams.setMargins(0,30,0,30);
-            iParams.height = originalImaHeight;
-            iParams.setMargins(0,30,0,30);
-        }
+        setMarginsByItemType(item, bibleLecture, prayer, bParams, iParams);
 
         bibleLecture.setText(item.getBibleLecture());
         prayer.setText(item.getPrayer());
@@ -179,6 +175,23 @@ public class MainAppActivity extends AppCompatActivity
         TextView pm = (TextView)findViewById(R.id.delutan);
         pm.setVisibility(View.VISIBLE);
 
+    }
+
+    private void setMarginsByItemType(DailyDevotion item, TextView bibleLecture, TextView prayer, LinearLayout.LayoutParams bParams, LinearLayout.LayoutParams iParams) {
+        if (item.getBibleLecture().isEmpty() && (bibleLecture != null) && (prayer != null) && (bParams != null) && (iParams != null)) {
+            bParams.height = 0;
+            bParams.setMargins(0,0,0,0);
+            iParams.height = 0;
+            iParams.setMargins(0,0,0,0);
+        }
+        else {
+            bParams.height = originalBibHeight;
+            // FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni,
+            // megneztem a designerben es ott 15-re van beallitva ha ott valtozik itt is hozza kell nyulni
+            bParams.setMargins(0,30,0,30);
+            iParams.height = originalImaHeight;
+            iParams.setMargins(0,30,0,30);
+        }
     }
 
     private void fillTextViewsWithEmptyText() {
@@ -310,41 +323,8 @@ public class MainAppActivity extends AppCompatActivity
             Intent intent = new Intent(this, FavoritesActivity.class);
             startActivityForResult(intent, FAVORITES_REQUEST_CODE);
         } else if (id == R.id.nav_share) {
-
-            //TODO: ezt nem tudtam emulatoron tesztelni
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-            sendIntent.setType("text/html");
-            startActivity(Intent.createChooser(sendIntent, getString(R.string.shareactual)));
-
-
-            /*
-            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            sharingIntent.setType("text/html");
-
-
-            String shareString = Html.fromHtml("<p>Store Name:</p>") .toString();
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
-
-            if (sharingIntent.resolveActivity(getPackageManager()) != null)
-                startActivity(Intent.createChooser(sharingIntent, "Áhitat megosztása"));
-            else {
-                Toast.makeText(this, "No app found on your phone which can perform this action", Toast.LENGTH_SHORT).show();
-            }
-            */
-
-            /*
-            ShareCompat.IntentBuilder.from(this)
-                    .setText("blabla")
-                    .setType("string/html")
-                    .setChooserTitle("Kiválasztott áhitat megosztása")
-                    .startChooser();
-            */
-            /*Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
-            */
+            DialogFragment newChoice = new ChoiceDialogFragment();
+            newChoice.show(getSupportFragmentManager(), "choseDailyDevotionType");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -442,10 +422,138 @@ public class MainAppActivity extends AppCompatActivity
             dpd.getDatePicker().setMinDate(minDate);
             dpd.getDatePicker().setMaxDate(maxDate);
             dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), dpd);
-            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.choice), dpd);
+            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.ok), dpd);
 
             return dpd;
+        }
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
+        //Toast.makeText(this, "You choosed: " + choosedId, Toast.LENGTH_LONG).show();
+        prepareTextForSharing(choosedId);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void prepareTextForSharing(int type) {
+        DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
+        //setTextViews(dateManager.getFormattedDateWithDayName(this), item);
+        //TODO: ezt nem tudtam emulatoron tesztelni
+            /*
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+            sendIntent.setType("text/html");
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.shareactual)));
+            */
+
+            /*
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/html");
+
+
+            String shareString = Html.fromHtml("<p>Store Name:</p>") .toString();
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
+
+            if (sharingIntent.resolveActivity(getPackageManager()) != null)
+                startActivity(Intent.createChooser(sharingIntent, "Áhitat megosztása"));
+            else {
+                Toast.makeText(this, "No app found on your phone which can perform this action", Toast.LENGTH_SHORT).show();
+            }
+            */
+
+            /*
+            ShareCompat.IntentBuilder.from(this)
+                    .setText("blabla")
+                    .setType("string/html")
+                    .setChooserTitle("Kiválasztott áhitat megosztása")
+                    .startChooser();
+            */
+            /*Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+            */
+
+        String shareString = "";
+        if (type == 0) {
+            shareString = String.format("<p> %s </p> <br> <h3> %s </h3> <br> " +
+                            "<i> %s </i> <br> <p> %s </p> <br> <i> %s <i/>" ,
+                    dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getAmTitle(),
+                    actualItem.getAmVerse(), actualItem.getAmDailyDevotion(), actualItem.getAmDailyDevotionAuthor());
+            //Toast.makeText(this, source, Toast.LENGTH_LONG).show();
+            //shareString = Html.fromHtml(source,FROM_HTML_MODE_COMPACT).toString();
+        }
+        else if (type == 1) {
+            shareString = String.format("<p> %s <br> <h3> %s </h3> <br> " +
+                            "<i> %s </i> </p> <br> <p> %s </p> <br> <i> %s <i/>" ,
+                    dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getPmTitle(),
+                    actualItem.getPmVerse(), actualItem.getPmDailyDevotion(), actualItem.getPmDailyDevotionAuthor());
+            //shareString = Html.fromHtml(source,FROM_HTML_MODE_COMPACT).toString();
+        }
+
+
+        if (!shareString.isEmpty()) {
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/html");
+
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
+
+            if (sharingIntent.resolveActivity(getPackageManager()) != null)
+                startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharedtitle)));
+            else {
+                Toast.makeText(this, getString(R.string.nosharedapp), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public static class ChoiceDialogFragment extends DialogFragment {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+
+        ShareTypeListenerInterface mListener;
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            try {
+                mListener = (ShareTypeListenerInterface) getActivity();
+            } catch (ClassCastException e) {
+                throw new ClassCastException(getActivity().toString()
+                        + " must implement ShareTypeListenerInterface");
+            }
+        }
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            final int[] choosed = {-1};
+            // Set the dialog title
+            builder.setTitle(R.string.sharetypetitle);
+
+            builder.setSingleChoiceItems(R.array.daily_devotion_choice_items, choosed[0],
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        choosed[0] = which;
+                    }
+            });
+
+            // Set the action buttons
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    //Toast.makeText(getContext(), "ok clicked : " + choosed[0], Toast.LENGTH_LONG).show();
+                    mListener.gotPositiveResultFromChoiceDialog(ChoiceDialogFragment.this, choosed[0]);
+                }
+            });
+
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+
+            return builder.create();
         }
     }
 }

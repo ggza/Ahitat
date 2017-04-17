@@ -91,7 +91,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.delete_from_favorites) {
-            showAlertDialog(FavoritesActivity.this);
+            showAlertDialog();
         }
         else if (item.getItemId() == android.R.id.home)
             finish();
@@ -113,7 +113,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     public void gotNegativeResult() {
     }
 
-    public void showAlertDialog(Context self) {
+    public void showAlertDialog() {
         final UpdateFavoritesInterface listener = this;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

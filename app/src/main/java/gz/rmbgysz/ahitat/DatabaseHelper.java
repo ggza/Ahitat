@@ -30,7 +30,6 @@ import java.util.HashMap;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "devotional2017.sqlite";
-    public static final String AHITATOK_TABLE_NAME = "ahitatok";
     public static final String AHITATOK_COLUMN_ID = "id";
     public static final String AHITATOK_COLUMN_DATE = "datum";
     public static final String AHITATOK_COLUMN_DE_CIM = "de_cim";

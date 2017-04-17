@@ -21,6 +21,9 @@
     <string name="datesettingerror">Hiba történt a dátum beállításnál!!!</string>
     <string name="dateiniterror">Hiba történt a dátum inicializálásánál!!!</string>
     <string name="shareactual">Áhitat megosztása</string>
+    <string name="sharetypetitle">MEGOSZTÁS KIVÁLASZTÁSA</string>
+    <string name="sharedtitle">Kiválasztott áhitat megosztása</string>
+    <string name="nosharedapp">Nincs feltelepítve megosztásra alkalmas alkalmazás</string>
 
     <string name="actual_date">TextView</string>
     <string name="heading">TextView</string>
@@ -63,6 +66,11 @@
         <item>Csütörtök</item>
         <item>Péntek</item>
         <item>Szombat</item>
+    </string-array>
+
+    <string-array name="daily_devotion_choice_items">
+        <item>Délelőtti áhitat</item>
+        <item>Délutáni áhitat</item>
     </string-array>
 
     <string name="pref_header_general">Általános</string>
