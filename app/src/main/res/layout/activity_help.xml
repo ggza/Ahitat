@@ -37,7 +37,8 @@
         android:paddingEnd="50dp"
         android:paddingStart="50dp"
         android:text="@string/help_content"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="16sp" />
 
 
 </android.support.design.widget.CoordinatorLayout>
