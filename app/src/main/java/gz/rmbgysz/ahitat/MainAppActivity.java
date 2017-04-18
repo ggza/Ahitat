@@ -450,14 +450,13 @@ public class MainAppActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
-        //Toast.makeText(this, "You choosed: " + choosedId, Toast.LENGTH_LONG).show();
+
         prepareTextForSharing(choosedId);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void prepareTextForSharing(int type) {
         DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
-        //setTextViews(dateManager.getFormattedDateWithDayName(this), item);
         //TODO: ezt nem tudtam emulatoron tesztelni
             /*
             Intent sendIntent = new Intent();
@@ -501,7 +500,7 @@ public class MainAppActivity extends AppCompatActivity
                             "<i> %s </i> <br> <p> %s </p> <br> <i> %s <i/>" ,
                     dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getAmTitle(),
                     actualItem.getAmVerse(), actualItem.getAmDailyDevotion(), actualItem.getAmDailyDevotionAuthor());
-                    */
+        */
             shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
                             actualItem.getAmTitle() + "\n"+
                             actualItem.getAmVerse() + "\n\n" +
@@ -510,16 +509,14 @@ public class MainAppActivity extends AppCompatActivity
 
         }
         else if (type == PM_DAILYDEVOTION) {
-            shareString = String.format("<p> %s <br> <h3> %s </h3> <br> " +
-                            "<i> %s </i> </p> <br> <p> %s </p> <br> <i> %s <i/>" ,
-                    dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getPmTitle(),
-                    actualItem.getPmVerse(), actualItem.getPmDailyDevotion(), actualItem.getPmDailyDevotionAuthor());
+            shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+                    actualItem.getPmTitle() + "\n"+
+                    actualItem.getPmVerse() + "\n\n" +
+                    actualItem.getPmDailyDevotion() + "\n\n" +
+                    actualItem.getPmDailyDevotionAuthor();
         }
 
         //Toast.makeText(this, fromHtml(shareString), Toast.LENGTH_LONG).show();
-
-
-
         if (!shareString.isEmpty()) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/html");
