@@ -143,6 +143,7 @@
     <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
     <string name="title_activity_help">Segítség</string>
 
+    <string name="help_title1">Menü és navigáció</string>
     <string name="help_content">A napok közti navigációt az oldal jobb alsó sarkában található „+” gomb segíti. Nagyobb időtávra, előre vagy visszamenőleg a főmenü „Dátum szerint” menüpontjában lehet a kívánt elmélkedést kiválasztani. Itt lehet a „Mai áhítat”-ra is visszalépni.</string>
 
 </resources>

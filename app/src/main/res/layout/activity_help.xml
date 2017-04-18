@@ -29,16 +29,38 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <TextView
-        android:id="@+id/help_content"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:ignore="UselessParent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_gravity="center_vertical"
-        android:paddingEnd="30dp"
-        android:paddingStart="30dp"
-        android:text="@string/help_content"
-        android:textAlignment="center"
-        android:textSize="18sp" />
+        android:id="@+id/main_app_linear_layout">
 
+        <TextView
+            android:id="@+id/help_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingEnd="30dp"
+            android:paddingStart="30dp"
+            android:text="@string/help_title1"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/help_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="30dp"
+            android:paddingStart="30dp"
+            android:text="@string/help_content"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
