@@ -496,10 +496,18 @@ public class MainAppActivity extends AppCompatActivity
 
         String shareString = "";
         if (type == AM_DAILYDEVOTION) {
+            /*
             shareString = String.format("<p> %s </p> <br> <h3> %s </h3> <br> " +
                             "<i> %s </i> <br> <p> %s </p> <br> <i> %s <i/>" ,
                     dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getAmTitle(),
                     actualItem.getAmVerse(), actualItem.getAmDailyDevotion(), actualItem.getAmDailyDevotionAuthor());
+                    */
+            shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+                            actualItem.getAmTitle() + "\n"+
+                            actualItem.getAmVerse() + "\n\n" +
+                            actualItem.getAmDailyDevotion() + "\n\n" +
+                            actualItem.getAmDailyDevotionAuthor();
+
         }
         else if (type == PM_DAILYDEVOTION) {
             shareString = String.format("<p> %s <br> <h3> %s </h3> <br> " +
