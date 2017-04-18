@@ -501,7 +501,7 @@ public class MainAppActivity extends AppCompatActivity
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/html");
 
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(shareString,FROM_HTML_MODE_COMPACT));
 
             if (sharingIntent.resolveActivity(getPackageManager()) != null)
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharedtitle)));
