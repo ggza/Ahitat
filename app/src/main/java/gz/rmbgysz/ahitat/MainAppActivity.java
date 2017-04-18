@@ -48,6 +48,8 @@ public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
+    public static final int AM_DAILYDEVOTION = 0;
+    public static final int PM_DAILYDEVOTION = 1;
     private DatabaseHelper mydb ;
     private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
@@ -493,28 +495,28 @@ public class MainAppActivity extends AppCompatActivity
             */
 
         String shareString = "";
-        if (type == 0) {
+        if (type == AM_DAILYDEVOTION) {
             shareString = String.format("<p> %s </p> <br> <h3> %s </h3> <br> " +
                             "<i> %s </i> <br> <p> %s </p> <br> <i> %s <i/>" ,
                     dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getAmTitle(),
                     actualItem.getAmVerse(), actualItem.getAmDailyDevotion(), actualItem.getAmDailyDevotionAuthor());
-            //Toast.makeText(this, source, Toast.LENGTH_LONG).show();
-            //shareString = Html.fromHtml(source,FROM_HTML_MODE_COMPACT).toString();
         }
-        else if (type == 1) {
+        else if (type == PM_DAILYDEVOTION) {
             shareString = String.format("<p> %s <br> <h3> %s </h3> <br> " +
                             "<i> %s </i> </p> <br> <p> %s </p> <br> <i> %s <i/>" ,
                     dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getPmTitle(),
                     actualItem.getPmVerse(), actualItem.getPmDailyDevotion(), actualItem.getPmDailyDevotionAuthor());
-            //shareString = Html.fromHtml(source,FROM_HTML_MODE_COMPACT).toString();
         }
+
+        //Toast.makeText(this, fromHtml(shareString), Toast.LENGTH_LONG).show();
+
 
 
         if (!shareString.isEmpty()) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/html");
 
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, fromHtml(shareString));
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
 
             if (sharingIntent.resolveActivity(getPackageManager()) != null)
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharedtitle)));
