@@ -21,7 +21,7 @@
     <string name="datesettingerror">Hiba történt a dátum beállításnál!!!</string>
     <string name="dateiniterror">Hiba történt a dátum inicializálásánál!!!</string>
     <string name="shareactual">Áhitat megosztása</string>
-    <string name="sharetypetitle">MEGOSZTANI KÍVÁNT SOROZAT</string>
+    <string name="sharetypetitle">MEGOSZTANDÓ SOROZAT</string>
     <string name="sharedtitle">Kiválasztott áhítat megosztása</string>
     <string name="nosharedapp">Nincs telepítve megosztásra alkalmas alkalmazás</string>
 
