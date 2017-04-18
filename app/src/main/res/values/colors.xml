@@ -9,7 +9,7 @@
     <color name="navigationBarColor">#000000</color>
 
     <!--floating button actions-->
-    <color name="white">#FFFFFF</color>
+    <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="half_black">#808080</color>
 </resources>

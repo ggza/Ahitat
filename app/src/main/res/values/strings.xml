@@ -21,9 +21,9 @@
     <string name="datesettingerror">Hiba történt a dátum beállításnál!!!</string>
     <string name="dateiniterror">Hiba történt a dátum inicializálásánál!!!</string>
     <string name="shareactual">Áhitat megosztása</string>
-    <string name="sharetypetitle">MEGOSZTÁS KIVÁLASZTÁSA</string>
-    <string name="sharedtitle">Kiválasztott áhitat megosztása</string>
-    <string name="nosharedapp">Nincs feltelepítve megosztásra alkalmas alkalmazás</string>
+    <string name="sharetypetitle">MEGOSZTANI KÍVÁNT SOROZAT</string>
+    <string name="sharedtitle">Kiválasztott áhítat megosztása</string>
+    <string name="nosharedapp">Nincs telepítve megosztásra alkalmas alkalmazás</string>
 
     <string name="actual_date">TextView</string>
     <string name="heading">TextView</string>
@@ -69,8 +69,8 @@
     </string-array>
 
     <string-array name="daily_devotion_choice_items">
-        <item>Délelőtti áhitat</item>
-        <item>Délutáni áhitat</item>
+        <item>Délelőtt</item>
+        <item>Délután</item>
     </string-array>
 
     <string name="pref_header_general">Általános</string>
@@ -142,5 +142,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
     <string name="title_activity_help">Segítség</string>
+
+    <string name="help_content">A napok közti navigációt az oldal jobb alsó sarkában található „+” gomb segíti. Nagyobb időtávra, előre vagy visszamenőleg a főmenü „Dátum szerint” menüpontjában lehet a kívánt elmélkedést kiválasztani. Itt lehet a „Mai áhítat”-ra is visszalépni.</string>
 
 </resources>
