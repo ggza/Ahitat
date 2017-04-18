@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -432,6 +433,18 @@ public class MainAppActivity extends AppCompatActivity
         }
     }
 
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
@@ -501,7 +514,7 @@ public class MainAppActivity extends AppCompatActivity
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/html");
 
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(shareString,FROM_HTML_MODE_COMPACT));
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, fromHtml(shareString));
 
             if (sharingIntent.resolveActivity(getPackageManager()) != null)
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.sharedtitle)));
