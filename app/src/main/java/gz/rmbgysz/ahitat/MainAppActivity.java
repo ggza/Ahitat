@@ -405,7 +405,7 @@ public class MainAppActivity extends AppCompatActivity
 
     public static class DatePickerFragment extends DialogFragment {
         @NonNull
-        @RequiresApi(api = Build.VERSION_CODES.N)
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
 
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -447,14 +447,14 @@ public class MainAppActivity extends AppCompatActivity
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
 
         prepareTextForSharing(choosedId);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void prepareTextForSharing(int type) {
         DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
         //TODO: ezt nem tudtam emulatoron tesztelni
@@ -532,7 +532,7 @@ public class MainAppActivity extends AppCompatActivity
     }
 
     public static class ChoiceDialogFragment extends DialogFragment {
-        @RequiresApi(api = Build.VERSION_CODES.N)
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
         ShareTypeListenerInterface mListener;
 
