@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_actual_lecture"
+            android:icon="@drawable/ic_actual_lecture"
+            android:title="@string/dailydevotion" />
+        <item
+            android:id="@+id/nav_search_by_date"
+            android:icon="@drawable/ic_search_by_date"
+            android:title="@string/searchbydate" />
+
+<!--FIXME: ezt egyelore nem valositjuk meg majd egy kovetkezo verzioban
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/kereses" />
+-->
+    </group>
+
+    <group android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_favourite"
+            android:title="@string/favorites" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_my_share"
+            android:title="@string/share" />
+    </group>
+
+    <group android:id="@+id/nav_menu_help"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="@string/title_activity_help" />
+    </group>
+
+</menu>
