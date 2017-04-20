@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -24,7 +23,8 @@
         android:layout_alignTop="@+id/button2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/description" />
 
     <TextView
         android:id="@+id/button2"
@@ -36,8 +36,9 @@
         android:background="@android:color/transparent"
         android:onClick="startMainApp"
         android:text="@string/dailydevotiontitle"
-        android:textColor="@android:color/black"
-        android:textColorLink="@android:color/black" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColorLink="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView2"
