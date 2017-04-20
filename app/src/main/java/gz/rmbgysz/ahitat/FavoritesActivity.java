@@ -31,12 +31,11 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_favorites);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.favorites_toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar favoritesToolbar = (Toolbar) findViewById(R.id.favorites_toolbar);
+        setSupportActionBar(favoritesToolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
