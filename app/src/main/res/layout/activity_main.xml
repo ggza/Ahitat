@@ -16,26 +16,29 @@
         android:contentDescription="@string/description"
         android:scaleType="fitXY" />
 
-    <LinearLayout
-        android:onClick="startMainApp"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_ujjam"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/description" />
+
+    <TextView
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/ic_ujjam"
-            android:onClick="startMainApp"
-            android:text="@string/dailydevotiontitle"
-            android:textColor="@android:color/black"
-            android:textColorLink="@android:color/black" />
-    </LinearLayout>
+        android:layout_marginBottom="90dp"
+        android:background="@android:color/transparent"
+        android:onClick="startMainApp"
+        android:text="@string/dailydevotiontitle"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColorLink="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView2"
