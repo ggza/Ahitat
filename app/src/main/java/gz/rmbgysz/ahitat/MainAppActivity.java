@@ -1,15 +1,13 @@
 package gz.rmbgysz.ahitat;
 
-import android.app.Activity;
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-//import android.support.design.widget.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
@@ -18,11 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -42,15 +36,12 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static android.text.Html.FROM_HTML_MODE_COMPACT;
-
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
     public static final int PM_DAILYDEVOTION = 1;
-    private DatabaseHelper mydb ;
     private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = DateManager.getInstance();
@@ -71,31 +62,16 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
-        mydb = DatabaseHelper.getInstance(this);
-
         try {
-            mydb.createDataBase();
+            DatabaseHelper.getInstance(this).createDataBase();
 
         } catch (IOException ioe) {
             throw new Error("Unable to create database");
         }
 
-        texts_map= mydb.getAllDevotionals();
+        texts_map= DatabaseHelper.getInstance(this).getAllDevotionals();
 
         getItemFromMap(texts_map);
-
-        //setTextViews(dateManager.getFormattedDate());
-
-        /* ez a regi megoldas egyelore nem kell
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_menu);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Ide jön majd a helyi menü", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -190,7 +166,7 @@ public class MainAppActivity extends AppCompatActivity
         else {
             bParams.height = originalBibHeight;
             // FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni,
-            // megneztem a designerben es ott 15-re van beallitva ha ott valtozik itt is hozza kell nyulni
+            // megneztem a designerben es ott 30-ra van beallitva ha ott valtozik itt is hozza kell nyulni
             bParams.setMargins(0,30,0,30);
             iParams.height = originalImaHeight;
             iParams.setMargins(0,30,0,30);
@@ -251,7 +227,7 @@ public class MainAppActivity extends AppCompatActivity
 
     @Override
     public void onDestroy() {
-        mydb.closeDB();
+        DatabaseHelper.getInstance(this).closeDB();
         super.onDestroy();
     }
 
@@ -279,8 +255,8 @@ public class MainAppActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-            boolean ret = mydb.insertFavoriteIfNotExist(dateManager.getDateString());
+            boolean ret = DatabaseHelper.getInstance(this).
+                    insertFavoriteIfNotExist(dateManager.getDateString());
             if (ret) {
                 if (id == R.id.add_to_favorites) {
                     Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
@@ -315,13 +291,6 @@ public class MainAppActivity extends AppCompatActivity
             newFragment.setArguments(bundle);
             newFragment.show(getSupportFragmentManager(), "datePicker");
 
-        /*FIXME: a keressel egyelore nem foglalkozunk
-        } else if (id == R.id.nav_search) {
-
-            Snackbar.make(findViewById(R.id.content_main_app), "Keresés", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
-        */
         } else if (id == R.id.nav_favorites) {
             Intent intent = new Intent(this, FavoritesActivity.class);
             startActivityForResult(intent, FAVORITES_REQUEST_CODE);
@@ -404,25 +373,21 @@ public class MainAppActivity extends AppCompatActivity
 
 
     public static class DatePickerFragment extends DialogFragment {
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
         @NonNull
-        @RequiresApi(api = Build.VERSION_CODES.N)
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
 
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             //lokalizacio
-            Locale locale = new Locale("HU");
-            locale.setDefault(locale);
-
-            Configuration config = new Configuration();
-            config.setLocale(locale);
-            getResources().getConfiguration().updateFrom(config);
+            Locale.setDefault(new Locale("HU"));
 
             int year = getArguments().getInt("year");
             int month = getArguments().getInt("month");
             int day = getArguments().getInt("day");
             long minDate = getArguments().getLong("minDate");
             long maxDate = getArguments().getLong("maxDate");
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),R.style.DatepickerTheme,
                     (DatePickerDialog.OnDateSetListener)
                             getActivity(), year, month, day);
 
@@ -435,7 +400,8 @@ public class MainAppActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("deprecation")
+
+    /*
     public static Spanned fromHtml(String html){
         Spanned result;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -445,78 +411,20 @@ public class MainAppActivity extends AppCompatActivity
         }
         return result;
     }
+    */
 
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
-
         prepareTextForSharing(choosedId);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void prepareTextForSharing(int type) {
         DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
-        //TODO: ezt nem tudtam emulatoron tesztelni
-            /*
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-            sendIntent.setType("text/html");
-            startActivity(Intent.createChooser(sendIntent, getString(R.string.shareactual)));
-            */
 
-            /*
-            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            sharingIntent.setType("text/html");
+        String  shareString =  prepareStringForSharing(type, actualItem);
 
-
-            String shareString = Html.fromHtml("<p>Store Name:</p>") .toString();
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
-
-            if (sharingIntent.resolveActivity(getPackageManager()) != null)
-                startActivity(Intent.createChooser(sharingIntent, "Áhitat megosztása"));
-            else {
-                Toast.makeText(this, "No app found on your phone which can perform this action", Toast.LENGTH_SHORT).show();
-            }
-            */
-
-            /*
-            ShareCompat.IntentBuilder.from(this)
-                    .setText("blabla")
-                    .setType("string/html")
-                    .setChooserTitle("Kiválasztott áhitat megosztása")
-                    .startChooser();
-            */
-            /*Snackbar.make(findViewById(R.id.content_main_app), "Megosztás", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
-            */
-
-        String shareString = "";
-        if (type == AM_DAILYDEVOTION) {
-            /*
-            shareString = String.format("<p> %s </p> <br> <h3> %s </h3> <br> " +
-                            "<i> %s </i> <br> <p> %s </p> <br> <i> %s <i/>" ,
-                    dateManager.getFormattedDateWithDayName(MainAppActivity.this), actualItem.getAmTitle(),
-                    actualItem.getAmVerse(), actualItem.getAmDailyDevotion(), actualItem.getAmDailyDevotionAuthor());
-        */
-            shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
-                            actualItem.getAmTitle() + "\n"+
-                            actualItem.getAmVerse() + "\n\n" +
-                            actualItem.getAmDailyDevotion() + "\n\n" +
-                            actualItem.getAmDailyDevotionAuthor();
-
-        }
-        else if (type == PM_DAILYDEVOTION) {
-            shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
-                    actualItem.getPmTitle() + "\n"+
-                    actualItem.getPmVerse() + "\n\n" +
-                    actualItem.getPmDailyDevotion() + "\n\n" +
-                    actualItem.getPmDailyDevotionAuthor();
-        }
-
-        //Toast.makeText(this, fromHtml(shareString), Toast.LENGTH_LONG).show();
         if (!shareString.isEmpty()) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/html");
@@ -531,8 +439,28 @@ public class MainAppActivity extends AppCompatActivity
         }
     }
 
+    private String prepareStringForSharing(int type, DailyDevotion actualItem) {
+        String returnString = "";
+        if (type == AM_DAILYDEVOTION) {
+            returnString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+                            actualItem.getAmTitle() + "\n"+
+                            actualItem.getAmVerse() + "\n\n" +
+                            actualItem.getAmDailyDevotion() + "\n\n" +
+                            actualItem.getAmDailyDevotionAuthor();
+
+        }
+        else if (type == PM_DAILYDEVOTION) {
+            returnString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+                    actualItem.getPmTitle() + "\n"+
+                    actualItem.getPmVerse() + "\n\n" +
+                    actualItem.getPmDailyDevotion() + "\n\n" +
+                    actualItem.getPmDailyDevotionAuthor();
+        }
+        return returnString;
+    }
+
     public static class ChoiceDialogFragment extends DialogFragment {
-        @RequiresApi(api = Build.VERSION_CODES.N)
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
         ShareTypeListenerInterface mListener;
 
@@ -566,7 +494,6 @@ public class MainAppActivity extends AppCompatActivity
             builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    //Toast.makeText(getContext(), "ok clicked : " + choosed[0], Toast.LENGTH_LONG).show();
                     mListener.gotPositiveResultFromChoiceDialog(ChoiceDialogFragment.this, choosed[0]);
                 }
             });

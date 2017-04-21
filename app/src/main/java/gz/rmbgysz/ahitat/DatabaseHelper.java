@@ -29,31 +29,29 @@ import java.util.HashMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static String DB_NAME = "devotional2017.sqlite";
-    public static final String AHITATOK_COLUMN_ID = "id";
-    public static final String AHITATOK_COLUMN_DATE = "datum";
-    public static final String AHITATOK_COLUMN_DE_CIM = "de_cim";
-    public static final String AHITATOK_COLUMN_DE_IGE = "de_ige";
-    public static final String AHITATOK_COLUMN_DE_SZOVEG = "de_szoveg";
-    public static final String AHITATOK_COLUMN_DE_SZERZO = "de_szerzo";
-    public static final String AHITATOK_COLUMN_DU_CIM = "du_cim";
-    public static final String AHITATOK_COLUMN_DU_IGE = "du_ige";
-    public static final String AHITATOK_COLUMN_DU_SZOVEG = "du_szoveg";
-    public static final String AHITATOK_COLUMN_DU_SZERZO = "du_szerzo";
-    public static final String AHITATOK_COLUMN_BIBLIAORA = "bibliaora";
-    public static final String AHITATOK_COLUMN_IMAORA = "imaora";
-
-    public static final String KEDVENCEK_TABLE_NAME = "kedvencek";
-    public static final String KEDVENCEK_COLUMN_ID = "id";
-    public static final String KEDVENCEK_COLUMN_DATE = "datum";
+    private static final String DB_NAME = "devotional2017.sqlite";
+    private static final String AHITATOK_COLUMN_ID = "id";
+    private static final String AHITATOK_COLUMN_DATE = "datum";
+    private static final String AHITATOK_COLUMN_DE_CIM = "de_cim";
+    private static final String AHITATOK_COLUMN_DE_IGE = "de_ige";
+    private static final String AHITATOK_COLUMN_DE_SZOVEG = "de_szoveg";
+    private static final String AHITATOK_COLUMN_DE_SZERZO = "de_szerzo";
+    private static final String AHITATOK_COLUMN_DU_CIM = "du_cim";
+    private static final String AHITATOK_COLUMN_DU_IGE = "du_ige";
+    private static final String AHITATOK_COLUMN_DU_SZOVEG = "du_szoveg";
+    private static final String AHITATOK_COLUMN_DU_SZERZO = "du_szerzo";
+    private static final String AHITATOK_COLUMN_BIBLIAORA = "bibliaora";
+    private static final String AHITATOK_COLUMN_IMAORA = "imaora";
+    private static final String KEDVENCEK_TABLE_NAME = "kedvencek";
+    private static final String KEDVENCEK_COLUMN_ID = "id";
+    private static final String KEDVENCEK_COLUMN_DATE = "datum";
 
     private static final String TAG = "DatabaseHelper";
 
     //The Android's default system path of your application database.
     private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
-    private final Context myContext;
-
+    private static Context myContext;
 
     //for singleton instance
 
@@ -67,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static DatabaseHelper getInstance(Context context) {
         if (instance == null)
-            instance = new DatabaseHelper(context);
+            instance = new DatabaseHelper(context.getApplicationContext());
         return instance;
     }
 
@@ -239,13 +237,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return (count == 0);
-    }
-
-    public Integer deleteFavorite(Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(KEDVENCEK_TABLE_NAME,
-                KEDVENCEK_COLUMN_ID + " = ? ",
-                new String[] { Integer.toString(id) });
     }
 
     public Integer deleteFavorite(String date) {
