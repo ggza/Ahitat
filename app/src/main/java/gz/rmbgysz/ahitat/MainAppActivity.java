@@ -1,13 +1,11 @@
 package gz.rmbgysz.ahitat;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -44,7 +42,6 @@ public class MainAppActivity extends AppCompatActivity
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
     public static final int PM_DAILYDEVOTION = 1;
-    private DatabaseHelper mydb ;
     private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = DateManager.getInstance();
@@ -65,31 +62,16 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
-        mydb = DatabaseHelper.getInstance(getApplicationContext());
-
         try {
-            mydb.createDataBase();
+            DatabaseHelper.getInstance(this).createDataBase();
 
         } catch (IOException ioe) {
             throw new Error("Unable to create database");
         }
 
-        texts_map= mydb.getAllDevotionals();
+        texts_map= DatabaseHelper.getInstance(this).getAllDevotionals();
 
         getItemFromMap(texts_map);
-
-        //setTextViews(dateManager.getFormattedDate());
-
-        /* ez a regi megoldas egyelore nem kell
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_menu);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Ide jön majd a helyi menü", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -245,7 +227,7 @@ public class MainAppActivity extends AppCompatActivity
 
     @Override
     public void onDestroy() {
-        mydb.closeDB();
+        DatabaseHelper.getInstance(this).closeDB();
         super.onDestroy();
     }
 
@@ -273,7 +255,8 @@ public class MainAppActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-            boolean ret = mydb.insertFavoriteIfNotExist(dateManager.getDateString());
+            boolean ret = DatabaseHelper.getInstance(this).
+                    insertFavoriteIfNotExist(dateManager.getDateString());
             if (ret) {
                 if (id == R.id.add_to_favorites) {
                     Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
@@ -308,13 +291,6 @@ public class MainAppActivity extends AppCompatActivity
             newFragment.setArguments(bundle);
             newFragment.show(getSupportFragmentManager(), "datePicker");
 
-        /*FIXME: a keressel egyelore nem foglalkozunk
-        } else if (id == R.id.nav_search) {
-
-            Snackbar.make(findViewById(R.id.content_main_app), "Keresés", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
-        */
         } else if (id == R.id.nav_favorites) {
             Intent intent = new Intent(this, FavoritesActivity.class);
             startActivityForResult(intent, FAVORITES_REQUEST_CODE);
@@ -404,12 +380,7 @@ public class MainAppActivity extends AppCompatActivity
 
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             //lokalizacio
-            Locale locale = new Locale("HU");
-            locale.setDefault(locale);
-
-            Configuration config = new Configuration();
-            config.setLocale(locale);
-            getResources().getConfiguration().updateFrom(config);
+            Locale.setDefault(new Locale("HU"));
 
             int year = getArguments().getInt("year");
             int month = getArguments().getInt("month");
@@ -452,22 +423,7 @@ public class MainAppActivity extends AppCompatActivity
     private void prepareTextForSharing(int type) {
         DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
 
-        String shareString = "";
-        if (type == AM_DAILYDEVOTION) {
-            shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
-                            actualItem.getAmTitle() + "\n"+
-                            actualItem.getAmVerse() + "\n\n" +
-                            actualItem.getAmDailyDevotion() + "\n\n" +
-                            actualItem.getAmDailyDevotionAuthor();
-
-        }
-        else if (type == PM_DAILYDEVOTION) {
-            shareString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
-                    actualItem.getPmTitle() + "\n"+
-                    actualItem.getPmVerse() + "\n\n" +
-                    actualItem.getPmDailyDevotion() + "\n\n" +
-                    actualItem.getPmDailyDevotionAuthor();
-        }
+        String  shareString =  prepareStringForSharing(type, actualItem);
 
         if (!shareString.isEmpty()) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -481,6 +437,26 @@ public class MainAppActivity extends AppCompatActivity
                 Toast.makeText(this, getString(R.string.nosharedapp), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private String prepareStringForSharing(int type, DailyDevotion actualItem) {
+        String returnString = "";
+        if (type == AM_DAILYDEVOTION) {
+            returnString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+                            actualItem.getAmTitle() + "\n"+
+                            actualItem.getAmVerse() + "\n\n" +
+                            actualItem.getAmDailyDevotion() + "\n\n" +
+                            actualItem.getAmDailyDevotionAuthor();
+
+        }
+        else if (type == PM_DAILYDEVOTION) {
+            returnString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+                    actualItem.getPmTitle() + "\n"+
+                    actualItem.getPmVerse() + "\n\n" +
+                    actualItem.getPmDailyDevotion() + "\n\n" +
+                    actualItem.getPmDailyDevotionAuthor();
+        }
+        return returnString;
     }
 
     public static class ChoiceDialogFragment extends DialogFragment {

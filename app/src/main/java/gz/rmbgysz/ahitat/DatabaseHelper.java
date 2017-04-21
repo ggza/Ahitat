@@ -51,8 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //The Android's default system path of your application database.
     private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
-    private final Context myContext;
-
+    private static Context myContext;
 
     //for singleton instance
 
@@ -66,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static DatabaseHelper getInstance(Context context) {
         if (instance == null)
-            instance = new DatabaseHelper(context);
+            instance = new DatabaseHelper(context.getApplicationContext());
         return instance;
     }
 

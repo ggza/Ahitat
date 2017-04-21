@@ -16,18 +16,19 @@ import java.util.ArrayList;
 
 public class FavoritesAdapter extends BaseAdapter{
 
+    private Context mContext;
     private final UpdateFavoritesInterface listener;
     private LayoutInflater mInflater;
     private DatabaseHelper mydb;
     private ArrayList<Favorite> mDataSource;
     private final ArrayList<String> mSelectedForDelete;
 
-    public FavoritesAdapter(Context mContext) {
+    public FavoritesAdapter(Context context) {
+        this.mContext = context;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.listener = (UpdateFavoritesInterface) mContext;
         mSelectedForDelete = new ArrayList<>();
-        mydb = DatabaseHelper.getInstance(mContext);
-        mDataSource = mydb.getAllFavoritesWithTitles();
+        mDataSource = DatabaseHelper.getInstance(mContext).getAllFavoritesWithTitles();
     }
 
     @Override
@@ -94,10 +95,10 @@ public class FavoritesAdapter extends BaseAdapter{
     public void deleteItemsAndRefresh() {
 
         for (int j=0; j < mSelectedForDelete.size(); j ++) {
-                mydb.deleteFavorite(mSelectedForDelete.get(j));
+            DatabaseHelper.getInstance(this.mContext).deleteFavorite(mSelectedForDelete.get(j));
         }
         mSelectedForDelete.clear();
-        mDataSource = mydb.getAllFavoritesWithTitles();
+        mDataSource = DatabaseHelper.getInstance(mContext).getAllFavoritesWithTitles();
         this.notifyDataSetChanged();
         listener.updateMenu(mSelectedForDelete.size());
     }
