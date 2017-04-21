@@ -387,7 +387,7 @@ public class MainAppActivity extends AppCompatActivity
             int day = getArguments().getInt("day");
             long minDate = getArguments().getLong("minDate");
             long maxDate = getArguments().getLong("maxDate");
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),R.style.DatepickerTheme,
                     (DatePickerDialog.OnDateSetListener)
                             getActivity(), year, month, day);
 
