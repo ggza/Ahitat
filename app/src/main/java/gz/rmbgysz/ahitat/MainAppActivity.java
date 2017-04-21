@@ -65,7 +65,7 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
-        mydb = DatabaseHelper.getInstance(this);
+        mydb = DatabaseHelper.getInstance(getApplicationContext());
 
         try {
             mydb.createDataBase();

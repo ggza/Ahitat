@@ -17,14 +17,12 @@ import java.util.ArrayList;
 public class FavoritesAdapter extends BaseAdapter{
 
     private final UpdateFavoritesInterface listener;
-    private Context mContext;
     private LayoutInflater mInflater;
     private DatabaseHelper mydb;
     private ArrayList<Favorite> mDataSource;
     private final ArrayList<String> mSelectedForDelete;
 
     public FavoritesAdapter(Context mContext) {
-        this.mContext = mContext;
         this.mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.listener = (UpdateFavoritesInterface) mContext;
         mSelectedForDelete = new ArrayList<>();
@@ -47,8 +45,6 @@ public class FavoritesAdapter extends BaseAdapter{
         return position;
     }
 
-    public ArrayList<String> getItemsSelectedForDelete() { return  mSelectedForDelete;}
-    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
