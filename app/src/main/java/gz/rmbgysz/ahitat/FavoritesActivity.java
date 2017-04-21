@@ -1,27 +1,19 @@
 package gz.rmbgysz.ahitat;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import java.text.ParseException;
-
 
 public class FavoritesActivity extends AppCompatActivity implements UpdateFavoritesInterface {
 
-    public static final String TITLE = "Törlés megerősítése";
-    public static final String AREYOUSURE = "Biztosan törölni szeretné a kijelölt elemeket?";
-    public static final String YES = "Igen";
-    public static final String CANCEL = "Mégse";
     private int selectedForDeleteCount = 0;
     private Menu optionsMenu = null;
     private ListView listView;
@@ -65,10 +57,6 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                // Show Alert
-                //Toast.makeText(getApplicationContext(),
-                //        "Position :"+itemPosition+"  ListItem : " +item , Toast.LENGTH_LONG)
-                //        .show();
             }
 
         });
@@ -118,10 +106,10 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
         final UpdateFavoritesInterface listener = this;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle(TITLE);
-        builder.setMessage(AREYOUSURE);
+        builder.setTitle(getString(R.string.deletetitle));
+        builder.setMessage(getString(R.string.areyousure));
 
-        builder.setPositiveButton(YES, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok2), new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
                 listener.gotPositiveResult();
@@ -129,7 +117,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
             }
         });
 
-        builder.setNegativeButton(CANCEL, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {

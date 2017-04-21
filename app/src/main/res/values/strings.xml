@@ -17,13 +17,16 @@
     <string name="next">Következő nap</string>
     <string name="cancel">Mégse</string>
     <string name="ok">Beállít</string>
+    <string name="ok2">Igen</string>
     <string name="choice">Választ</string>
     <string name="datesettingerror">Hiba történt a dátum beállításnál!!!</string>
     <string name="dateiniterror">Hiba történt a dátum inicializálásánál!!!</string>
     <string name="shareactual">Áhitat megosztása</string>
-    <string name="sharetypetitle">MEGOSZTANDÓ SOROZAT</string>
+    <string name="sharetypetitle">KIVÁLASZTOTT ÁHITAT MEGOSZTÁSA</string>
     <string name="sharedtitle">Kiválasztott áhítat megosztása</string>
     <string name="nosharedapp">Nincs telepítve megosztásra alkalmas alkalmazás</string>
+    <string name="areyousure">Biztosan törölni szeretné a kijelölt kedvence(ke)t?</string>
+    <string name="deletetitle">TÖRLÉS MEGERŐSÍTÉSE</string>
 
     <string name="actual_date">TextView</string>
     <string name="heading">TextView</string>
@@ -143,14 +146,11 @@
     <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
     <string name="title_activity_help">Segítség</string>
 
-    <string name="help_title1">Főoldal</string>
-    <string name="help_content1">A főoldalt érintve az aktuális napi áhítatra ugrik a program.</string>
-    <string name="help_title2">Navigáció</string>
-    <string name="help_content2">A napok közti navigációt az oldal jobb alsó sarkában található, legújabb Google- és Android szabványt követő <b>„+”</b> gomb segíti. </string>
-    <string name="help_title3">Menü</string>
-    <string name="help_content3">– A “MAI ÁHÍTAT” az <b>aktuális</b> (mai) napi áhítatra állítja, vagy állítja vissza a programot.</string>
-    <string name="help_content4">– A „DÁTUM SZERINT” menüpont alatt felugró dátumválasztó widgeten <b>hosszabb időtávra</b> lehet, előre vagy visszamenőleg a kívánt elmélkedést kiválasztani.</string>
-    <string name="help_content5">– A napi áhítat fejlécének jobb felső sarkában látható szív-ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani. Ezt a „KEDVENCEK” menüpont alatt lehet összegyűjteni, meghívni, illetve törölni.</string>
-    <string name="help_content6">– A „MEGOSZTÁS” menüpont <b>a kívánt áhítatok megosztását</b> teszi lehetővé a telefonra telepített megosztó programokkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését osztja meg a felhasználó.</string>
+    <string name="help_content1">Az applikácót az induló képernyőn található ujj gombra kattintva lehet elindítani. Induláskor az aktuális dátum szerinti áhitat jelenik meg. A főmenü a bal felső sarokban lévő hamburger ikonra kattinta érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy navigációs menü, melynek segítségével naponként lehet visszafele, illetve előre léptetni a megjeleníteni kívánt áhitatot.\n</string>
+    <string name="help_title1">MENÜ\n</string>
+    <string name="help_content2"><b>MAI ÁHITAT</b>\n\nA MAI ÁHÍTAT menüpont az aktuális (mai) napi áhítatot állítja be.\n</string>
+    <string name="help_content3"><b>DÁTUM SZERINT</b>\n\nA DÁTUM SZERINT menüpont alatt felugró dátumválasztó segítségével tetszőlegesen ki lehet választani, a kívánt elmélkedés adott éven belül.\n A fejléc jobb felső sarkában látható szív alakú ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
+    <string name="help_content4"><b>KEDVENCEK</b>\n\nA MAI ÁHITAT menüpontban beállított kedvenceket itt lehet megtekinteni, törölni, valamint (kattintásra) az elmentett áhitatra navigálni.\n</string>
+    <string name="help_content5"><b>MEGOSZTÁS</b>\n\nA MEGOSZTÁS menüpont az előzőleg kiválasztott áhítat <b> megosztását</b> teszi lehetővé, az eszközre telepített -megosztásra alkalmas- applikációkkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését szeretné megosztani a felhasználó.\n</string>
 
 </resources>
