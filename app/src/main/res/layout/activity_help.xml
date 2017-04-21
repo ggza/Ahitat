@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gz.rmbgysz.ahitat.HelpActivity">
+    tools:context="gz.rmbgysz.ahitat.HelpActivity"
+    tools:showIn="@layout/activity_help">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -137,7 +138,6 @@
             android:text="@string/help_content6"
             android:textAlignment="viewStart"
             android:textSize="15sp" />
-
 
     </LinearLayout>
 
