@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,11 +17,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_main);
+
     }
 
+
+    @Override
+    public void onDestroy() {
+        DatabaseHelper.getInstance(this).closeDB();
+        super.onDestroy();
+        //Toast.makeText(this, "Before create db.", Toast.LENGTH_SHORT).show();
+        try {
+            DatabaseHelper.getInstance(this).createDataBase();
+
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        //Toast.makeText(this, "After create db.", Toast.LENGTH_SHORT).show();
+    }
 
     public void startMainApp(View view) {
         Intent intent = new Intent(this, MainAppActivity.class);
         startActivity(intent);
+        //Toast.makeText(this, "After start activity", Toast.LENGTH_SHORT).show();
     }
 }

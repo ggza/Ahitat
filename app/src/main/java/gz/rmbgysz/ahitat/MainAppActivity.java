@@ -62,12 +62,6 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
-        try {
-            DatabaseHelper.getInstance(this).createDataBase();
-
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
 
         //texts_map= DatabaseHelper.getInstance(this).getAllDevotionals();
 
@@ -241,12 +235,6 @@ public class MainAppActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        DatabaseHelper.getInstance(this).closeDB();
-        super.onDestroy();
     }
 
     @Override
