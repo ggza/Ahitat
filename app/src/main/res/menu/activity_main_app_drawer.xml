@@ -40,7 +40,7 @@
             android:title="@string/title_activity_help" />
         <item
             android:id="@+id/nav_info"
-            android:icon="@drawable/ic_info_black_24dp"
+            android:icon="@drawable/ic_information_outline"
             android:title="@string/title_activity_info" />
     </group>
 
