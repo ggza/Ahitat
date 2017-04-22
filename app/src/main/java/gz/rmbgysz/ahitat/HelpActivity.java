@@ -15,7 +15,7 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_help);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.help_toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {

@@ -35,12 +35,11 @@
             android:id="@+id/help_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:layout_marginBottom="10dp"
             android:paddingEnd="30dp"
             android:paddingStart="30dp"
             android:text="@string/help_title1"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -48,12 +47,11 @@
             android:id="@+id/help_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:paddingEnd="30dp"
             android:paddingStart="30dp"
             android:text="@string/help_content"
-            android:textAlignment="viewStart"
-            android:textSize="17sp" />
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
