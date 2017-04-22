@@ -14,7 +14,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -227,6 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res.moveToFirst();
         }
         else {
+            assert res != null;
             res.close();
             return null;
         }

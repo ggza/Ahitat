@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, "After create db.", Toast.LENGTH_SHORT).show();
     }
 
-    public void startMainApp(View view) {
+    public void startMainApp() {
         Intent intent = new Intent(this, MainAppActivity.class);
         startActivity(intent);
         //Toast.makeText(this, "After start activity", Toast.LENGTH_SHORT).show();

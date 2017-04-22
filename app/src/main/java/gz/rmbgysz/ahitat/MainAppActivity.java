@@ -31,9 +31,7 @@ import android.widget.TextView;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class MainAppActivity extends AppCompatActivity
@@ -168,10 +166,12 @@ public class MainAppActivity extends AppCompatActivity
             iParams.setMargins(0,0,0,0);
         }
         else {
+            assert bParams != null;
             bParams.height = originalBibHeight;
             // FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni,
             // megneztem a designerben es ott 30-ra van beallitva ha ott valtozik itt is hozza kell nyulni
             bParams.setMargins(0,30,0,30);
+            assert iParams != null;
             iParams.height = originalImaHeight;
             iParams.setMargins(0,30,0,30);
         }
@@ -420,7 +420,7 @@ public class MainAppActivity extends AppCompatActivity
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
+    public void gotPositiveResultFromChoiceDialog(int choosedId) {
         prepareTextForSharing(choosedId);
     }
 
@@ -483,6 +483,7 @@ public class MainAppActivity extends AppCompatActivity
             }
         }
 
+        @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -502,7 +503,7 @@ public class MainAppActivity extends AppCompatActivity
             builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    mListener.gotPositiveResultFromChoiceDialog(ChoiceDialogFragment.this, choosed[0]);
+                    mListener.gotPositiveResultFromChoiceDialog(choosed[0]);
                 }
             });
 
