@@ -32,23 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/ic_ujjam"
-            android:onClick="startMainApp"
-            android:text="@string/dailydevotiontitle"
-            android:textColor="@android:color/black"
-            android:textColorLink="@android:color/black" />
-
-    </LinearLayout>
-=======
         android:layout_marginBottom="120dp"
         android:background="@android:color/transparent"
         android:onClick="startMainApp"
@@ -56,7 +39,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColorLink="@android:color/black"
         android:textStyle="bold" />
->>>>>>> geza_tovabb
 
     <ImageView
         android:id="@+id/imageView2"

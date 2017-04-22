@@ -42,7 +42,7 @@ public class MainAppActivity extends AppCompatActivity
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
     public static final int PM_DAILYDEVOTION = 1;
-    private HashMap texts_map;
+    //private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
     private DateManager dateManager = DateManager.getInstance();
 
@@ -69,9 +69,11 @@ public class MainAppActivity extends AppCompatActivity
             throw new Error("Unable to create database");
         }
 
-        texts_map= DatabaseHelper.getInstance(this).getAllDevotionals();
+        //texts_map= DatabaseHelper.getInstance(this).getAllDevotionals();
 
-        getItemFromMap(texts_map);
+        //getItemFromMap(texts_map);
+        refresTextViews(DatabaseHelper.getInstance(this).
+                getDailyDevotionByDate(DateManager.getInstance().getDateString()));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -86,7 +88,9 @@ public class MainAppActivity extends AppCompatActivity
     }
 
     public void refreshActivity() {
-        getItemFromMap(texts_map);
+        //getItemFromMap(texts_map);
+        refresTextViews(DatabaseHelper.getInstance(this).
+                getDailyDevotionByDate(DateManager.getInstance().getDateString()));
     }
 
     private void getInitalHeights() {
@@ -98,6 +102,7 @@ public class MainAppActivity extends AppCompatActivity
 
     }
 
+    /*
     private void getItemFromMap(HashMap texts_map) {
         if (texts_map.isEmpty()  || !(texts_map.containsKey(dateManager.getDateString()))) {
             fillTextViewsWithEmptyText();
@@ -109,6 +114,19 @@ public class MainAppActivity extends AppCompatActivity
             setTextViews(dateManager.getFormattedDateWithDayName(this), item);
         }
     }
+    */
+
+    private void refresTextViews(DailyDevotion item) {
+        if (item == null){
+            fillTextViewsWithEmptyText();
+            Toast.makeText(this, getString(R.string.notfounddailydevotion) + " (" +
+                    dateManager.getDateString() + ")", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+            setTextViews(dateManager.getFormattedDateWithDayName(this), item);
+    }
+
 
     private void setTextViews(String actualDateString, DailyDevotion item) {
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
@@ -276,7 +294,9 @@ public class MainAppActivity extends AppCompatActivity
 
         if (id == R.id.nav_actual_lecture) {
             dateManager.setActualDate();
-            getItemFromMap(texts_map);
+            //getItemFromMap(texts_map);
+            refresTextViews(DatabaseHelper.getInstance(this).
+                    getDailyDevotionByDate(DateManager.getInstance().getDateString()));
 
         } else if (id == R.id.nav_search_by_date) {
 
@@ -328,7 +348,9 @@ public class MainAppActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 dateManager.stepToPreviousDay();
-                getItemFromMap(texts_map);
+                //getItemFromMap(texts_map);
+                refresTextViews(DatabaseHelper.getInstance(MainAppActivity.this).
+                        getDailyDevotionByDate(DateManager.getInstance().getDateString()));
                 floatingActionsMenu.collapse();
             }
         });
@@ -337,7 +359,9 @@ public class MainAppActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 dateManager.stepToNextDay();
-                getItemFromMap(texts_map);
+                //getItemFromMap(texts_map);
+                refresTextViews(DatabaseHelper.getInstance(MainAppActivity.this).
+                        getDailyDevotionByDate(DateManager.getInstance().getDateString()));
                 floatingActionsMenu.collapse();
             }
         });
@@ -367,7 +391,9 @@ public class MainAppActivity extends AppCompatActivity
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         try {
             dateManager.setDate(year, month , dayOfMonth);
-            getItemFromMap(texts_map);
+            //getItemFromMap(texts_map);
+            refresTextViews(DatabaseHelper.getInstance(this).
+                    getDailyDevotionByDate(DateManager.getInstance().getDateString()));
         } catch (ParseException e) {
             Toast.makeText(view.getContext(), R.string.datesettingerror, Toast.LENGTH_SHORT).show();
         }
@@ -415,10 +441,6 @@ public class MainAppActivity extends AppCompatActivity
     }
     */
 
-<<<<<<< HEAD
-
-=======
->>>>>>> geza_tovabb
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void gotPositiveResultFromChoiceDialog(DialogFragment dialog, int choosedId) {
@@ -427,8 +449,9 @@ public class MainAppActivity extends AppCompatActivity
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void prepareTextForSharing(int type) {
-        DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
-
+        //DailyDevotion actualItem = (DailyDevotion) texts_map.get(dateManager.getDateString());
+        DailyDevotion actualItem = DatabaseHelper.getInstance(MainAppActivity.this).
+                getDailyDevotionByDate(DateManager.getInstance().getDateString());
         String  shareString =  prepareStringForSharing(type, actualItem);
 
         if (!shareString.isEmpty()) {

@@ -30,6 +30,7 @@ import java.util.HashMap;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "devotional2017.sqlite";
+    private static final String AHITATOK_TABLE_NAME = "ahitatok";
     private static final String AHITATOK_COLUMN_ID = "id";
     private static final String AHITATOK_COLUMN_DATE = "datum";
     private static final String AHITATOK_COLUMN_DE_CIM = "de_cim";
@@ -202,6 +203,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.close();
         return hash_map;
     }
+
+    public DailyDevotion getDailyDevotionByDate(String datum) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.query(AHITATOK_TABLE_NAME, new String[]
+                {AHITATOK_COLUMN_ID, AHITATOK_COLUMN_DATE,
+                        AHITATOK_COLUMN_DE_CIM,
+                        AHITATOK_COLUMN_DE_IGE,
+                        AHITATOK_COLUMN_DE_SZOVEG,
+                        AHITATOK_COLUMN_DE_SZERZO,
+                        AHITATOK_COLUMN_DU_CIM,
+                        AHITATOK_COLUMN_DU_IGE,
+                        AHITATOK_COLUMN_DU_SZOVEG,
+                        AHITATOK_COLUMN_DU_SZERZO,
+                        AHITATOK_COLUMN_BIBLIAORA,
+                        AHITATOK_COLUMN_IMAORA}, AHITATOK_COLUMN_DATE + "=?",
+                new String[] {datum}, null, null, null, null);
+
+        if (res != null)
+            res.moveToFirst();
+        else
+            return null;
+
+        DailyDevotion returnValue = new DailyDevotion(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_IGE)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZOVEG)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZERZO)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_IGE)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZOVEG)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZERZO)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_BIBLIAORA)),
+                res.getString(res.getColumnIndex(AHITATOK_COLUMN_IMAORA)));
+
+        return returnValue;
+    }
+
 
     public ArrayList<Favorite> getAllFavoritesWithTitles() {
         ArrayList<Favorite> array_list = new ArrayList<>();
