@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -221,10 +222,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         AHITATOK_COLUMN_IMAORA}, AHITATOK_COLUMN_DATE + "=?",
                 new String[] {datum}, null, null, null, null);
 
-        if (res != null)
+
+        if (res != null && (res.getCount() > 0)) {
             res.moveToFirst();
-        else
+        }
+        else {
+            res.close();
             return null;
+        }
 
         DailyDevotion returnValue = new DailyDevotion(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
@@ -238,6 +243,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZERZO)),
                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_BIBLIAORA)),
                 res.getString(res.getColumnIndex(AHITATOK_COLUMN_IMAORA)));
+
+        res.close();
 
         return returnValue;
     }

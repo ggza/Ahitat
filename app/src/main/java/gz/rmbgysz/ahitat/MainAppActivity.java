@@ -42,9 +42,7 @@ public class MainAppActivity extends AppCompatActivity
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
     public static final int PM_DAILYDEVOTION = 1;
-    //private HashMap texts_map;
     private DrawerLayout mDrawerLayout;
-    private DateManager dateManager = DateManager.getInstance();
 
     private int originalBibHeight;
     private int originalImaHeight;
@@ -62,10 +60,6 @@ public class MainAppActivity extends AppCompatActivity
 
         initFloatingActionButtonMenu();
 
-
-        //texts_map= DatabaseHelper.getInstance(this).getAllDevotionals();
-
-        //getItemFromMap(texts_map);
         refresTextViews(DatabaseHelper.getInstance(this).
                 getDailyDevotionByDate(DateManager.getInstance().getDateString()));
 
@@ -82,7 +76,6 @@ public class MainAppActivity extends AppCompatActivity
     }
 
     public void refreshActivity() {
-        //getItemFromMap(texts_map);
         refresTextViews(DatabaseHelper.getInstance(this).
                 getDailyDevotionByDate(DateManager.getInstance().getDateString()));
     }
@@ -110,15 +103,14 @@ public class MainAppActivity extends AppCompatActivity
     }
     */
 
-    private void refresTextViews(DailyDevotion item) {
-        if (item == null){
+    private void refresTextViews(DailyDevotion devItem) {
+        if (devItem == null) {
             fillTextViewsWithEmptyText();
             Toast.makeText(this, getString(R.string.notfounddailydevotion) + " (" +
-                    dateManager.getDateString() + ")", Toast.LENGTH_SHORT).show();
-
+                    DateManager.getInstance().getDateString() + ")", Toast.LENGTH_SHORT).show();
+        } else {
+            setTextViews(DateManager.getInstance().getFormattedDateWithDayName(this), devItem);
         }
-        else
-            setTextViews(dateManager.getFormattedDateWithDayName(this), item);
     }
 
 
@@ -262,10 +254,10 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
             boolean ret = DatabaseHelper.getInstance(this).
-                    insertFavoriteIfNotExist(dateManager.getDateString());
+                    insertFavoriteIfNotExist(DateManager.getInstance().getDateString());
             if (ret) {
                 if (id == R.id.add_to_favorites) {
-                    Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + dateManager.getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
+                    Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + DateManager.getInstance().getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
                             .setAction("clicked", null)
                             .show();
             }
@@ -281,8 +273,7 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_actual_lecture) {
-            dateManager.setActualDate();
-            //getItemFromMap(texts_map);
+            DateManager.getInstance().setActualDate();
             refresTextViews(DatabaseHelper.getInstance(this).
                     getDailyDevotionByDate(DateManager.getInstance().getDateString()));
 
@@ -321,11 +312,11 @@ public class MainAppActivity extends AppCompatActivity
     @NonNull
     private Bundle getBundleForDatePicker() throws ParseException {
         Bundle bundle = new Bundle();
-        bundle.putInt("year",dateManager.getYear());
-        bundle.putInt("month",dateManager.getMonth());
-        bundle.putInt("day",dateManager.getDay());
-        bundle.putLong("minDate", dateManager.getMinDate());
-        bundle.putLong("maxDate", dateManager.getMaxDate());
+        bundle.putInt("year",DateManager.getInstance().getYear());
+        bundle.putInt("month",DateManager.getInstance().getMonth());
+        bundle.putInt("day",DateManager.getInstance().getDay());
+        bundle.putLong("minDate", DateManager.getInstance().getMinDate());
+        bundle.putLong("maxDate", DateManager.getInstance().getMaxDate());
         return bundle;
     }
 
@@ -335,8 +326,7 @@ public class MainAppActivity extends AppCompatActivity
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dateManager.stepToPreviousDay();
-                //getItemFromMap(texts_map);
+                DateManager.getInstance().stepToPreviousDay();
                 refresTextViews(DatabaseHelper.getInstance(MainAppActivity.this).
                         getDailyDevotionByDate(DateManager.getInstance().getDateString()));
                 floatingActionsMenu.collapse();
@@ -346,8 +336,7 @@ public class MainAppActivity extends AppCompatActivity
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dateManager.stepToNextDay();
-                //getItemFromMap(texts_map);
+                DateManager.getInstance().stepToNextDay();
                 refresTextViews(DatabaseHelper.getInstance(MainAppActivity.this).
                         getDailyDevotionByDate(DateManager.getInstance().getDateString()));
                 floatingActionsMenu.collapse();
@@ -378,7 +367,7 @@ public class MainAppActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         try {
-            dateManager.setDate(year, month , dayOfMonth);
+            DateManager.getInstance().setDate(year, month , dayOfMonth);
             //getItemFromMap(texts_map);
             refresTextViews(DatabaseHelper.getInstance(this).
                     getDailyDevotionByDate(DateManager.getInstance().getDateString()));
@@ -459,7 +448,8 @@ public class MainAppActivity extends AppCompatActivity
     private String prepareStringForSharing(int type, DailyDevotion actualItem) {
         String returnString = "";
         if (type == AM_DAILYDEVOTION) {
-            returnString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+            returnString =  DateManager.getInstance().
+                    getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
                             actualItem.getAmTitle() + "\n"+
                             actualItem.getAmVerse() + "\n\n" +
                             actualItem.getAmDailyDevotion() + "\n\n" +
@@ -467,7 +457,8 @@ public class MainAppActivity extends AppCompatActivity
 
         }
         else if (type == PM_DAILYDEVOTION) {
-            returnString =  dateManager.getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
+            returnString =  DateManager.getInstance().
+                    getFormattedDateWithDayName(MainAppActivity.this) + "\n\n" +
                     actualItem.getPmTitle() + "\n"+
                     actualItem.getPmVerse() + "\n\n" +
                     actualItem.getPmDailyDevotion() + "\n\n" +
