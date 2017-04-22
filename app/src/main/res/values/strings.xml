@@ -28,6 +28,9 @@
     <string name="areyousure">Biztosan törölni szeretné a kijelölt kedvence(ke)t?</string>
     <string name="deletetitle">TÖRLÉS MEGERŐSÍTÉSE</string>
 
+    <string name="deletefromfavorites">Törlés</string>
+    <string name="addtofavorites">Kedvencek</string>
+
     <string name="actual_date">TextView</string>
     <string name="heading">TextView</string>
 

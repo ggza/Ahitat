@@ -6,7 +6,7 @@
         android:id="@+id/add_to_favorites"
         android:icon="@drawable/ic_favorite_white_24dp"
         app:showAsAction="ifRoom"
-        android:title="Kedvencek">
+        android:title="@string/addtofavorites">
     </item>
 
 </menu>
