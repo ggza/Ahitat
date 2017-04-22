@@ -297,9 +297,11 @@ public class MainAppActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             DialogFragment newChoice = new ChoiceDialogFragment();
             newChoice.show(getSupportFragmentManager(), "choseDailyDevotionType");
-        }
-        else if (id == R.id.nav_help) {
+        } else if (id == R.id.nav_help) {
             Intent intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_info) {
+            Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
         }
 
