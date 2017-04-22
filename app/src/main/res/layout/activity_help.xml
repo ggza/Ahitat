@@ -30,6 +30,7 @@
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="none"
             tools:ignore="UselessParent">
 
             <LinearLayout
@@ -56,9 +57,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/fekete30"
+                    android:paddingBottom="5dp"
                     android:paddingEnd="15dp"
                     android:paddingStart="15dp"
+                    android:paddingTop="5dp"
                     android:text="@string/help_title1"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
