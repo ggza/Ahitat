@@ -28,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    public void startMainApp(View view) {
+        try {
+            DatabaseHelper.getInstance(this).createDataBase();
+            Intent intent = new Intent(this, MainAppActivity.class);
+            startActivity(intent);
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+    }
+
     ImageView rotateImage;
 
     public void startRotatingImage(View view) {
