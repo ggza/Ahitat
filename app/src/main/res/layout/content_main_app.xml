@@ -37,17 +37,17 @@
             android:id="@+id/actual_date" />
 
         <TextView
-            android:text="@string/amheading"
+            android:id="@+id/delelott"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:id="@+id/delelott"
-            android:textAlignment="center"
             android:background="@color/half_colorAccent"
-            android:padding="3dp" />
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/amheading"
+            android:textColor="#000000"
+            android:textSize="16sp" />
 
         <TextView
             android:text="@string/heading"
@@ -126,17 +126,17 @@
             android:textStyle="italic" />
 
         <TextView
-            android:text="@string/pmheading"
+            android:id="@+id/delutan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:id="@+id/delutan"
-            android:textAlignment="center"
             android:background="@color/half_colorAccent"
-            android:padding="3dp" />
+            android:padding="3dp"
+            android:text="@string/pmheading"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="16sp" />
 
         <TextView
             android:text="@string/pmtitle"
