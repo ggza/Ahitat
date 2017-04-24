@@ -1,6 +1,7 @@
 package gz.rmbgysz.ahitat;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -27,26 +28,24 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void startMainApp(View view) {
-        try {
-            DatabaseHelper.getInstance(this).createDataBase();
-            Intent intent = new Intent(this, MainAppActivity.class);
-            startActivity(intent);
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
-    }
-
     ImageView rotateImage;
 
     public void startRotatingImage(View view) {
         rotateImage = (ImageView) findViewById(R.id.rotate_image);
         Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
         rotateImage.startAnimation(startRotateAnimation);
+
         try {
-            DatabaseHelper.getInstance(this).createDataBase();
-            Intent intent = new Intent(this, MainAppActivity.class);
-            startActivity(intent);
+            DatabaseHelper.getInstance(MainActivity.this).createDataBase();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
+                startActivity(intent);
+                }
+            },getApplicationContext().getResources().
+                    getInteger(R.integer.imagedaley));
+
         } catch (IOException ioe) {
             throw new Error("Unable to create database");
         }
