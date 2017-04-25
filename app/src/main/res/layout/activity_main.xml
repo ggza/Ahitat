@@ -2,11 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:scaleType="fitXY"
-    android:background="@drawable/hatter" >
+    android:background="@drawable/hatter"
+    android:clipToPadding="false">
 
     <ImageView
         android:layout_width="match_parent"
@@ -17,29 +19,31 @@
         android:scaleType="fitXY" />
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_ujjam"
+        app:srcCompat="@drawable/ic_ujjam1"
         android:id="@+id/rotate_image"
         android:contentDescription="@string/description"
         android:onClick="startRotatingImage"
+        android:layout_marginBottom="41dp"
+        android:elevation="5dp"
+        android:background="@drawable/ujjcircle"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="40dp"/>
+        android:layout_alignLeft="@+id/button2"/>
 
     <TextView
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="130dp"
         android:background="@android:color/transparent"
         android:onClick="startMainApp"
         android:text="@string/dailydevotiontitle"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColorLink="@android:color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/rotate_image"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -50,6 +54,6 @@
         android:layout_marginTop="50dp"
         android:contentDescription="@string/description"
         android:onClick="startMainApp"
-        app:srcCompat="@drawable/ic_ahitat_logo" />
+        app:srcCompat="@drawable/ic_ahitat_logo2" />
 
 </RelativeLayout>
