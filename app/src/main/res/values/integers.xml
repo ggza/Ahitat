@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="imagedelay">1000</integer>
-    <integer name="mainappdelay">2000</integer>
+    <integer name="mainappdelay">3000</integer>
 </resources>

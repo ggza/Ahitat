@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_main);
 
+        rotateImage = (ImageView) findViewById(R.id.rotate_image);
+        Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
+        rotateImage.startAnimation(startRotateAnimation);
+
         try {
             DatabaseHelper.getInstance(MainActivity.this).createDataBase();
             new Handler().postDelayed(new Runnable() {
