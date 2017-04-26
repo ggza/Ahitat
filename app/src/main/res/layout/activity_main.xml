@@ -17,15 +17,17 @@
         android:scaleType="fitXY" />
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_ujjam"
+        app:srcCompat="@drawable/ic_ujjam2"
         android:id="@+id/rotate_image"
         android:contentDescription="@string/description"
         android:onClick="startRotatingImage"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="40dp"/>
+        android:elevation="4dp"
+        android:background="@drawable/ujjcircle"
+        android:layout_marginTop="28dp"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignRight="@+id/button2" />
 
     <TextView
         android:id="@+id/button2"
