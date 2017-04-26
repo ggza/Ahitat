@@ -21,14 +21,20 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_main);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 2000);
+        try {
+            DatabaseHelper.getInstance(MainActivity.this).createDataBase();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
+                    startActivity(intent);
+                }
+            },getApplicationContext().getResources().
+                    getInteger(R.integer.mainappdelay));
+
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
     }
 
     @Override
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 }
             },getApplicationContext().getResources().
-                    getInteger(R.integer.imagedaley));
+                    getInteger(R.integer.imagedelay));
 
         } catch (IOException ioe) {
             throw new Error("Unable to create database");

@@ -10,6 +10,7 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="MainAppTheme" parent="MainAppTheme.Base"></style>

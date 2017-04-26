@@ -19,7 +19,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_ujjam2"
+        app:srcCompat="@drawable/ic_ujjam"
         android:id="@+id/rotate_image"
         android:contentDescription="@string/description"
         android:onClick="startRotatingImage"
