@@ -15,13 +15,21 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ImageView rotateImage;
+    private static boolean mMainAppStarted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_main);
-
         rotateImage = (ImageView) findViewById(R.id.rotate_image);
+        mMainAppStarted = false;
+    }
+
+    private synchronized void startMainApplication() {
+
+        mMainAppStarted = true;
         Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
         rotateImage.startAnimation(startRotateAnimation);
 
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
                     Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
                     startActivity(intent);
                 }
@@ -47,36 +56,15 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void startMainApp(View view) {
-        try {
-            DatabaseHelper.getInstance(this).createDataBase();
-            Intent intent = new Intent(this, MainAppActivity.class);
-            startActivity(intent);
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMainAppStarted = false;
     }
 
-    ImageView rotateImage;
 
     public void startRotatingImage(View view) {
-        rotateImage = (ImageView) findViewById(R.id.rotate_image);
-        Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
-        rotateImage.startAnimation(startRotateAnimation);
-
-        try {
-            DatabaseHelper.getInstance(MainActivity.this).createDataBase();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                Intent intent = new Intent(MainActivity.this, MainAppActivity.class);
-                startActivity(intent);
-                }
-            },getApplicationContext().getResources().
-                    getInteger(R.integer.imagedelay));
-
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
+        if (!mMainAppStarted)
+            startMainApplication();
     }
 }
