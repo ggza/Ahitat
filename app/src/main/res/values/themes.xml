@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values/themes.xml -->
+
+<resources>
+    <style name="Default" parent="Theme.AppCompat.Light">
+        <item name="selectableItemBackground">@drawable/my_ripple</item>
+        <item name="android:selectableItemBackground">@drawable/my_ripple</item>
+        <!-- for the following two, you shoud use a different ripple without mask -->
+        <item name="selectableItemBackgroundBorderless">@drawable/my_ripple</item>
+        <item name="android:selectableItemBackgroundBorderless">@drawable/my_ripple</item>
+    </style>
+</resources>
