@@ -10,7 +10,10 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowDisablePreview">true</item>
+        <!--<item name="android:windowDisablePreview">true</item>-->
+
+        <!-- For ripple effect -->
+        <item name="android:colorControlHighlight">@color/colorPrimary</item>
     </style>
 
     <style name="MainAppTheme" parent="MainAppTheme.Base"></style>
