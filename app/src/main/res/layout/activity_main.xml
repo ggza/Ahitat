@@ -17,23 +17,25 @@
         android:scaleType="fitXY"
         android:id="@+id/imageView3" />
 
-    <ImageView
+    <com.andexert.library.RippleView
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        app:srcCompat="@drawable/ic_ujjam"
-        android:onClick="startMainApp"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColorLink="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="69dp"
-        android:layout_below="@+id/imageView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:contentDescription="@string/app_name" />
+        android:layout_below="@+id/imageView3">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_ujjam"
+            android:onClick="startMainApp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColorLink="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="69dp"
+            android:contentDescription="@string/app_name" />
+    </com.andexert.library.RippleView>
 
     <ImageView
         android:id="@+id/imageView2"
