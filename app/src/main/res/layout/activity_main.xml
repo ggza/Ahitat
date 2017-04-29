@@ -21,7 +21,8 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView3">
+        android:layout_below="@+id/imageView3"
+        app:rv_rippleDuration="600">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
