@@ -170,10 +170,10 @@ public class MainAppActivity extends AppCompatActivity
             bParams.height = originalBibHeight;
             // FIXME:egyelore nem talaltam meg  hogyan lehet lekerdezni,
             // megneztem a designerben es ott 30-ra van beallitva ha ott valtozik itt is hozza kell nyulni
-            bParams.setMargins(0,30,0,30);
+            bParams.setMargins(0,80,0,20);
             assert iParams != null;
             iParams.height = originalImaHeight;
-            iParams.setMargins(0,30,0,30);
+            iParams.setMargins(0,80,0,20);
         }
     }
 

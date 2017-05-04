@@ -73,14 +73,13 @@
 
         <TextView
             android:text="@string/heading"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:lineSpacingMultiplier="1.1"
-            android:ems="14"
+            android:lineSpacingMultiplier="1.2"
             android:id="@+id/amDailyDevotion" />
 
         <TextView
@@ -101,10 +100,7 @@
             android:layout_height="wrap_content"
             android:background="@color/fekete30"
             android:lineSpacingMultiplier="1.1"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
+            android:padding="10dp"
             android:text="@string/biblestudy"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -116,10 +112,7 @@
             android:layout_height="wrap_content"
             android:background="@color/fekete30"
             android:lineSpacingMultiplier="1.1"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
+            android:padding="10dp"
             android:text="@string/prayer"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -130,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="45dp"
             android:background="@color/half_colorAccent"
             android:padding="3dp"
             android:text="@string/pmheading"
@@ -162,14 +155,13 @@
 
         <TextView
             android:text="@string/pmdailydevotion"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:lineSpacingMultiplier="1.1"
-            android:ems="14"
+            android:lineSpacingMultiplier="1.2"
             android:id="@+id/pmDailyDevotion" />
 
         <TextView

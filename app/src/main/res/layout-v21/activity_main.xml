@@ -20,22 +20,26 @@
     <com.andexert.library.RippleView
         android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView3"
-        app:rv_rippleDuration="600">
+        android:layout_height="match_parent"
+        app:rv_rippleDuration="600"
+        android:gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_ujjam"
             android:onClick="startMainApp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColorLink="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="0sp"
             android:textStyle="bold"
-            android:layout_marginTop="69dp"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
     </com.andexert.library.RippleView>
 
     <ImageView
