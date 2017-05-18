@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/hatter"
     android:orientation="vertical"
-    android:weightSum="5"
-    android:scaleType="fitCenter">
+    android:weightSum="5">
 
     <ImageView
         android:id="@+id/imageView2"
