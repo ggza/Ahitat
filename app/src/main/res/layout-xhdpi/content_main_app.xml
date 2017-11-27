@@ -33,7 +33,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:id="@+id/actual_date" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:padding="3dp"
                 android:text="@string/amheading"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:text="@string/heading"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="26sp"
                 android:id="@+id/amTitle" />
 
             <TextView
@@ -67,7 +67,7 @@
                 android:textColor="#000000"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="italic"
                 android:id="@+id/amVerse"/>
 
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:lineSpacingMultiplier="1.1"
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="italic"
                 android:gravity="end"
                 android:lineSpacingMultiplier="1.1"
@@ -107,7 +107,7 @@
                 android:paddingTop="15dp"
                 android:text="@string/biblestudy"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="italic" />
 
             <TextView
@@ -122,7 +122,7 @@
                 android:paddingTop="15dp"
                 android:text="@string/prayer"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="italic" />
 
             <TextView
@@ -136,7 +136,7 @@
                 android:text="@string/pmheading"
                 android:textColor="#000000"
                 android:gravity="center"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:text="@string/pmtitle"
@@ -146,7 +146,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="26sp"
                 android:id="@+id/pmTitle" />
 
             <TextView
@@ -156,7 +156,7 @@
                 android:textColor="#000000"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textSize="15.5sp"
+                android:textSize="24sp"
                 android:textStyle="italic"
                 android:id="@+id/pmVerse" />
 
@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:lineSpacingMultiplier="1.1"
