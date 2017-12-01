@@ -51,6 +51,7 @@ public class MainAppActivity extends AppCompatActivity
 
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_main_app);
+        setTitle(R.string.main_app__activity_title);
         getInitalHeights();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
