@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_icon"
-        android:label="Napi Áhitatok"
+        android:label="Napi áhítatok"
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
