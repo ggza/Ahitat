@@ -31,8 +31,8 @@
     <string name="deletefromfavorites">Törlés</string>
     <string name="addtofavorites">Kedvencek</string>
 
-    <string name="actual_date">TextView</string>
-    <string name="heading">TextView</string>
+    <string name="actual_date">Aktuális dátum</string>
+    <string name="heading">Fejléc</string>
 
     <string name="amheading">DÉLELŐTTI SOROZAT</string>
     <string name="amverse">de. ige</string>
@@ -42,7 +42,7 @@
     <string name="pmheading">DÉLUTÁNI SOROZAT</string>
     <string name="pmtitle">du. cím</string>
     <string name="pmverse">du. ige</string>
-    <string name="pmdailydevotion">du. szöveg</string>
+    <string name="pmdailydevotion">du. ahitat</string>
     <string name="pmdevotionauthor">du. szerző</string>
     <string name="biblestudy">bibliaóra</string>
     <string name="prayer">imaóra</string>

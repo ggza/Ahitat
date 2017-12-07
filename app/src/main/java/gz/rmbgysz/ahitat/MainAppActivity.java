@@ -30,12 +30,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.DatePicker;
 import android.widget.Toast;
+import android.graphics.Typeface;
 
 import java.text.ParseException;
 import java.util.Locale;
 
+
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
+
+    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
@@ -45,6 +49,10 @@ public class MainAppActivity extends AppCompatActivity
     private int originalBibHeight;
     private int originalImaHeight;
 
+    private String A_BOLD= "merriweather_bold.ttf";
+    private String A_REGULAR= "merriweather_regular.ttf";
+    private String O_ITALIC= "merriweather_italic.ttf";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +61,30 @@ public class MainAppActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_app);
         setTitle(R.string.main_app__activity_title);
         getInitalHeights();
+
+        actual_date=(TextView)findViewById(R.id.actual_date);
+        delelott=(TextView)findViewById(R.id.delelott);
+        delutan=(TextView)findViewById(R.id.delutan);
+        amTitle=(TextView)findViewById(R.id.amTitle);
+        amVerse=(TextView)findViewById(R.id.amVerse);
+        amDailyDevotion=(TextView)findViewById(R.id.amDailyDevotion);
+        amDailyDevotionAuthor=(TextView)findViewById(R.id.amDailyDevotionAuthor);
+        pmTitle=(TextView)findViewById(R.id.pmTitle);
+        pmVerse=(TextView)findViewById(R.id.pmVerse);
+        pmDailyDevotion=(TextView)findViewById(R.id.pmDailyDevotion);
+        pmDailyDevotionAuthor=(TextView)findViewById(R.id.pmDailyDevotionAuthor);
+
+        actual_date.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
+        delelott.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
+        delutan.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
+        amTitle.setTypeface(Typeface.createFromAsset(getAssets(), A_BOLD));
+        amVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
+        amDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
+        amDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
+        pmTitle.setTypeface(Typeface.createFromAsset(getAssets(), A_BOLD));
+        pmVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
+        pmDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
+        pmDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -114,6 +146,7 @@ public class MainAppActivity extends AppCompatActivity
 
 
     private void setTextViews(String actualDateString, DailyDevotion item) {
+
         TextView actualDate = (TextView)findViewById(R.id.actual_date);
         actualDate.setText(actualDateString);
 
