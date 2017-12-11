@@ -39,7 +39,7 @@ import java.util.Locale;
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
 
-    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
+    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, bibleLecture, prayer, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
@@ -69,6 +69,8 @@ public class MainAppActivity extends AppCompatActivity
         amVerse=(TextView)findViewById(R.id.amVerse);
         amDailyDevotion=(TextView)findViewById(R.id.amDailyDevotion);
         amDailyDevotionAuthor=(TextView)findViewById(R.id.amDailyDevotionAuthor);
+        bibleLecture=(TextView)findViewById(R.id.amDailyDevotionAuthor);
+        prayer=(TextView)findViewById(R.id.amDailyDevotionAuthor);
         pmTitle=(TextView)findViewById(R.id.pmTitle);
         pmVerse=(TextView)findViewById(R.id.pmVerse);
         pmDailyDevotion=(TextView)findViewById(R.id.pmDailyDevotion);
@@ -81,6 +83,8 @@ public class MainAppActivity extends AppCompatActivity
         amVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
         amDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
         amDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
+        bibleLecture.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
+        prayer.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
         pmTitle.setTypeface(Typeface.createFromAsset(getAssets(), A_BOLD));
         pmVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
         pmDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
