@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -39,7 +40,7 @@ import java.util.Locale;
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
 
-    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, bibleLecture, prayer, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
+    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
@@ -69,8 +70,6 @@ public class MainAppActivity extends AppCompatActivity
         amVerse=(TextView)findViewById(R.id.amVerse);
         amDailyDevotion=(TextView)findViewById(R.id.amDailyDevotion);
         amDailyDevotionAuthor=(TextView)findViewById(R.id.amDailyDevotionAuthor);
-        bibleLecture=(TextView)findViewById(R.id.amDailyDevotionAuthor);
-        prayer=(TextView)findViewById(R.id.amDailyDevotionAuthor);
         pmTitle=(TextView)findViewById(R.id.pmTitle);
         pmVerse=(TextView)findViewById(R.id.pmVerse);
         pmDailyDevotion=(TextView)findViewById(R.id.pmDailyDevotion);
@@ -83,8 +82,6 @@ public class MainAppActivity extends AppCompatActivity
         amVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
         amDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
         amDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
-        bibleLecture.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
-        prayer.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
         pmTitle.setTypeface(Typeface.createFromAsset(getAssets(), A_BOLD));
         pmVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
         pmDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
@@ -291,14 +288,24 @@ public class MainAppActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.go_to_bible) {
+            Snackbar.make(findViewById(R.id.content_main_app), "a b ", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abibliamindenkie.hu"));
+            startActivity(browserIntent);
+        }
+
+
             boolean ret = DatabaseHelper.getInstance(this).
                     insertFavoriteIfNotExist(DateManager.getInstance().getDateString());
+
             if (ret) {
                 if (id == R.id.add_to_favorites) {
                     Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + DateManager.getInstance().getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
                             .setAction("clicked", null)
                             .show();
-            }
+                }
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/go_to_bible"
+        android:icon="@drawable/ic_local_library_white_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Biblia">
+    </item>
 
     <item
         android:id="@+id/add_to_favorites"
@@ -8,5 +14,6 @@
         app:showAsAction="ifRoom"
         android:title="@string/addtofavorites">
     </item>
+
 
 </menu>
