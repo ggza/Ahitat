@@ -40,7 +40,7 @@ import java.util.Locale;
 public class MainAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener, ShareTypeListenerInterface {
 
-    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
+    TextView actual_date, delelott, delutan, amTitle, amVerse, amDailyDevotion, amDailyDevotionAuthor, bibleLecture, prayer, pmTitle, pmVerse, pmDailyDevotion, pmDailyDevotionAuthor;
 
     public static final int FAVORITES_REQUEST_CODE = 0xe23;
     public static final int AM_DAILYDEVOTION = 0;
@@ -50,9 +50,9 @@ public class MainAppActivity extends AppCompatActivity
     private int originalBibHeight;
     private int originalImaHeight;
 
-    private String A_BOLD= "merriweather_bold.ttf";
-    private String A_REGULAR= "merriweather_regular.ttf";
-    private String O_ITALIC= "merriweather_italic.ttf";
+    private String M_BOLD= "merriweather_bold.ttf";
+    private String M_REGULAR= "merriweather_regular.ttf";
+    private String M_ITALIC= "merriweather_italic.ttf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +70,26 @@ public class MainAppActivity extends AppCompatActivity
         amVerse=(TextView)findViewById(R.id.amVerse);
         amDailyDevotion=(TextView)findViewById(R.id.amDailyDevotion);
         amDailyDevotionAuthor=(TextView)findViewById(R.id.amDailyDevotionAuthor);
+        bibleLecture=(TextView)findViewById(R.id.bibleLecture);
+        prayer=(TextView)findViewById(R.id.prayer);
         pmTitle=(TextView)findViewById(R.id.pmTitle);
         pmVerse=(TextView)findViewById(R.id.pmVerse);
         pmDailyDevotion=(TextView)findViewById(R.id.pmDailyDevotion);
         pmDailyDevotionAuthor=(TextView)findViewById(R.id.pmDailyDevotionAuthor);
 
-        actual_date.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
-        delelott.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
-        delutan.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
-        amTitle.setTypeface(Typeface.createFromAsset(getAssets(), A_BOLD));
-        amVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
-        amDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
-        amDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
-        pmTitle.setTypeface(Typeface.createFromAsset(getAssets(), A_BOLD));
-        pmVerse.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
-        pmDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), A_REGULAR));
-        pmDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), O_ITALIC));
+        actual_date.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
+        delelott.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
+        delutan.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
+        amTitle.setTypeface(Typeface.createFromAsset(getAssets(), M_BOLD));
+        amVerse.setTypeface(Typeface.createFromAsset(getAssets(), M_ITALIC));
+        amDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
+        amDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), M_ITALIC));
+        bibleLecture.setTypeface(Typeface.createFromAsset(getAssets(), M_ITALIC));
+        prayer.setTypeface(Typeface.createFromAsset(getAssets(), M_ITALIC));
+        pmTitle.setTypeface(Typeface.createFromAsset(getAssets(), M_BOLD));
+        pmVerse.setTypeface(Typeface.createFromAsset(getAssets(), M_ITALIC));
+        pmDailyDevotion.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
+        pmDailyDevotionAuthor.setTypeface(Typeface.createFromAsset(getAssets(), M_ITALIC));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
