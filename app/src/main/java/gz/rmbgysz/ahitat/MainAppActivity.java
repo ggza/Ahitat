@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -287,14 +288,24 @@ public class MainAppActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.go_to_bible) {
+            Snackbar.make(findViewById(R.id.content_main_app), "a b ", Snackbar.LENGTH_LONG)
+                    .setAction("clicked", null)
+                    .show();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abibliamindenkie.hu"));
+            startActivity(browserIntent);
+        }
+
+
             boolean ret = DatabaseHelper.getInstance(this).
                     insertFavoriteIfNotExist(DateManager.getInstance().getDateString());
+
             if (ret) {
                 if (id == R.id.add_to_favorites) {
                     Snackbar.make(findViewById(R.id.content_main_app), "Kedvencekhez hozzáadva: " + DateManager.getInstance().getFormattedDateWithDayName(this), Snackbar.LENGTH_LONG)
                             .setAction("clicked", null)
                             .show();
-            }
+                }
             return true;
         }
         return super.onOptionsItemSelected(item);
