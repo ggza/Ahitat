@@ -6,7 +6,7 @@
 
     <string name="description">Áhítat-applikáció</string>
 
-    <string name="main_app__activity_title">Áhítat</string>
+    <string name="main_app__activity_title">Napi áhítatok</string>
     <string name="menudescription">A Romániai Magyar Baptista Szövetség áhítata</string>
     <string name="searchbydate">Dátum szerint</string>
     <string name="search">Keresés</string>
@@ -31,8 +31,8 @@
     <string name="deletefromfavorites">Törlés</string>
     <string name="addtofavorites">Kedvencek</string>
 
-    <string name="actual_date">TextView</string>
-    <string name="heading">TextView</string>
+    <string name="actual_date">Aktuális dátum</string>
+    <string name="heading">Fejléc</string>
 
     <string name="amheading">DÉLELŐTTI SOROZAT</string>
     <string name="amverse">de. ige</string>
@@ -42,7 +42,7 @@
     <string name="pmheading">DÉLUTÁNI SOROZAT</string>
     <string name="pmtitle">du. cím</string>
     <string name="pmverse">du. ige</string>
-    <string name="pmdailydevotion">du. szöveg</string>
+    <string name="pmdailydevotion">du. ahitat</string>
     <string name="pmdevotionauthor">du. szerző</string>
     <string name="biblestudy">bibliaóra</string>
     <string name="prayer">imaóra</string>
@@ -150,13 +150,13 @@
     <string name="title_activity_help">Segítség</string>
     <string name="title_activity_info">Az Áhítatról</string>
 
-    <string name="help_content1">Az Áhítat csak 5.1-es, vagy annál újabb verziójú Android-rendszeren fut. Az applikációt az induló képernyőn található <b>ujj gomb</b> érintésével lehet <b>elindítani</b>. Induláskor az aktuális dátum szerinti áhítat jelenik meg. A főmenü a bal felső sarokban lévő <b>hamburger</b> ikonra kattinta érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy navigációs menü, melynek segítségével naponként lehet visszafele, illetve előre lépni.\n</string>
+    <string name="help_content1">Az Áhítat csak 4.3-as, vagy annál újabb verziószámú Android-rendszeren fut. Az applikációt az induló képernyőn található <b>ujj gomb</b> érintésével lehet <b>elindítani</b>. Induláskor az aktuális dátum szerinti áhítat jelenik meg. A főmenü a bal felső sarokban lévő <b>hamburger</b> ikonra kattinta érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy navigációs menü, melynek segítségével naponként lehet visszafele, illetve előre lépni.\n</string>
     <string name="help_title1">FŐMENÜ</string>
     <string name="help_content2"><b>MAI ÁHÍTAT</b>\n\nA MAI ÁHÍTAT menüpont az aktuális (mai) napi áhítatot állítja be.\n</string>
     <string name="help_content3"><b>DÁTUM SZERINT</b>\n\nA DÁTUM SZERINT menüpont alatt felugró dátumválasztó naptár segítségével hosszabb időtávon belül lehet elmélkedést választani.\nA fejléc jobb felső sarkában látható szív alakú ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
     <string name="help_content4"><b>KEDVENCEK</b>\n\nA MAI ÁHITAT menüpontban beállított kedvenceket itt lehet megtekinteni, törölni, valamint (érintésre) az elmentett áhítatra navigálni.\n</string>
     <string name="help_content5"><b>MEGOSZTÁS</b>\n\nA MEGOSZTÁS menüpont az előzőleg kiválasztott áhítat <b>megosztását</b> teszi lehetővé az eszközre telepített - megosztásra alkalmas - applikációkkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését szeretné megosztani a felhasználó.\n</string>
 
-    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat <b>szerzői</b> erdélyi – részben magyarországi és amerikai – baptista lelkipásztorok és lelki munkások.\n\nKöszönjük a  <b><i>Hungarian Baptist Mission (HBM)</i></b>-nek, és vezetőjének <b><i>Kui Barnabás</i></b>nak az anyagi támogatást. Nélkülük nem jött volna létre ez az alkalmazás! </string>
+    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat <b>szerzői</b> erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n\nKöszönjük a <b><i>Hungarian Baptist Mission</i></b>-nek (HBM), és vezetőjének <b><i>Kui Barnabás</i></b>nak az anyagi támogatást. Nélkülük nem jött volna létre ez az alkalmazás! </string>
 
 </resources>
