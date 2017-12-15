@@ -77,6 +77,35 @@
                     android:paddingEnd="20dp"
                     android:paddingStart="20dp"
                     android:paddingTop="5dp"
+                    android:text="@string/help_content6"
+                    android:textAlignment="viewStart"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/help_title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/fekete30"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/help_title2"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/help_content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
                     android:text="@string/help_content2"
                     android:textAlignment="viewStart"
                     android:textSize="15sp" />
