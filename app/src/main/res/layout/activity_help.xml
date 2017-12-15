@@ -75,13 +75,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
+                    android:lineSpacingMultiplier="1.2"
                     android:paddingEnd="20dp"
                     android:paddingStart="20dp"
                     android:paddingTop="5dp"
                     android:text="@string/help_content6"
                     android:textAlignment="viewStart"
-                    android:textSize="15sp"
-                    android:lineSpacingMultiplier="1.2"/>
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/help_title2"
