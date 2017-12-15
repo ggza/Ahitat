@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="actual_date">TextView</string>
-    <string name="heading">TextView</string>
-    <string name="amverse">TextView</string>
-    <string name="pmdailydevotion">TextView</string>
+    <string name="actual_date">Aktuális dátum</string>
+    <string name="heading">Fejléc</string>
+    <string name="amverse">de. ige</string>
+    <string name="pmdailydevotion">du. ahitat</string>
     <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
 </resources>
