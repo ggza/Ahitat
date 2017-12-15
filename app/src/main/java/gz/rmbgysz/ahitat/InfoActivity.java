@@ -33,6 +33,9 @@ public class InfoActivity extends AppCompatActivity {
         info_content.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
         info_content1.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
 
+
+        info_title1.setText(String.format("%s %s", getString(R.string.info_versiontitle), BuildConfig.VERSION_NAME));
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
