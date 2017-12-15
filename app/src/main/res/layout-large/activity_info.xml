@@ -50,7 +50,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/info_content"
                     android:textAlignment="viewStart"
-                    android:textSize="18sp" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/info_title"
@@ -66,7 +66,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/info_title"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/info_content1"
                     android:textAlignment="viewStart"
-                    android:textSize="18sp" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/info_title1"
@@ -95,7 +95,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/info_title1"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
 
