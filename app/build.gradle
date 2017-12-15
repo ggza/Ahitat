@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    def formattedDate = new Date().format('yyyy-MM-dd-HH-mm-ss')
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
@@ -9,6 +10,8 @@ android {
         targetSdkVersion 16
         versionCode 100
         versionName "1.0"
+        def formattedName = String.format("%s_%s_%s","napi-ahitatok", versionName, formattedDate)
+        setProperty("archivesBaseName", "$formattedName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
