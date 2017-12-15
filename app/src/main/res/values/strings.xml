@@ -160,6 +160,6 @@
     <string name="help_content5"><b>MEGOSZTÁS</b>\n\nA MEGOSZTÁS menüpont az előzőleg kiválasztott áhítat <b>megosztását</b> teszi lehetővé az eszközre telepített - megosztásra alkalmas - applikációkkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését szeretné megosztani a felhasználó.\n</string>
     <string name="info_title">KÖSZÖNENYILVÁNÍTÁS</string>
     <string name="info_versiontitle">VERZIÓSZÁM:</string>
-    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat <b>szerzői</b> erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n</string>
+    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat szerzői erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n</string>
     <string name="info_content1">Köszönjük a <b><i>Hungarian Baptist Mission</i></b>-nek (HBM), és vezetőjének <b><i>Kui Barnabás</i></b>nak az anyagi támogatást. Nélkülük nem jött volna létre ez az alkalmazás!\n</string>
 </resources>
