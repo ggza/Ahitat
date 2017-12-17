@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/go_to_bible"
-        android:icon="@drawable/ic_local_library_white_24dp"
+        android:icon="@drawable/ic_biblia_white"
         app:showAsAction="ifRoom"
-        android:title="Biblia">
+        android:title="@string/biblia">
     </item>
 
     <item
         android:id="@+id/add_to_favorites"
-        android:icon="@drawable/ic_favorite_white_24dp"
+        android:icon="@drawable/ic_sziv_white"
         app:showAsAction="ifRoom"
         android:title="@string/addtofavorites">
     </item>

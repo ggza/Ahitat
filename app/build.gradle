@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "gz.rmbgysz.ahitat"
         minSdkVersion 16
-        targetSdkVersion 16
+        targetSdkVersion 25
         versionCode 100
         versionName "1.0"
         def formattedName = String.format("%s_%s_%s","napi-ahitatok", versionName, formattedDate)
@@ -28,10 +28,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:design:25.1.1'
-    compile 'com.android.support:support-vector-drawable:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:support-vector-drawable:25.4.0'
     compile 'com.getbase:floatingactionbutton:1.10.1'
     //compile "com.android.support:appcompat-v7:21.0.+"
-    testCompile 'junit:junit:4.12'
+    compile 'com.joanzapata.iconify:android-iconify:2.2.2'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2' // (v4.5)
+
 }

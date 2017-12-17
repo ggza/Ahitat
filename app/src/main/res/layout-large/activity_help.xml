@@ -50,7 +50,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content1"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:lineSpacingMultiplier="1.2"/>
 
                 <TextView
@@ -67,21 +67,21 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_title1"
                     android:textAlignment="viewStart"
-                    android:textSize="20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
-                <gz.rmbgysz.ahitat.TextViewWithImages
-                    android:id="@+id/help_content6"
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:id="@+id/help_content7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
+                    android:lineSpacingMultiplier="1.2"
                     android:paddingEnd="20dp"
                     android:paddingStart="20dp"
                     android:paddingTop="5dp"
-                    android:text="@string/help_content6"
+                    android:text="@string/help_content7"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
-                    android:lineSpacingMultiplier="1.2"/>
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/help_title2"
@@ -97,7 +97,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_title2"
                     android:textAlignment="viewStart"
-                    android:textSize="20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -110,7 +110,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content2"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:lineSpacingMultiplier="1.2"/>
 
                 <TextView
@@ -123,7 +123,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content3"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:lineSpacingMultiplier="1.2"/>
 
                 <TextView
@@ -136,7 +136,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content4"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:lineSpacingMultiplier="1.2"/>
 
                 <TextView
@@ -149,7 +149,7 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content5"
                     android:textAlignment="viewStart"
-                    android:textSize="19sp"
+                    android:textSize="18sp"
                     android:lineSpacingMultiplier="1.2"/>
 
             </LinearLayout>

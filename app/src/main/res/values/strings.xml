@@ -30,6 +30,7 @@
 
     <string name="deletefromfavorites">Törlés</string>
     <string name="addtofavorites">Kedvencek</string>
+    <string name="biblia">Biblia</string>
 
     <string name="actual_date">Aktuális dátum</string>
     <string name="heading">Fejléc</string>
@@ -152,12 +153,12 @@
 
     <string name="help_content1">Az Áhítat csak 4.3-as, vagy annál újabb verziószámú Android-rendszeren fut. Az applikáció az induló képernyőn található <b>ujj gomb</b> érintésével <b>indul</b>. Induláskor az aktuális dátum szerinti áhítat jelenik meg. A főmenü a bal felső sarokban lévő <b>hamburger</b> ikonra kattinta érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy navigációs menü, melynek segítségével naponként lehet visszafele, illetve előre lépni.\n</string>
     <string name="help_title1">FEJLÉC</string>
-    <string name="help_content6">A fejléc jobb felső sarkában látható [img src=ic_local_library_grey_24dp/] ikont érintve a <b>bibliamindenkie.hu</b> internetoldalra navigál az alkalmazás, ahol két magyar <b>bibliafordítás</b> is elérhető. A mellette látható [img src=ic_favorite_grey_24dp/] ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
     <string name="help_title2">FŐMENÜ</string>
     <string name="help_content2"><b>MAI ÁHÍTAT</b>\n\nA MAI ÁHÍTAT menüpont az aktuális (mai) napi áhítatot állítja be.\n</string>
     <string name="help_content3"><b>DÁTUM SZERINT</b>\n\nA DÁTUM SZERINT menüpont alatt felugró dátumválasztó naptár segítségével hosszabb időtávon belül lehet elmélkedést választani.\n</string>
     <string name="help_content4"><b>KEDVENCEK</b>\n\nA MAI ÁHITAT menüpontban beállított kedvenceket itt lehet megtekinteni, törölni, valamint (érintésre) az elmentett áhítatra navigálni.\n</string>
     <string name="help_content5"><b>MEGOSZTÁS</b>\n\nA MEGOSZTÁS menüpont az előzőleg kiválasztott áhítat <b>megosztását</b> teszi lehetővé az eszközre telepített - megosztásra alkalmas - applikációkkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését szeretné megosztani a felhasználó.\n</string>
+    <string name="help_content7">A fejléc jobb felső sarkában látható {ahitat-book} ikont érintve a <b>bibliamindenkie.hu</b> internetoldalra navigál az alkalmazás, ahol két magyar <b>bibliafordítás</b> is elérhető. A mellette látható {ahitat-heart} ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
     <string name="info_title">KÖSZÖNENYILVÁNÍTÁS</string>
     <string name="info_versiontitle">VERZIÓSZÁM:</string>
     <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat szerzői erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n</string>
