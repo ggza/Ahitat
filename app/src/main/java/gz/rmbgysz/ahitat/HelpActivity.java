@@ -10,9 +10,9 @@ import android.widget.TextView;
 public class HelpActivity extends AppCompatActivity {
     TextView help_content1, help_title1, help_content6, help_title2, help_content2, help_content3, help_content4, help_content5;
 
-    private String M_BOLD= "merriweather_bold.ttf";
-    private String M_REGULAR= "merriweather_regular.ttf";
-    private String M_ITALIC= "merriweather_italic.ttf";
+    private String M_BOLD = "merriweather_bold.ttf";
+    private String M_REGULAR = "merriweather_regular.ttf";
+    private String M_ITALIC = "merriweather_italic.ttf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,5 @@ public class HelpActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
-
-
 }
 
