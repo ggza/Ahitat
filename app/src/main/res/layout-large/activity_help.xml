@@ -70,7 +70,7 @@
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
-                <com.joanzapata.iconify.widget.IconTextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

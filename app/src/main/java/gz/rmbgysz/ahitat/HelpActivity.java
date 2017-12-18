@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.graphics.Typeface;
 import android.widget.TextView;
-import com.joanzapata.iconify.Iconify;
 
 public class HelpActivity extends AppCompatActivity {
     TextView help_content1, help_title1, help_content6, help_title2, help_content2, help_content3, help_content4, help_content5, help_content7;
@@ -60,7 +59,6 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
         */
-
     }
 
     @Override
