@@ -40,7 +40,7 @@
                 android:paddingBottom="30dp"
                 android:paddingTop="10dp">
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <com.joanzapata.iconify.widget.IconTextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                     android:textSize="15sp"
                     android:lineSpacingMultiplier="1.2"/>
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                     android:textSize="15sp"
                     android:lineSpacingMultiplier="1.2"/>
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                     android:textSize="15sp"
                     android:lineSpacingMultiplier="1.2"/>
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

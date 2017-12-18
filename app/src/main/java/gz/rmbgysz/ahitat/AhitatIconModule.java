@@ -1,7 +1,7 @@
 package gz.rmbgysz.ahitat;
 
-import com.joanzapata.iconify.Icon;
-import com.joanzapata.iconify.IconFontDescriptor;
+import gz.rmbgysz.ahitat.Icon;
+import gz.rmbgysz.ahitat.IconFontDescriptor;
 
 public class AhitatIconModule implements IconFontDescriptor {
 
