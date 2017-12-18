@@ -4,7 +4,7 @@ import com.joanzapata.iconify.Icon;
 
 public enum AhitatIconIcons implements Icon {
     ahitat_book('\ue900'),
-    ahitat_heart('\ue9da');
+    ahitat_heart('\ue87d');
     
     char character;
 

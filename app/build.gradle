@@ -34,6 +34,4 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.10.1'
     //compile "com.android.support:appcompat-v7:21.0.+"
     compile 'com.joanzapata.iconify:android-iconify:2.2.2'
-    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2' // (v4.5)
-
 }
