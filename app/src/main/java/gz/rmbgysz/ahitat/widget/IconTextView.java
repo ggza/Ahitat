@@ -2,11 +2,11 @@ package gz.rmbgysz.ahitat.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.support.v7.widget.AppCompatTextView;
 import gz.rmbgysz.ahitat.Iconify;
 import gz.rmbgysz.ahitat.internal.HasOnViewAttachListener;
 
-public class IconTextView extends TextView implements HasOnViewAttachListener {
+public class IconTextView extends AppCompatTextView implements HasOnViewAttachListener {
 
     private HasOnViewAttachListenerDelegate delegate;
 

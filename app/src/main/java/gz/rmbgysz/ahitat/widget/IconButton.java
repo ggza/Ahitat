@@ -2,11 +2,11 @@ package gz.rmbgysz.ahitat.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.Button;
+import android.support.v7.widget.AppCompatButton;
 import gz.rmbgysz.ahitat.Iconify;
 import gz.rmbgysz.ahitat.internal.HasOnViewAttachListener;
 
-public class IconButton extends Button implements HasOnViewAttachListener {
+public class IconButton extends AppCompatButton implements HasOnViewAttachListener {
 
     private HasOnViewAttachListenerDelegate delegate;
 
