@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
-        this.myContext = context;
+        myContext = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
     }
 
@@ -135,7 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void copyDataBase() throws IOException{
 
         //Open your local db as the input stream
-        InputStream myInput = this.myContext.getAssets().open(DB_NAME);
+        InputStream myInput = myContext.getAssets().open(DB_NAME);
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;

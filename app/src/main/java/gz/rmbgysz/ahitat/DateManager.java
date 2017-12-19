@@ -96,14 +96,14 @@ public class DateManager {
     }
 
     public String getFormattedDateWithDayName(Context context) {
-        return String.valueOf(calendar.get(calendar.YEAR)) + ". " +
+        return String.valueOf(calendar.get(Calendar.YEAR)) + ". " +
                 context.getResources()
                         .getStringArray(R.array.hungarian_month_names)
-                        [calendar.get(calendar.MONTH)] + " " +
+                        [calendar.get(Calendar.MONTH)] + " " +
                 String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "., " +
                 context.getResources()
                 .getStringArray(R.array.hungarian_day_names)
-                [calendar.get(calendar.DAY_OF_WEEK) - 1];
+                [calendar.get(Calendar.DAY_OF_WEEK) - 1];
 
     }
 
