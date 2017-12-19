@@ -6,7 +6,7 @@
 
     <string name="description">Áhítat-applikáció</string>
 
-    <string name="application_title">ÁHÍTAT 2017</string>
+    <string name="main_app__activity_title">Napi áhítatok</string>
     <string name="menudescription">A Romániai Magyar Baptista Szövetség áhítata</string>
     <string name="searchbydate">Dátum szerint</string>
     <string name="search">Keresés</string>
@@ -22,24 +22,28 @@
     <string name="datesettingerror">Hiba történt a dátum beállításnál!!!</string>
     <string name="dateiniterror">Hiba történt a dátum inicializálásánál!!!</string>
     <string name="shareactual">Áhitat megosztása</string>
-    <string name="sharetypetitle">KIVÁLASZTOTT ÁHITAT MEGOSZTÁSA</string>
-    <string name="sharedtitle">Kiválasztott áhítat megosztása</string>
+    <string name="sharetypetitle">ÁHÍTAT MEGOSZTÁSA</string>
+    <string name="sharedtitle">Áhítat megosztása</string>
     <string name="nosharedapp">Nincs telepítve megosztásra alkalmas alkalmazás</string>
     <string name="areyousure">Biztosan törölni szeretné a kijelölt kedvence(ke)t?</string>
     <string name="deletetitle">TÖRLÉS MEGERŐSÍTÉSE</string>
 
-    <string name="actual_date">TextView</string>
-    <string name="heading">TextView</string>
+    <string name="deletefromfavorites">Törlés</string>
+    <string name="addtofavorites">Kedvencek</string>
+    <string name="biblia">Biblia</string>
 
-    <string name="amheading">DÉLELŐTT</string>
+    <string name="actual_date">Aktuális dátum</string>
+    <string name="heading">Fejléc</string>
+
+    <string name="amheading">DÉLELŐTTI SOROZAT</string>
     <string name="amverse">de. ige</string>
     <string name="amtitle">de. cím</string>
     <string name="amdailydevotion">de. áhitat</string>
     <string name="amdevotionauthor">de. szerző</string>
-    <string name="pmheading">DÉLUTÁN</string>
+    <string name="pmheading">DÉLUTÁNI SOROZAT</string>
     <string name="pmtitle">du. cím</string>
     <string name="pmverse">du. ige</string>
-    <string name="pmdailydevotion">du. szöveg</string>
+    <string name="pmdailydevotion">du. ahitat</string>
     <string name="pmdevotionauthor">du. szerző</string>
     <string name="biblestudy">bibliaóra</string>
     <string name="prayer">imaóra</string>
@@ -78,7 +82,7 @@
 
     <string name="pref_header_general">Általános</string>
 
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_title_social_recommendations">Enable social recommendationsA</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
         based on your message history
     </string>
@@ -145,12 +149,18 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
     <string name="title_activity_help">Segítség</string>
+    <string name="title_activity_info">Az Áhítatról</string>
 
-    <string name="help_content1">Az applikácót az induló képernyőn található ujj gombra kattintva lehet elindítani. Induláskor az aktuális dátum szerinti áhitat jelenik meg. A főmenü a bal felső sarokban lévő hamburger ikonra kattinta érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy navigációs menü, melynek segítségével naponként lehet visszafele, illetve előre léptetni a megjeleníteni kívánt áhitatot.\n</string>
-    <string name="help_title1">FŐMENÜ\n</string>
-    <string name="help_content2"><b>MAI ÁHITAT</b>\n\nA MAI ÁHÍTAT menüpont az aktuális (mai) napi áhítatot állítja be.\n</string>
-    <string name="help_content3"><b>DÁTUM SZERINT</b>\n\nA DÁTUM SZERINT menüpont alatt felugró dátumválasztó segítségével tetszőlegesen ki lehet választani, a kívánt elmélkedés adott éven belül.\n A fejléc jobb felső sarkában látható szív alakú ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
-    <string name="help_content4"><b>KEDVENCEK</b>\n\nA MAI ÁHITAT menüpontban beállított kedvenceket itt lehet megtekinteni, törölni, valamint (kattintásra) az elmentett áhitatra navigálni.\n</string>
-    <string name="help_content5"><b>MEGOSZTÁS</b>\n\nA MEGOSZTÁS menüpont az előzőleg kiválasztott áhítat <b> megosztását</b> teszi lehetővé, az eszközre telepített -megosztásra alkalmas- applikációkkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését szeretné megosztani a felhasználó.\n</string>
-
+    <string name="help_content1">Az applikációval kapcsolatos észrevételeket, hibabejelentéseket az <a href="mailto:ahitatapp@gmail.com">ahitatapp@gmail.com</a> email címre várjuk.\n\n Az Áhítat csak 4.3-as, vagy annál újabb verziószámú Android rendszerrel használható.\n\n Az applikáció az induló képernyőn található \u00A0{ahitat-ujj 120%}\u00A0 érintésével <b>indul</b>. Induláskor az aktuális dátum szerinti áhítat jelenik meg. A <b>főmenü</b> a bal felső sarokban lévő \u00A0{ahitat-menu 120%}\u00A0 ikonra kattintva érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy <b>navigációs menü</b>, melynek segítségével naponként lehet visszafele, illetve előre lépni.\n</string>
+    <string name="help_title1">FEJLÉC</string>
+    <string name="help_title2">FŐMENÜ</string>
+    <string name="help_content2"><b>MAI ÁHÍTAT</b>\n\nA \u00A0{ahitat-bookopenvariant 120%}\u00A0 MAI ÁHÍTAT menüpont az aktuális (mai) napi áhítatot állítja be.\n</string>
+    <string name="help_content3"><b>DÁTUM SZERINT</b>\n\nA \u00A0{ahitat-calendar 120%}\u00A0 DÁTUM SZERINT menüpont alatt felugró dátumválasztó naptár segítségével hosszabb időtávon belül lehet elmélkedést választani.\n</string>
+    <string name="help_content4"><b>KEDVENCEK</b>\n\nA MAI ÁHITAT menüpontban beállított kedvenceket itt lehet megtekinteni, törölni, valamint (érintésre) az elmentett áhítatra navigálni.\n</string>
+    <string name="help_content5"><b>MEGOSZTÁS</b>\n\nA \u00A0{ahitat-myshare 120%}\u00A0 MEGOSZTÁS menüpont az előzőleg kiválasztott áhítat <b>megosztását</b> teszi lehetővé az eszközre telepített - megosztásra alkalmas - applikációkkal. Megosztáskor meg lehet jelölni, hogy a délelőtti, vagy a délutáni sorozat áhítat-bejegyzését szeretné megosztani a felhasználó.\n</string>
+    <string name="help_content7">A fejléc jobb felső sarkában látható \u00A0{ahitat-book 120%}\u00A0 ikont érintve a <b>bibliamindenkie.hu</b> internetoldalra navigál az alkalmazás, ahol két magyar <b>bibliafordítás</b> is elérhető. A mellette látható \u00A0{ahitat-heart 120%}\u00A0 ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
+    <string name="info_title">KÖSZÖNETNYILVÁNÍTÁS</string>
+    <string name="info_versiontitle">VERZIÓSZÁM:</string>
+    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat szerzői erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n\nA borítófotót Paniti Márta készítette Torockón. Háttérben a Székelykő.\n</string>
+    <string name="info_content1">Köszönjük a <b><i>Hungarian Baptist Mission</i></b>-nek (HBM), és vezetőjének <b><i>Kui Barnabás</i></b>nak az anyagi támogatást. Nélkülük nem jött volna létre ez az alkalmazás!\n</string>
 </resources>

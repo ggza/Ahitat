@@ -1,14 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+    def formattedDate = new Date().format('yyyy-MM-dd-HH-mm-ss')
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "gz.rmbgysz.ahitat"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
+        versionCode 100
         versionName "1.0"
+        def formattedName = String.format("%s_%s_%s","napi-ahitatok", versionName, formattedDate)
+        setProperty("archivesBaseName", "$formattedName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -25,14 +28,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support:gridlayout-v7:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:support-vector-drawable:25.4.0'
     compile 'com.getbase:floatingactionbutton:1.10.1'
-    compile 'com.android.support.constraint:constraint-layout:+'
-    testCompile 'junit:junit:4.12'
+    //compile "com.android.support:appcompat-v7:21.0.+"
+    //compile 'com.joanzapata.iconify:android-iconify:2.2.2'
 }

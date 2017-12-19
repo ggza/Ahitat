@@ -30,17 +30,17 @@
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="none"
             tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/hatter"
                 android:orientation="vertical"
                 android:paddingBottom="30dp"
-                android:paddingTop="30dp">
+                android:paddingTop="10dp">
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,22 +50,57 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content1"
                     android:textAlignment="viewStart"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.2"/>
 
                 <TextView
                     android:id="@+id/help_title1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/fekete30"
+                    android:paddingBottom="5dp"
                     android:paddingEnd="15dp"
                     android:paddingStart="15dp"
+                    android:paddingTop="5dp"
                     android:text="@string/help_title1"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <gz.rmbgysz.ahitat.widget.IconTextView
+                    android:id="@+id/help_content7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/help_content7"
+                    android:textAlignment="viewStart"
+                    android:textSize="15sp"/>
+
                 <TextView
+                    android:id="@+id/help_title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/fekete30"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/help_title2"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,9 +110,10 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content2"
                     android:textAlignment="viewStart"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.2"/>
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,9 +123,10 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content3"
                     android:textAlignment="viewStart"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.2"/>
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,9 +136,10 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content4"
                     android:textAlignment="viewStart"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.2"/>
 
-                <TextView
+                <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,7 +149,8 @@
                     android:paddingTop="5dp"
                     android:text="@string/help_content5"
                     android:textAlignment="viewStart"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.2"/>
 
             </LinearLayout>
 

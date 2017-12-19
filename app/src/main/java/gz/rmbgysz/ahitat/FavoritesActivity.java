@@ -18,7 +18,6 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
     private Menu optionsMenu = null;
     private ListView listView;
     private FavoritesAdapter adapter;
-    private DateManager dateManager = DateManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class FavoritesActivity extends AppCompatActivity implements UpdateFavori
                 Favorite item = (Favorite) listView.getItemAtPosition(position);
 
                 try {
-                    dateManager.setDate(item.getDate());
+                    DateManager.getInstance().setDate(item.getDate());
                     finish();
                 } catch (ParseException e) {
                     e.printStackTrace();

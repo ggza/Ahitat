@@ -5,11 +5,11 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_actual_lecture"
-            android:icon="@drawable/ic_actual_lecture"
+            android:icon="@drawable/ic_book_open_page_variant"
             android:title="@string/dailydevotion" />
         <item
             android:id="@+id/nav_search_by_date"
-            android:icon="@drawable/ic_search_by_date"
+            android:icon="@drawable/ic_calendar"
             android:title="@string/searchbydate" />
 
 <!--FIXME: ezt egyelore nem valositjuk meg majd egy kovetkezo verzioban
@@ -24,7 +24,7 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_favorites"
-            android:icon="@drawable/ic_favourite"
+            android:icon="@drawable/ic_heart"
             android:title="@string/favorites" />
         <item
             android:id="@+id/nav_share"
@@ -38,6 +38,10 @@
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_help"
             android:title="@string/title_activity_help" />
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_information_outline"
+            android:title="@string/title_activity_info" />
     </group>
 
 </menu>

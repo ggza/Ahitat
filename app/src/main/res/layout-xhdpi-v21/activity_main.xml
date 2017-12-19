@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hatter"
+    android:orientation="vertical"
+    android:weightSum="6"
+    android:scaleType="fitCenter">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:contentDescription="@string/description"
+        app:srcCompat="@drawable/ic_ahitat_logo" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:background="@drawable/ahitat_borito_2017a"
+        android:contentDescription="@string/description" />
+
+    <ImageView
+        android:id="@+id/rotate_image"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/description"
+        android:onClick="startMainApp"
+        app:srcCompat="@drawable/ic_ujj" />
+
+</LinearLayout>

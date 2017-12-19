@@ -14,7 +14,7 @@ import java.util.TimeZone;
 
 public class DateManager {
 
-    private static int actYear = 2017;
+    private static int publicationYear = 2017;
     private static int minMonth = 0;
     private static int minDay = 1;
     private static int maxDay = 31;
@@ -22,8 +22,10 @@ public class DateManager {
     private static int getDefaultMin = 11;
 
     private String timezoneString = "Europe/Budapest";
+    //TODO: ezekkel lehet megadni, hogy a datepicker milyen tartományt jelenítsen meg most 2018 végére van állítva a vége,
+    //TODO: ha kiadjuk a 2019-est akkor ezt át kell írni, esetleg valami konfigba ki lehet tenni
     private String minDateString = "2017-01-01";
-    private String maxDateString = "2017-12-31";
+    private String maxDateString = "2018-12-31";
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat;
 
@@ -35,7 +37,7 @@ public class DateManager {
     }
 
     private boolean isValidDate(int year, int month, int day) {
-        return (year == actYear) && (month >= minMonth) && (day >= minDay) && (day <= maxDay);
+        return (year >= publicationYear) && (month >= minMonth) && (day >= minDay) && (day <= maxDay);
     }
 
     public static DateManager getInstance() {
@@ -94,14 +96,14 @@ public class DateManager {
     }
 
     public String getFormattedDateWithDayName(Context context) {
-        return String.valueOf(calendar.get(calendar.YEAR)) + ". " +
+        return String.valueOf(calendar.get(Calendar.YEAR)) + ". " +
                 context.getResources()
                         .getStringArray(R.array.hungarian_month_names)
-                        [calendar.get(calendar.MONTH)] + " " +
+                        [calendar.get(Calendar.MONTH)] + " " +
                 String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "., " +
                 context.getResources()
                 .getStringArray(R.array.hungarian_day_names)
-                [calendar.get(calendar.DAY_OF_WEEK) - 1];
+                [calendar.get(Calendar.DAY_OF_WEEK) - 1];
 
     }
 
