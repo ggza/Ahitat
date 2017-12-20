@@ -8,7 +8,7 @@ import android.graphics.Typeface;
 import android.widget.TextView;
 
 public class HelpActivity extends AppCompatActivity {
-    TextView  help_title1, help_title2, help_title3, help_content1, help_content2, help_content3, help_content4, help_content5, help_content6, help_content7;
+    TextView  help_title1, help_title2, help_title3, help_title4, help_content1, help_content2, help_content3, help_content4, help_content5, help_content6, help_content7;
 
     private String M_BOLD= "merriweather_bold.ttf";
     private String M_REGULAR= "merriweather_regular.ttf";
@@ -29,6 +29,7 @@ public class HelpActivity extends AppCompatActivity {
         help_title1=(TextView)findViewById(R.id.help_title1);
         help_title2=(TextView)findViewById(R.id.help_title2);
         help_title3=(TextView)findViewById(R.id.help_title3);
+        help_title4=(TextView)findViewById(R.id.help_title4);
         help_content1=(TextView)findViewById(R.id.help_content1);
         help_content2=(TextView)findViewById(R.id.help_content2);
         help_content3=(TextView)findViewById(R.id.help_content3);
@@ -40,6 +41,7 @@ public class HelpActivity extends AppCompatActivity {
         help_title1.setTypeface(Typeface.createFromAsset(getAssets(), M_BOLD));
         help_title2.setTypeface(Typeface.createFromAsset(getAssets(), M_BOLD));
         help_title3.setTypeface(Typeface.createFromAsset(getAssets(), M_BOLD));
+        help_title4.setTypeface(Typeface.createFromAsset(getAssets(), M_BOLD));
         help_content1.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
         help_content2.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));
         help_content3.setTypeface(Typeface.createFromAsset(getAssets(), M_REGULAR));

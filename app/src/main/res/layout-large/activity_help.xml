@@ -40,6 +40,53 @@
                 android:paddingBottom="30dp"
                 android:paddingTop="10dp">
 
+                <TextView
+                    android:id="@+id/help_title3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/fekete30"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/help_title3"
+                    android:textAlignment="viewStart"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/help_content6"
+                    android:text="@string/help_content6"
+                    android:layout_gravity="start"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="18sp"
+                    android:lineSpacingMultiplier="1.2"/>
+
+                <TextView
+                    android:id="@+id/help_title4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/fekete30"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/help_title4"
+                    android:textAlignment="viewStart"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
                 <gz.rmbgysz.ahitat.widget.IconTextView
                     android:id="@+id/help_content1"
                     android:layout_width="match_parent"
@@ -148,36 +195,6 @@
                     android:paddingStart="20dp"
                     android:paddingTop="5dp"
                     android:text="@string/help_content5"
-                    android:textAlignment="viewStart"
-                    android:textSize="18sp"
-                    android:lineSpacingMultiplier="1.2"/>
-
-                <TextView
-                    android:id="@+id/help_title3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/fekete30"
-                    android:paddingBottom="5dp"
-                    android:paddingEnd="15dp"
-                    android:paddingStart="15dp"
-                    android:paddingTop="5dp"
-                    android:text="@string/help_title3"
-                    android:textAlignment="viewStart"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/help_content6"
-                    android:text="@string/help_content6"
-                    android:layout_gravity="start"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     android:lineSpacingMultiplier="1.2"/>

@@ -151,10 +151,11 @@
     <string name="title_activity_help">Segítség</string>
     <string name="title_activity_info">Az Áhítatról</string>
 
-    <string name="help_content1">Az Áhítat csak 4.3-as, vagy annál újabb verziószámú Android rendszerrel használható.\n\nAz applikáció az induló képernyőn található \u00A0{ahitat-ujj 120%}\u00A0 érintésével <b>indul</b>. Induláskor az aktuális dátum szerinti áhítat jelenik meg. A <b>főmenü</b> a bal felső sarokban lévő \u00A0{ahitat-menu 120%}\u00A0 ikonra kattintva érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy <b>navigációs menü</b>, melynek segítségével naponként lehet visszafele, illetve előre lépni.\n</string>
     <string name="help_title1">FEJLÉC</string>
     <string name="help_title2">FŐMENÜ</string>
-    <string name="help_title3">KARBANTARTÁS</string>
+    <string name="help_title3">VISSZAJELZÉS</string>
+    <string name="help_title4">INDÍTÁS</string>
+    <string name="help_content1">Az Áhítat csak 4.3-as, vagy annál újabb verziószámú Android rendszeren használható.\n\nAz applikáció az induló képernyőn található \u00A0{ahitat-ujj 120%}\u00A0 ikon érintésével <b>indul</b>. Induláskor az aktuális dátum szerinti áhítat jelenik meg. A <b>főmenü</b> a bal felső sarokban lévő \u00A0{ahitat-menu 120%}\u00A0 ikonra kattintva érhető el. A jobb alsó sarokban található <b>„+”</b> gombbal elérhetővé válik egy <b>navigációs menü</b>, melynek segítségével naponként lehet visszafele, illetve előre lépni.\n</string>
     <string name="help_content2"><b>MAI ÁHÍTAT</b>\n\nA \u00A0{ahitat-bookopenvariant 120%}\u00A0 MAI ÁHÍTAT menüpont az aktuális (mai) napi áhítatot állítja be.\n</string>
     <string name="help_content3"><b>DÁTUM SZERINT</b>\n\nA \u00A0{ahitat-calendar 120%}\u00A0 DÁTUM SZERINT menüpont alatt felugró dátumválasztó naptár segítségével hosszabb időtávon belül lehet elmélkedést választani.\n</string>
     <string name="help_content4"><b>KEDVENCEK</b>\n\nA MAI ÁHITAT menüpontban beállított kedvenceket itt lehet megtekinteni, törölni, valamint (érintésre) az elmentett áhítatra navigálni.\n</string>
