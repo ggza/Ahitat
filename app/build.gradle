@@ -1,7 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    def formattedDate = new Date().format('yyyy-MM-dd-HH-mm-ss')
+    signingConfigs {
+        config {
+            keyAlias 'release_key'
+            keyPassword 'ahitat2017'
+            storeFile file('D:/ahitat_private_key.keystore')
+            storePassword 'ahitat2017'
+        }
+    }
+    //def formattedDate = new Date().format('yyyy-MM-dd-HH-mm-ss')
+    def applicationName = new String("napi-ahitatok")
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
@@ -10,8 +19,6 @@ android {
         targetSdkVersion 25
         versionCode 100
         versionName "1.0"
-        def formattedName = String.format("%s_%s_%s","napi-ahitatok", versionName, formattedDate)
-        setProperty("archivesBaseName", "$formattedName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -19,12 +26,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    output.outputFileName = "${applicationName}_${variant.versionName}.apk"
+                }
+            }
+        }
+        debug {
+            versionNameSuffix '-debug'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
