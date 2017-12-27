@@ -293,14 +293,12 @@ public class MainAppActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.go_to_bible) {
-            Snackbar.make(findViewById(R.id.content_main_app), "a b ", Snackbar.LENGTH_LONG)
-                    .setAction("clicked", null)
-                    .show();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abibliamindenkie.hu"));
             startActivity(browserIntent);
         }
 
 
+        if (DatabaseHelper.getInstance(this).getDailyDevotionByDate(DateManager.getInstance().getDateString()) != null) {
             boolean ret = DatabaseHelper.getInstance(this).
                     insertFavoriteIfNotExist(DateManager.getInstance().getDateString());
 
@@ -310,6 +308,8 @@ public class MainAppActivity extends AppCompatActivity
                             .setAction("clicked", null)
                             .show();
                 }
+        }
+
             return true;
         }
         return super.onOptionsItemSelected(item);
