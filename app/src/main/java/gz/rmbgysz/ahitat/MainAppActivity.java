@@ -60,7 +60,6 @@ public class MainAppActivity extends AppCompatActivity
 
         setTheme(R.style.MainAppTheme);
         setContentView(R.layout.activity_main_app);
-        setTitle(R.string.main_app__activity_title);
         getInitalHeights();
 
         actual_date=(TextView)findViewById(R.id.actual_date);
@@ -94,7 +93,7 @@ public class MainAppActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initFloatingActionButtonMenu();
+//        initFloatingActionButtonMenu();
 
         refresTextViews(DatabaseHelper.getInstance(this).
                 getDailyDevotionByDate(DateManager.getInstance().getDateString()));
@@ -292,8 +291,20 @@ public class MainAppActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_go_back) {
+            DateManager.getInstance().stepToPreviousDay();
+            refresTextViews(DatabaseHelper.getInstance(MainAppActivity.this).
+                    getDailyDevotionByDate(DateManager.getInstance().getDateString()));
+        }
+
+        if (id == R.id.action_go_forward) {
+            DateManager.getInstance().stepToNextDay();
+            refresTextViews(DatabaseHelper.getInstance(MainAppActivity.this).
+                    getDailyDevotionByDate(DateManager.getInstance().getDateString()));
+        }
+
         if (id == R.id.go_to_bible) {
-            Snackbar.make(findViewById(R.id.content_main_app), "a b ", Snackbar.LENGTH_LONG)
+            Snackbar.make(findViewById(R.id.content_main_app), "A Biblia...", Snackbar.LENGTH_LONG)
                     .setAction("clicked", null)
                     .show();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abibliamindenkie.hu"));
@@ -369,7 +380,7 @@ public class MainAppActivity extends AppCompatActivity
         return bundle;
     }
 
-    private void initFloatingActionButtonMenu() {
+/*    private void initFloatingActionButtonMenu() {
         final FloatingActionsMenu floatingActionsMenu = (FloatingActionsMenu) findViewById(R.id.fab_menu);
         final FloatingActionButton goBack = (FloatingActionButton) findViewById(R.id.action_go_back);
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -411,7 +422,7 @@ public class MainAppActivity extends AppCompatActivity
                 floatingMenuBackground.setVisibility(View.GONE);
             }
         });
-    }
+    }*/
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

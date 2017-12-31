@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_go_back"
+        android:icon="@drawable/ic_arrow_back_white_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Előző nap">
+    </item>
+
+    <item
+        android:id="@+id/action_go_forward"
+        android:icon="@drawable/ic_arrow_forward_white_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Következő nap">
+    </item>
+
     <item
         android:id="@+id/go_to_bible"
         android:icon="@drawable/ic_biblia_white"

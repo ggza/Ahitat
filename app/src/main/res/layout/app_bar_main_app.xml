@@ -29,6 +29,5 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom" />
 
-    <include layout="@layout/floating_menu" />
 
 </android.support.design.widget.CoordinatorLayout>
