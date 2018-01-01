@@ -175,6 +175,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /*
     public HashMap<String, DailyDevotion> getAllDevotionals() {
         HashMap<String, DailyDevotion> hash_map = new HashMap<>();
 
@@ -203,31 +204,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.close();
         return hash_map;
     }
+    */
 
     public DailyDevotion getDailyDevotionByDate(String datum) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor res = db.query(AHITATOK_TABLE_NAME, new String[]
-                {AHITATOK_COLUMN_ID, AHITATOK_COLUMN_DATE,
-                        AHITATOK_COLUMN_DE_CIM,
-                        AHITATOK_COLUMN_DE_IGE,
-                        AHITATOK_COLUMN_DE_SZOVEG,
-                        AHITATOK_COLUMN_DE_SZERZO,
-                        AHITATOK_COLUMN_DU_CIM,
-                        AHITATOK_COLUMN_DU_IGE,
-                        AHITATOK_COLUMN_DU_SZOVEG,
-                        AHITATOK_COLUMN_DU_SZERZO,
-                        AHITATOK_COLUMN_BIBLIAORA,
-                        AHITATOK_COLUMN_IMAORA}, AHITATOK_COLUMN_DATE + "=?",
-                new String[] {datum}, null, null, null, null);
-
-
-        if (res != null && (res.getCount() > 0)) {
-            res.moveToFirst();
+        SQLiteDatabase db;
+        try {
+            db = this.getReadableDatabase();
         }
-        else {
-            assert res != null;
-            res.close();
+        catch (SQLException e) {
+            return null;
+        }
+
+        Cursor res = null;
+        try {
+            res = db.query(AHITATOK_TABLE_NAME, new String[]
+                            {AHITATOK_COLUMN_ID, AHITATOK_COLUMN_DATE,
+                                    AHITATOK_COLUMN_DE_CIM,
+                                    AHITATOK_COLUMN_DE_IGE,
+                                    AHITATOK_COLUMN_DE_SZOVEG,
+                                    AHITATOK_COLUMN_DE_SZERZO,
+                                    AHITATOK_COLUMN_DU_CIM,
+                                    AHITATOK_COLUMN_DU_IGE,
+                                    AHITATOK_COLUMN_DU_SZOVEG,
+                                    AHITATOK_COLUMN_DU_SZERZO,
+                                    AHITATOK_COLUMN_BIBLIAORA,
+                                    AHITATOK_COLUMN_IMAORA}, AHITATOK_COLUMN_DATE + "=?",
+                    new String[]{datum}, null, null, null, null);
+
+
+            if (res != null && (res.getCount() > 0)) {
+                res.moveToFirst();
+            } else {
+                res.close();
+                return null;
+            }
+        }
+        catch (Exception e) {
+            if (res != null)
+                res.close();
             return null;
         }
 
@@ -252,45 +266,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<Favorite> getAllFavoritesWithTitles() {
         ArrayList<Favorite> array_list = new ArrayList<>();
+        SQLiteDatabase db;
 
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor res =  db.rawQuery( "select t.datum as datum, a.de_cim as de_cim, " +
-                "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum order by t.datum", null );
-        res.moveToFirst();
-
-        while(!res.isAfterLast()){
-            Favorite k = new Favorite(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
-                    "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
-                    "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
-
-            array_list.add(k);
-            res.moveToNext();
+        try {
+            db = this.getReadableDatabase();
         }
+        catch (SQLException e) {
+            return array_list;
+        }
+
+        Cursor res =  null;
+        try {
+            res = db.rawQuery("select t.datum as datum, a.de_cim as de_cim, " +
+                    "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum order by t.datum", null);
+            res.moveToFirst();
+
+            while (!res.isAfterLast()) {
+                Favorite k = new Favorite(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+                        "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
+                        "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
+
+                array_list.add(k);
+                res.moveToNext();
+            }
+        }
+        catch (Exception e) {
+            if (res != null)
+                res.close();
+            return array_list;
+        }
+
         res.close();
         return array_list;
     }
 
-    public boolean insertFavoriteIfNotExist (String datum) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public boolean insertFavoriteIfNotExist (String datum){
+        long count = 0;
+        SQLiteDatabase db;
 
-        long count = DatabaseUtils.queryNumEntries(db, KEDVENCEK_TABLE_NAME,
-                KEDVENCEK_COLUMN_DATE+"=? ", new String[] {datum});
+        try {
+            db = this.getWritableDatabase();
+            count = DatabaseUtils.queryNumEntries(db, KEDVENCEK_TABLE_NAME,
+                    KEDVENCEK_COLUMN_DATE+"=? ", new String[] {datum});
 
-        if (count == 0) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(KEDVENCEK_COLUMN_DATE, datum);
-            db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
+            if (count == 0) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(KEDVENCEK_COLUMN_DATE, datum);
+                db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
+            }
+
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        catch (Exception e) {
+            return false;
+        }
+        finally {
+            return (count == 0);
         }
 
-        return (count == 0);
     }
 
-    public Integer deleteFavorite(String date) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(KEDVENCEK_TABLE_NAME,
-                KEDVENCEK_COLUMN_DATE + "= ? ",
-                new String[] { date });
+    public void deleteFavorite(String date) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.delete(KEDVENCEK_TABLE_NAME,
+                    KEDVENCEK_COLUMN_DATE + "= ? ",
+                    new String[]{date});
+        }
+        catch (SQLException e) {}
+        catch (Exception ex) {}
     }
 
     // closing database
