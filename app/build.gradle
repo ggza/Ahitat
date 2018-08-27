@@ -11,14 +11,14 @@ android {
     }
     //def formattedDate = new Date().format('yyyy-MM-dd-HH-mm-ss')
     def applicationName = new String("napi-ahitatok")
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "gz.rmbgysz.ahitat"
         minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 100
-        versionName "1.0"
+        targetSdkVersion 26
+        versionCode 101
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

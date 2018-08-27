@@ -295,6 +295,7 @@ public class MainAppActivity extends AppCompatActivity
         if (id == R.id.go_to_bible) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abibliamindenkie.hu"));
             startActivity(browserIntent);
+            return true;
         }
 
 
