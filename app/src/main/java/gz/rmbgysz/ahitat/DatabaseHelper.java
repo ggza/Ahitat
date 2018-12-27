@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEDVENCEK_COLUMN_DATE = "datum";
 
     private static final String TAG = "AhitatokDatabaseHelper";
-
+    private static final int DATABASE_VERSION = 3;
     //The Android's default system path of your application database.
     private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper instance = null;
 
     private DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, 2);
+        super(context, DB_NAME, null, DATABASE_VERSION);
         myContext = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
 
@@ -83,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(newVersion>oldVersion)
             try {
                 Log.d(TAG, "onUpgrade version differs");
-                copyDataBase();
+                createDataBase();
             } catch (IOException e) {
                 e.printStackTrace();
             }
