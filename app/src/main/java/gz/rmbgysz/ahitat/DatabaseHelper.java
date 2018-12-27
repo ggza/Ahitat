@@ -59,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper instance = null;
 
     private DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, 1);
+        super(context, DB_NAME, null, 2);
         myContext = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
     }
