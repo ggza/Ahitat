@@ -62,8 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 2);
         myContext = context;
-        //DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
-        DB_PATH = myContext.getAssets().toString();
+        DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
     }
 
     public static DatabaseHelper getInstance(Context context) {
@@ -86,6 +85,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
     }
 
+
+    public void init() throws IOException {
+
+        try {
+                instance.createDataBase();
+        } catch (IOException ioe) {
+            throw  new Error("Unable to create database");
+        }
+
+        try {
+            instance.openDataBase();
+        } catch (SQLException sqle) {
+            throw sqle;
+        }
+    }
+
+
     /**
      * Creates a empty database on the system and rewrites it with your own database.
      * */
@@ -95,6 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if(dbExist){
             Log.d(TAG, "database exist");
+            Toast.makeText( myContext,"database exist", Toast.LENGTH_SHORT).show();
         }else{
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
@@ -127,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        return checkDB != null;
+        return checkDB != null ? true : false;
     }
 
     /**
