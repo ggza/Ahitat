@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -119,6 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }catch(SQLiteException e){
             //database does't exist yet.
+            Toast.makeText( myContext,"cannot find database", Toast.LENGTH_SHORT).show();
         }
 
         if(checkDB != null){
