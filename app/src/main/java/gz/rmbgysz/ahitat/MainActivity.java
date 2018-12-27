@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void startMainApp(View view) {
         try {
-            //DatabaseHelper.getInstance(this).createDataBase();
             DatabaseHelper.getInstance(this).init();
             Intent intent = new Intent(this, MainAppActivity.class);
             startActivity(intent);

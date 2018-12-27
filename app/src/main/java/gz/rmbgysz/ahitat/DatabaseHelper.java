@@ -14,8 +14,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
+//import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEDVENCEK_COLUMN_ID = "id";
     private static final String KEDVENCEK_COLUMN_DATE = "datum";
 
-    private static final String TAG = "DatabaseHelper";
+    private static final String TAG = "AhitatokDatabaseHelper";
 
     //The Android's default system path of your application database.
     private String DB_PATH = null;
@@ -63,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, 2);
         myContext = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
+
     }
 
     public static DatabaseHelper getInstance(Context context) {
@@ -77,8 +79,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.d(TAG, "onUpgrade start");
         if(newVersion>oldVersion)
             try {
+                Log.d(TAG, "onUpgrade version differs");
                 copyDataBase();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -89,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void init() throws IOException {
 
         try {
-                instance.createDataBase();
+            instance.createDataBase();
         } catch (IOException ioe) {
             throw  new Error("Unable to create database");
         }
@@ -111,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if(dbExist){
             Log.d(TAG, "database exist");
-            Toast.makeText( myContext,"database exist", Toast.LENGTH_SHORT).show();
+            //Toast.makeText( myContext,"database exist", Toast.LENGTH_SHORT).show();
         }else{
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
@@ -138,7 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }catch(SQLiteException e){
             //database does't exist yet.
-            Toast.makeText( myContext,"cannot find database", Toast.LENGTH_SHORT).show();
+            //Toast.makeText( myContext,"cannot find database", Toast.LENGTH_SHORT).show();
         }
 
         if(checkDB != null){
@@ -154,15 +158,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * */
     private void copyDataBase() throws IOException{
 
+        Log.d(TAG, "copy database 1");
         //Open your local db as the input stream
         InputStream myInput = myContext.getAssets().open(DB_NAME);
-
+        Log.d(TAG, "copy database 2");
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
 
+
+        // if the path doesn't exist first, create it
+        File f = new File(DB_PATH);
+        if (!f.exists())
+            f.mkdir();
+
         //Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
-
+        Log.d(TAG, "copy database 3");
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
@@ -194,6 +205,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.close();
 
     }
+
+    //https://stackoverflow.com/questions/50476782/android-p-sqlite-no-such-table-error-after-copying-database-from-assets
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        db.disableWriteAheadLogging();
+    }
+
 
     /*
     public HashMap<String, DailyDevotion> getAllDevotionals() {
