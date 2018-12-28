@@ -17,6 +17,7 @@ import android.util.Log;
 //import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEDVENCEK_COLUMN_DATE = "datum";
 
     private static final String TAG = "AhitatokDatabaseHelper";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     //The Android's default system path of your application database.
     private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
@@ -67,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public static DatabaseHelper getInstance(Context context) {
+    public static synchronized DatabaseHelper getInstance(Context context) {
         if (instance == null)
             instance = new DatabaseHelper(context.getApplicationContext());
         return instance;
@@ -75,16 +76,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG, "onCreate called");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, "onUpgrade start");
-        if(newVersion>oldVersion)
+        if(newVersion != oldVersion)
             try {
                 Log.d(TAG, "onUpgrade version differs");
-                createDataBase();
-            } catch (IOException e) {
+
+                File f = new File(DB_PATH);
+                String[] fileList;
+
+                fileList = f.list();
+
+                for ( int i=0 ; i < fileList.length; i++) {
+                    File myFile = new File(f, fileList[i]);
+                    myFile.delete();
+                    Log.d(TAG, "onUpgrade deleting file: " + fileList[i]);
+                }
+
+                copyDataBase();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
     }
@@ -111,6 +125,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * */
     public void createDataBase() throws IOException {
 
+        Log.d(TAG, "createDatabase start");
+
         boolean dbExist = checkDataBase();
 
         if(dbExist){
@@ -119,10 +135,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else{
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
-            this.getReadableDatabase();
+            Log.d(TAG, "creating database from assets");
+            this.getWritableDatabase();
             try {
                 copyDataBase();
             } catch (IOException e) {
+                Log.d(TAG, "Error copying database");
                 throw new Error("Error copying database");
             }
         }
@@ -136,13 +154,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase checkDB = null;
 
+        Log.d(TAG, "checkDataBase start");
+
         try{
             String myPath = DB_PATH + DB_NAME;
             checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
         }catch(SQLiteException e){
-            //database does't exist yet.
-            //Toast.makeText( myContext,"cannot find database", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "checkDataBase cannot find database");
+            e.printStackTrace();
         }
 
         if(checkDB != null){
