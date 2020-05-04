@@ -51,7 +51,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEDVENCEK_COLUMN_DATE = "datum";
 
     private static final String TAG = "AhitatokDatabaseHelper";
-    private static final int DATABASE_VERSION = 5;
+    private static int DATABASE_VERSION = BuildConfig.VERSION_CODE;
+    //private static final int DATABASE_VERSION = 6;
     //The Android's default system path of your application database.
     private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
@@ -143,7 +144,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Log.d(TAG, "Error copying database");
                 throw new Error("Error copying database");
             }
-        }
+        };
+
+        onUpgrade(myDataBase, (DATABASE_VERSION-1), DATABASE_VERSION);
     }
 
     /**

@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'release_key'
             keyPassword 'ahitat2017'
-            storeFile file('/hoe/gzoli/ahitat_private_key/ahitat_private_key.keystore')
+            storeFile file('D:/ahitat_private_key.keystore')
             storePassword 'ahitat2017'
         }
     }
@@ -17,8 +17,8 @@ android {
         applicationId "gz.rmbgysz.ahitat"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 102
-        versionName "1.0.2"
+        versionCode 111
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

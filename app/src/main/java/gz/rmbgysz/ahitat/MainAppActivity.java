@@ -6,6 +6,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -139,6 +142,19 @@ public class MainAppActivity extends AppCompatActivity
     }
     */
 
+/*    private void refresTextViews(DailyDevotion devItem) {
+        if (devItem == null) {
+            fillTextViewsWithEmptyText();
+            for (int i=0; i < 2; i++)
+            {
+                Toast.makeText(this, getString(R.string.notfounddailydevotion) + " (" +
+                        DateManager.getInstance().getDateString() + ")", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            setTextViews(DateManager.getInstance().getFormattedDateWithDayName(this), devItem);
+        }
+    }*/
+
     private void refresTextViews(DailyDevotion devItem) {
         if (devItem == null) {
             fillTextViewsWithEmptyText();
@@ -148,7 +164,6 @@ public class MainAppActivity extends AppCompatActivity
             setTextViews(DateManager.getInstance().getFormattedDateWithDayName(this), devItem);
         }
     }
-
 
     private void setTextViews(String actualDateString, DailyDevotion item) {
 

@@ -25,7 +25,7 @@ public class DateManager {
     //TODO: ezekkel lehet megadni, hogy a datepicker milyen tartományt jelenítsen meg most 2018 végére van állítva a vége,
     //TODO: ha kiadjuk a 2019-est akkor ezt át kell írni, esetleg valami konfigba ki lehet tenni
     private String minDateString = "2017-01-01";
-    private String maxDateString = "2019-12-31";
+    private String maxDateString = "2021-12-31";
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat;
 
