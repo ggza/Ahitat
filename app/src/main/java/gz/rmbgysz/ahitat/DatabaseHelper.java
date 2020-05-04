@@ -16,6 +16,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 //import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.BuildConfig;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -144,7 +146,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Log.d(TAG, "Error copying database");
                 throw new Error("Error copying database");
             }
-        };
+        }
 
         onUpgrade(myDataBase, (DATABASE_VERSION-1), DATABASE_VERSION);
     }
@@ -171,7 +173,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        return checkDB != null ? true : false;
+        return checkDB != null;
     }
 
     /**
