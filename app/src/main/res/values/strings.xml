@@ -147,7 +147,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="notfounddailydevotion">Nincs áhítat a kijelölt napra! Törölje a gyorsítótárat!</string>
+    <string name="notfounddailydevotion">Nincs áhítat a kijelölt napra! Frissítse az alkalmazást!</string>
     <string name="title_activity_help">Segítség</string>
     <string name="title_activity_info">Az Áhítatról</string>
 
@@ -164,6 +164,6 @@
     <string name="help_content7">A fejléc jobb felső sarkában látható \u00A0{ahitat-book 120%}\u00A0 ikont érintve a <b>bibliamindenkie.hu</b> internetoldalra navigál az alkalmazás, ahol két magyar <b>bibliafordítás</b> is elérhető. A mellette látható \u00A0{ahitat-heart 120%}\u00A0 ikonnal lehet az aktuális áhítatot <b>kedvencként</b> beállítani.\n</string>
     <string name="info_title">KÖSZÖNETNYILVÁNÍTÁS</string>
     <string name="info_versiontitle">VERZIÓSZÁM:</string>
-    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat szerzői erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n\nA borítófotót Paniti Márta készítette Torockón. Háttérben a Székelykő.\n</string>
-    <string name="info_content1">Köszönjük a <b><i>Hungarian Baptist Mission</i></b>-nek (HBM), és vezetőjének <b><i>Kui Barnabás</i></b>nak az anyagi támogatást. Nélkülük nem jött volna létre ez az alkalmazás!\n</string>
+    <string name="info_content">Az Áhítat-applikáció a Romániai Magyar Baptista Szövetség gondozásában megjelenő nyomtatott elmélkedések mobilváltozata.\n\nAz Áhítat szerzői erdélyi, valamint részben magyarországi és amerikai baptista lelkipásztorok és lelki munkások.\n</string>
+    <string name="info_content1">Köszönjük a <b><i>Hungarian Baptist Mission</i></b>-nek (HBM), és vezetőjének <b><i>Kui Barnabás</i></b>nak az anyagi támogatást!\n</string>
 </resources>

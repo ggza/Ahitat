@@ -4,5 +4,5 @@
     <string name="heading">Fejléc</string>
     <string name="amverse">de. ige</string>
     <string name="pmdailydevotion">du. ahitat</string>
-    <string name="notfounddailydevotion">Nincs áhítat a kijelölt napra! Törölje a gyorsítótárat!</string>
+    <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra! Frissítse az alkalmazást!</string>
 </resources>

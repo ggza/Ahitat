@@ -4,5 +4,5 @@
     <string name="heading">TextView</string>
     <string name="amverse">TextView</string>
     <string name="pmdailydevotion">TextView</string>
-    <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra</string>
+    <string name="notfounddailydevotion">Nem található áhítat a kiválasztott napra! Frissítse az alkalmazást!</string>
 </resources>

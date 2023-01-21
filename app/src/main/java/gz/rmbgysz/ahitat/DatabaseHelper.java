@@ -14,27 +14,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-//import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.BuildConfig;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by gz on 2017.02.09..
- * TODO: majd ezt is angolositani kell
+ * TODO: majd ezt is angolosítani kell
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "devotional2017.sqlite";
+    private static final String DB_NAME = "devotional2023.sqlite";
     private static final String AHITATOK_TABLE_NAME = "ahitatok";
     private static final String AHITATOK_COLUMN_ID = "id";
     private static final String AHITATOK_COLUMN_DATE = "datum";
@@ -49,16 +46,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String AHITATOK_COLUMN_BIBLIAORA = "bibliaora";
     private static final String AHITATOK_COLUMN_IMAORA = "imaora";
     private static final String KEDVENCEK_TABLE_NAME = "kedvencek";
-    private static final String KEDVENCEK_COLUMN_ID = "id";
     private static final String KEDVENCEK_COLUMN_DATE = "datum";
 
     private static final String TAG = "AhitatokDatabaseHelper";
-    private static int DATABASE_VERSION = BuildConfig.VERSION_CODE;
-    //private static final int DATABASE_VERSION = 6;
+    private static int DATABASE_VERSION = 2;
+
     //The Android's default system path of your application database.
     private String DB_PATH = null;
     private SQLiteDatabase myDataBase;
-    private static Context myContext;
+    private Context myContext;
 
     //for singleton instance
 
@@ -68,7 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DATABASE_VERSION);
         myContext = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
-
     }
 
     public static synchronized DatabaseHelper getInstance(Context context) {
@@ -78,34 +73,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "onCreate called");
-    }
+    public void onCreate(SQLiteDatabase db) {}
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(TAG, "onUpgrade start");
-        if(newVersion != oldVersion)
-            try {
-                Log.d(TAG, "onUpgrade version differs");
-
-                File f = new File(DB_PATH);
-                String[] fileList;
-
-                fileList = f.list();
-
-                for ( int i=0 ; i < fileList.length; i++) {
-                    File myFile = new File(f, fileList[i]);
-                    myFile.delete();
-                    Log.d(TAG, "onUpgrade deleting file: " + fileList[i]);
-                }
-
-                copyDataBase();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     public void init() throws IOException {
 
@@ -117,11 +88,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try {
             instance.openDataBase();
-        } catch (SQLException sqle) {
-            throw sqle;
-        }
+        } catch (SQLException ignored) {}
     }
-
 
     /**
      * Creates a empty database on the system and rewrites it with your own database.
@@ -132,12 +100,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         boolean dbExist = checkDataBase();
 
-        if(dbExist){
+        if ( dbExist ) {
             Log.d(TAG, "database exist");
-            //Toast.makeText( myContext,"database exist", Toast.LENGTH_SHORT).show();
-        }else{
-            //By calling this method and empty database will be created into the default system path
-            //of your application so we are gonna be able to overwrite that database with our database.
+            // Toast.makeText( myContext,"database exist", Toast.LENGTH_SHORT).show();
+        } else {
+            // By calling this method and empty database will be created into the default system path
+            // of your application so we are gonna be able to overwrite that database with our database.
             Log.d(TAG, "creating database from assets");
             this.getWritableDatabase();
             try {
@@ -148,7 +116,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
 
-        onUpgrade(myDataBase, (DATABASE_VERSION-1), DATABASE_VERSION);
     }
 
     /**
@@ -161,16 +128,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "checkDataBase start");
 
-        try{
+        try {
             String myPath = DB_PATH + DB_NAME;
             checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
-        }catch(SQLiteException e){
+        } catch (SQLiteException e){
             Log.d(TAG, "checkDataBase cannot find database");
             e.printStackTrace();
         }
 
-        if(checkDB != null){
+        if (checkDB != null){
             checkDB.close();
         }
         return checkDB != null;
@@ -189,7 +156,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "copy database 2");
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
-
 
         // if the path doesn't exist first, create it
         File f = new File(DB_PATH);
@@ -210,25 +176,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         myOutput.flush();
         myOutput.close();
         myInput.close();
-
     }
 
     public void openDataBase() throws SQLException {
-
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
     }
 
     @Override
     public synchronized void close() {
-
         if(myDataBase != null)
             myDataBase.close();
-
         super.close();
-
     }
 
     //https://stackoverflow.com/questions/50476782/android-p-sqlite-no-such-table-error-after-copying-database-from-assets
@@ -237,38 +197,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.onOpen(db);
         db.disableWriteAheadLogging();
     }
-
-
-    /*
-    public HashMap<String, DailyDevotion> getAllDevotionals() {
-        HashMap<String, DailyDevotion> hash_map = new HashMap<>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from ahitatok", null );
-        res.moveToFirst();
-
-        while(!res.isAfterLast()){
-            hash_map.put(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
-                        new DailyDevotion(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_IGE)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZOVEG)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZERZO)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_IGE)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZOVEG)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZERZO)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_BIBLIAORA)),
-                                res.getString(res.getColumnIndex(AHITATOK_COLUMN_IMAORA))));
-
-
-            res.moveToNext();
-        }
-        res.close();
-        return hash_map;
-    }
-    */
 
     public DailyDevotion getDailyDevotionByDate(String datum) {
         SQLiteDatabase db;
@@ -282,23 +210,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = null;
         try {
             res = db.query(AHITATOK_TABLE_NAME, new String[]
-                            {AHITATOK_COLUMN_ID, AHITATOK_COLUMN_DATE,
-                                    AHITATOK_COLUMN_DE_CIM,
-                                    AHITATOK_COLUMN_DE_IGE,
-                                    AHITATOK_COLUMN_DE_SZOVEG,
-                                    AHITATOK_COLUMN_DE_SZERZO,
-                                    AHITATOK_COLUMN_DU_CIM,
-                                    AHITATOK_COLUMN_DU_IGE,
-                                    AHITATOK_COLUMN_DU_SZOVEG,
-                                    AHITATOK_COLUMN_DU_SZERZO,
-                                    AHITATOK_COLUMN_BIBLIAORA,
-                                    AHITATOK_COLUMN_IMAORA}, AHITATOK_COLUMN_DATE + "=?",
-                    new String[]{datum}, null, null, null, null);
+                {AHITATOK_COLUMN_ID, AHITATOK_COLUMN_DATE,
+                    AHITATOK_COLUMN_DE_CIM,
+                    AHITATOK_COLUMN_DE_IGE,
+                    AHITATOK_COLUMN_DE_SZOVEG,
+                    AHITATOK_COLUMN_DE_SZERZO,
+                    AHITATOK_COLUMN_DU_CIM,
+                    AHITATOK_COLUMN_DU_IGE,
+                    AHITATOK_COLUMN_DU_SZOVEG,
+                    AHITATOK_COLUMN_DU_SZERZO,
+                    AHITATOK_COLUMN_BIBLIAORA,
+                    AHITATOK_COLUMN_IMAORA}, AHITATOK_COLUMN_DATE + "=?",
+            new String[]{datum}, null, null, null, null);
 
 
             if (res != null && (res.getCount() > 0)) {
                 res.moveToFirst();
             } else {
+                assert res != null;
                 res.close();
                 return null;
             }
@@ -310,17 +239,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         DailyDevotion returnValue = new DailyDevotion(res.getInt(res.getColumnIndex(AHITATOK_COLUMN_ID)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_IGE)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZOVEG)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZERZO)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_IGE)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZOVEG)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZERZO)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_BIBLIAORA)),
-                res.getString(res.getColumnIndex(AHITATOK_COLUMN_IMAORA)));
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_IGE)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZOVEG)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_SZERZO)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_IGE)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZOVEG)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_SZERZO)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_BIBLIAORA)),
+            res.getString(res.getColumnIndex(AHITATOK_COLUMN_IMAORA)));
 
         res.close();
 
@@ -342,13 +271,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res =  null;
         try {
             res = db.rawQuery("select t.datum as datum, a.de_cim as de_cim, " +
-                    "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum order by t.datum", null);
+                "a.du_cim as du_cim from kedvencek t, ahitatok a where a.datum=t.datum order by t.datum", null);
             res.moveToFirst();
 
             while (!res.isAfterLast()) {
                 Favorite k = new Favorite(res.getString(res.getColumnIndex(AHITATOK_COLUMN_DATE)),
-                        "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
-                        "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
+                    "d.e:    " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DE_CIM)),
+                    "d.u.:   " + res.getString(res.getColumnIndex(AHITATOK_COLUMN_DU_CIM)));
 
                 array_list.add(k);
                 res.moveToNext();
@@ -366,17 +295,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean insertFavoriteIfNotExist (String datum){
         long count = 0;
-        SQLiteDatabase db;
+        SQLiteDatabase myDatabase;
 
         try {
-            db = this.getWritableDatabase();
-            count = DatabaseUtils.queryNumEntries(db, KEDVENCEK_TABLE_NAME,
+            myDatabase = this.getWritableDatabase();
+            count = DatabaseUtils.queryNumEntries(myDatabase, KEDVENCEK_TABLE_NAME,
                     KEDVENCEK_COLUMN_DATE+"=? ", new String[] {datum});
 
             if (count == 0) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(KEDVENCEK_COLUMN_DATE, datum);
-                db.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
+                myDatabase.insert(KEDVENCEK_TABLE_NAME, null, contentValues);
             }
 
         }
@@ -386,9 +315,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         catch (Exception e) {
             return false;
         }
-        finally {
-            return (count == 0);
-        }
+        return (count == 0);
 
     }
 
@@ -399,15 +326,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     KEDVENCEK_COLUMN_DATE + "= ? ",
                     new String[]{date});
         }
-        catch (SQLException e) {}
-        catch (Exception ex) {}
+        catch (SQLException ignored) {}
+        catch (Exception ignored) {}
     }
 
     // closing database
     public void closeDB() {
         SQLiteDatabase db = this.getReadableDatabase();
-        if (db != null && db.isOpen())
+        if (db != null && db.isOpen()) {
             db.close();
+        }
     }
-
 }

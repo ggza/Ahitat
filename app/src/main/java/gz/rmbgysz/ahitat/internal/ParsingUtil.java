@@ -5,17 +5,14 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.util.TypedValue;
 import android.widget.TextView;
 
 import gz.rmbgysz.ahitat.Icon;
-import gz.rmbgysz.ahitat.internal.HasOnViewAttachListener;
 import gz.rmbgysz.ahitat.internal.HasOnViewAttachListener.OnViewAttachListener;
-import gz.rmbgysz.ahitat.internal.IconFontDescriptorWrapper;
-import gz.rmbgysz.ahitat.internal.CustomTypefaceSpan;
 
 public final class ParsingUtil {
 

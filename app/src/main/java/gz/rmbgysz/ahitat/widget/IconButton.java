@@ -2,7 +2,7 @@ package gz.rmbgysz.ahitat.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.support.v7.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatButton;
 import gz.rmbgysz.ahitat.Iconify;
 import gz.rmbgysz.ahitat.internal.HasOnViewAttachListener;
 

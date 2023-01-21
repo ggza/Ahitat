@@ -1,7 +1,5 @@
 package gz.rmbgysz.ahitat;
 
-import android.support.v4.app.DialogFragment;
-
 /**
  * Created by gz on 2017. 04. 17..
  */

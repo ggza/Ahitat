@@ -2,7 +2,7 @@ package gz.rmbgysz.ahitat.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import gz.rmbgysz.ahitat.Iconify;
 import gz.rmbgysz.ahitat.internal.HasOnViewAttachListener;
 
